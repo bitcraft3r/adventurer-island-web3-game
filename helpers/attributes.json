@@ -1,0 +1,20 @@
+{
+    "character": {
+        "name:": "Brian"
+    },
+    "attributes": {
+        "strength": 10,
+        "agility": 10,
+        "wisdom": 10
+    },
+    "clothes": {
+        "head": "crown",
+        "body": "shirt",
+        "legs": "pants"
+    },
+    "traits": {
+        "starsign": "leo",
+        "calling": "gardening",
+        "language": "solidity"
+    }
+}
