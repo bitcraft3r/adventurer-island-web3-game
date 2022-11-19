@@ -18,7 +18,6 @@ class Character {
         this.damageAttack = this.damageBase + this.strength;
         this.damageDefence = this.agility / 2;
         this.luck = this.wisdom / 40;
-        this.criticalHitDamageExtra = this.damageBase + this.generateStat(this.strength);
     }
     generateStat(number){
         return Math.floor(Math.random()*number) + 1; // returns 1 to number; enter value above 1
@@ -28,7 +27,8 @@ class Character {
         let finalDmg;
     
         if (Math.random() < this.luck){ // 2.5% to 25% chance to deal critical damage
-            finalDmg = baseDmg + this.criticalHitDamageExtra;
+            let criticalHitDamage = this.damageBase + this.generateStat(this.strength); // randomized crit dmg every attack i.e. 5 + (1 to maxStrength)
+            finalDmg = baseDmg + criticalHitDamage;
             console.log(`${this.name} CRITICAL HIT!`)
         } else finalDmg = baseDmg;
     
@@ -65,12 +65,7 @@ class Character {
 
 class Hero extends Character {
     constructor(name){
-        // super(name);
-        // this.name = name
-        super(name, name);
-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super#using_super_in_classes
-        // super(length, length)
-        // search term: "class extends .js super"
+        super(name);
         this.prayed = false;
     }
     pray(){ 
@@ -91,7 +86,6 @@ class Hero extends Character {
 }
 
 function startBattle(name) {
-    console.log(typeof name)
     let human = new Hero(name);
     let comp = new Character("Nemesis");
     game.currentRound++;
@@ -103,14 +97,11 @@ function startBattle(name) {
     console.log(human);
     console.log(comp);
     console.log(game.currentRound, game.score);
-
-    if (game.currentRound < 10) startBattle(human, comp);
 }
 
 function startGame(){
-
-
-    startBattle("Brian");
+    // startBattle("Brian");
+    while (game.currentRound < 10) startBattle("Brian");
     console.log(`coins won:`, game.score);
 }
 
