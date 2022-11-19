@@ -1383,7 +1383,7 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Shoes"
     ];
     
-    string[] private starsign = [
+    string[] private zodiac = [
         "Aries",
         "Taurus",
         "Gemini",
@@ -1470,36 +1470,36 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
         return uint256(keccak256(abi.encodePacked(input)));
     }
     
-    function getWeapon(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "WEAPON", weapons);
+    function getStrength(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "STRENGTH", strength);
     }
     
-    function getChest(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "CHEST", chestArmor);
+    function getAgility(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "AGILITY", agility);
+    }
+    
+    function getWisdom(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "WISDOM", wisdom);
     }
     
     function getHead(uint256 tokenId) public view returns (string memory) {
         return pluck(tokenId, "HEAD", headArmor);
     }
-    
-    function getWaist(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "WAIST", waistArmor);
-    }
 
+    function getChest(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "CHEST", chestArmor);
+    }
+    
     function getFoot(uint256 tokenId) public view returns (string memory) {
         return pluck(tokenId, "FOOT", footArmor);
     }
     
-    function getHand(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "HAND", handArmor);
+    function getZodiac(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "ZODIAC", zodiac);
     }
     
-    function getNeck(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "NECK", necklaces);
-    }
-    
-    function getRing(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "RING", rings);
+    function getLanguage(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "LANGUAGE", language);
     }
     
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal view returns (string memory) {
@@ -1524,37 +1524,37 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     function tokenURI(uint256 tokenId) override public view returns (string memory) {
         string[17] memory parts;
-        parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
+        parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: black; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="white" /><text x="10" y="20" class="base">';
 
-        parts[1] = getWeapon(tokenId);
+        parts[1] = getStrength(tokenId);
 
         parts[2] = '</text><text x="10" y="40" class="base">';
 
-        parts[3] = getChest(tokenId);
+        parts[3] = getAgility(tokenId);
 
         parts[4] = '</text><text x="10" y="60" class="base">';
 
-        parts[5] = getHead(tokenId);
+        parts[5] = getWisdom(tokenId);
 
         parts[6] = '</text><text x="10" y="80" class="base">';
 
-        parts[7] = getWaist(tokenId);
+        parts[7] = getHead(tokenId);
 
         parts[8] = '</text><text x="10" y="100" class="base">';
 
-        parts[9] = getFoot(tokenId);
+        parts[9] = getChest(tokenId);
 
         parts[10] = '</text><text x="10" y="120" class="base">';
 
-        parts[11] = getHand(tokenId);
+        parts[11] = getFoot(tokenId);
 
         parts[12] = '</text><text x="10" y="140" class="base">';
 
-        parts[13] = getNeck(tokenId);
+        parts[13] = getZodiac(tokenId);
 
         parts[14] = '</text><text x="10" y="160" class="base">';
 
-        parts[15] = getRing(tokenId);
+        parts[15] = getLanguage(tokenId);
 
         parts[16] = '</text></svg>';
 
@@ -1568,12 +1568,12 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
 
     function claim(uint256 tokenId) public nonReentrant {
-        require(tokenId > 0 && tokenId < 7778, "Token ID invalid");
+        require(tokenId > 0 && tokenId < 1001, "Token ID invalid");
         _safeMint(_msgSender(), tokenId);
     }
     
     function ownerClaim(uint256 tokenId) public nonReentrant onlyOwner {
-        require(tokenId > 7777 && tokenId < 8001, "Token ID invalid");
+        require(tokenId > 1000 && tokenId < 1112, "Token ID invalid");
         _safeMint(owner(), tokenId);
     }
     
