@@ -1291,42 +1291,42 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
 contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
 
         string[] private strength = [
-        "STR: 1",
-        "STR: 2",
-        "STR: 3",
-        "STR: 4",
-        "STR: 5",
-        "STR: 6",
-        "STR: 7",
-        "STR: 8",
-        "STR: 9",
-        "STR: 10"
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
     ];
     
     string[] private agility = [
-        "AGI: 1",
-        "AGI: 2",
-        "AGI: 3",
-        "AGI: 4",
-        "AGI: 5",
-        "AGI: 6",
-        "AGI: 7",
-        "AGI: 8",
-        "AGI: 9",
-        "AGI: 10"
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
     ];
     
     string[] private wisdom = [
-        "WIS: 1",
-        "WIS: 2",
-        "WIS: 3",
-        "WIS: 4",
-        "WIS: 5",
-        "WIS: 6",
-        "WIS: 7",
-        "WIS: 8",
-        "WIS: 9",
-        "WIS: 10"
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
     ];
 
     string[] private weapons = [
@@ -1433,7 +1433,6 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Vyper",
         "Java",
         "Ruby"
-
     ];
     
     function random(string memory input) internal pure returns (uint256) {
@@ -1525,7 +1524,7 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
         string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
         output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16], parts[17], parts[18]));
         
-        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Adventurer #', toString(tokenId), '", "description": "Adventurer is randomized character attributes generated and stored on chain. Images and other functionality are intentionally omitted for others to interpret. Feel free to use Adventurer in any way you want.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Adventurer #', toString(tokenId), '", "description": "Adventurer is randomized character attributes generated and stored on chain. Images and other functionality are intentionally omitted for others to interpret. Feel free to use Adventurer in any way you want.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '", "attributes": [{"trait_type": "Strength","value": ', parts[1], ',"max_value": 10}, {"trait_type": "Agility","value": ', parts[3], ',"max_value": 10}, {"trait_type": "Wisdom","value": ', parts[5], ',"max_value": 10}]}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
 
         return output;
