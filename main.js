@@ -88,7 +88,7 @@ class Hero extends Character {
     
         if (finalDmg < 1) finalDmg = 1;
 
-        if (Math.random() < this.agility/20){ // 5% - 50% chance to dodge
+        if (Math.random() < defender.agility/20){ // 5% - 50% chance to dodge
             finalDmg = 0;
             console.log(`DOGED!!!`);
         } else defender.hitpoints -= finalDmg;
