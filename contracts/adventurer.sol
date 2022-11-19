@@ -1504,19 +1504,19 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
 
         parts[9] = getHead(tokenId);
 
-        parts[10] = '</text><text x="10" y="100" class="base">';
+        parts[10] = '</text><text x="10" y="120" class="base">';
 
         parts[11] = getChest(tokenId);
 
-        parts[12] = '</text><text x="10" y="120" class="base">';
+        parts[12] = '</text><text x="10" y="140" class="base">';
 
         parts[13] = getFoot(tokenId);
 
-        parts[14] = '</text><text x="10" y="140" class="base">';
+        parts[14] = '</text><text x="10" y="160" class="base">';
 
         parts[15] = getZodiac(tokenId);
 
-        parts[16] = '</text><text x="10" y="160" class="base">';
+        parts[16] = '</text><text x="10" y="180" class="base">';
 
         parts[17] = getLanguage(tokenId);
 
