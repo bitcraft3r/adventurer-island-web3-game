@@ -60,8 +60,14 @@ class Adventurer extends Character {
         }
         if (this.hitpoints <= 0 && defender.hitpoints <= 0){
             console.log(`it's a tie`) 
-        } else if (this.hitpoints <= 0 && defender.hitpoints > 0) console.log(`${defender.name} wins!`);
-        else if (this.hitpoints > 0 && defender.hitpoints <= 0) console.log(`${this.name} wins!`);
+        } else if (this.hitpoints <= 0 && defender.hitpoints > 0){
+            console.log(`${defender.name} wins!`);
+            return false;
+        } 
+        else if (this.hitpoints > 0 && defender.hitpoints <= 0){
+            console.log(`${this.name} wins!`);
+            return true;
+        } 
     }
 }
 
@@ -70,4 +76,34 @@ let computer = new Adventurer("Nemesis");
 console.log(player);
 console.log(computer);
 
-player.battle(computer);
+// player.battle(computer);
+
+let score = 0;
+
+
+function startBattle(human, comp) {
+    // human.battle(comp);
+
+    if (human.battle(comp) === true) { // Checking condition Runs the game. if player wins, also does below.
+        console.log(`player won`);
+        score += 10;
+    } else {
+        console.log(`computer won`);
+    }
+
+    human.hitpoints = 100;
+    comp.hitpoints = 100;
+}
+
+function startGame(human, comp){
+
+
+    startBattle(human, comp);
+}
+
+startGame(player, computer);
+startGame(player, computer);
+startGame(player, computer);
+
+
+console.log(`coins won:`, score);
