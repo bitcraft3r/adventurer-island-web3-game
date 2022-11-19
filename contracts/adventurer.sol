@@ -1291,42 +1291,63 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
 contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
 
         string[] private strength = [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10"
+        "STR: 1",
+        "STR: 2",
+        "STR: 3",
+        "STR: 4",
+        "STR: 5",
+        "STR: 6",
+        "STR: 7",
+        "STR: 8",
+        "STR: 9",
+        "STR: 10"
     ];
     
     string[] private agility = [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10"
+        "AGI: 1",
+        "AGI: 2",
+        "AGI: 3",
+        "AGI: 4",
+        "AGI: 5",
+        "AGI: 6",
+        "AGI: 7",
+        "AGI: 8",
+        "AGI: 9",
+        "AGI: 10"
     ];
     
     string[] private wisdom = [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10"
+        "WIS: 1",
+        "WIS: 2",
+        "WIS: 3",
+        "WIS: 4",
+        "WIS: 5",
+        "WIS: 6",
+        "WIS: 7",
+        "WIS: 8",
+        "WIS: 9",
+        "WIS: 10"
+    ];
+
+    string[] private weapons = [
+        "Warhammer",
+        "Quarterstaff",
+        "Maul",
+        "Mace",
+        "Club",
+        "Katana",
+        "Falchion",
+        "Scimitar",
+        "Long Sword",
+        "Short Sword",
+        "Ghost Wand",
+        "Grave Wand",
+        "Bone Wand",
+        "Wand",
+        "Grimoire",
+        "Chronicle",
+        "Tome",
+        "Book"
     ];
     
     string[] private headArmor = [
@@ -1383,7 +1404,7 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Shoes"
     ];
     
-    string[] private zodiac = [
+    string[] private zodiacs = [
         "Aries",
         "Taurus",
         "Gemini",
@@ -1398,7 +1419,7 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Pisces"
     ];
     
-    string[] private language = [
+    string[] private languages = [
         "HTML",
         "CSS",
         "JavaScript",
@@ -1431,6 +1452,10 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
         return pluck(tokenId, "WISDOM", wisdom);
     }
     
+    function getWeapon(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "WEAPON", weapons);
+    }
+
     function getHead(uint256 tokenId) public view returns (string memory) {
         return pluck(tokenId, "HEAD", headArmor);
     }
@@ -1444,11 +1469,11 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
     
     function getZodiac(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "ZODIAC", zodiac);
+        return pluck(tokenId, "ZODIAC", zodiacs);
     }
     
     function getLanguage(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "LANGUAGE", language);
+        return pluck(tokenId, "LANGUAGE", languages);
     }
     
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal pure returns (string memory) {
@@ -1458,7 +1483,7 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
 
     function tokenURI(uint256 tokenId) override public view returns (string memory) {
-        string[17] memory parts;
+        string[19] memory parts;
         parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: black; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="white" /><text x="10" y="20" class="base">';
 
         parts[1] = getStrength(tokenId);
@@ -1473,28 +1498,32 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
 
         parts[6] = '</text><text x="10" y="80" class="base">';
 
-        parts[7] = getHead(tokenId);
+        parts[7] = getWeapon(tokenId);
 
         parts[8] = '</text><text x="10" y="100" class="base">';
 
-        parts[9] = getChest(tokenId);
+        parts[9] = getHead(tokenId);
 
-        parts[10] = '</text><text x="10" y="120" class="base">';
+        parts[10] = '</text><text x="10" y="100" class="base">';
 
-        parts[11] = getFoot(tokenId);
+        parts[11] = getChest(tokenId);
 
-        parts[12] = '</text><text x="10" y="140" class="base">';
+        parts[12] = '</text><text x="10" y="120" class="base">';
 
-        parts[13] = getZodiac(tokenId);
+        parts[13] = getFoot(tokenId);
 
-        parts[14] = '</text><text x="10" y="160" class="base">';
+        parts[14] = '</text><text x="10" y="140" class="base">';
 
-        parts[15] = getLanguage(tokenId);
+        parts[15] = getZodiac(tokenId);
 
-        parts[16] = '</text></svg>';
+        parts[16] = '</text><text x="10" y="160" class="base">';
+
+        parts[17] = getLanguage(tokenId);
+
+        parts[18] = '</text></svg>';
 
         string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
-        output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16]));
+        output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16], parts[17], parts[18]));
         
         string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Adventurer #', toString(tokenId), '", "description": "Adventurer is randomized character attributes generated and stored on chain. Images and other functionality are intentionally omitted for others to interpret. Feel free to use Adventurer in any way you want.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
