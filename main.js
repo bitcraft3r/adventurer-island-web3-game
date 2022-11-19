@@ -11,31 +11,17 @@ class Character {
     constructor(name){
         this.name = name;
         this.hitpoints = 100;
-        this.strength = 0;
-        this.agility = 0;
-        this.wisdom = 0;
-        this.damageBase = 5;
-        this.damageAttack = this.damageBase;
-        this.damageDefence = 0;
-        // this.
-    }
-    generateStat(number){
-        return Math.floor(Math.random()*number) + 1; // returns 1 to number; enter value above 1
-    }
-}
-
-class Adventurer extends Character {
-    constructor(name){
-        super(name);
         this.strength = this.generateStat(10);
         this.agility = this.generateStat(10);
         this.wisdom = this.generateStat(10);
-        this.damageAttack += this.strength;
-        this.damageDefence += this.agility / 2;
-        // % chance to get critical hit = 2.5% to 25%
+        this.damageBase = 5;
+        this.damageAttack = this.damageBase + this.strength;
+        this.damageDefence = this.agility / 2;
         this.luck = this.wisdom / 40;
-        // critical hit dmg = noraml dmg + 5 dmg + randomized dmg based on strength
         this.criticalHitDamageExtra = this.damageBase + this.generateStat(this.strength);
+    }
+    generateStat(number){
+        return Math.floor(Math.random()*number) + 1; // returns 1 to number; enter value above 1
     }
     attack(defender){
         let baseDmg = this.damageAttack - defender.damageDefence;
@@ -46,6 +32,8 @@ class Adventurer extends Character {
             console.log(`CRITICAL HIT!`)
         } else finalDmg = baseDmg;
     
+        if (finalDmg < 1) finalDmg = 1;
+
         if (Math.random() < this.agility/20){ // 5% - 50% chance to dodge
             finalDmg = 0;
             console.log(`DOGED!!!`);
@@ -59,38 +47,61 @@ class Adventurer extends Character {
             defender.attack(this);
         }
         if (this.hitpoints <= 0 && defender.hitpoints <= 0){
-            console.log(`it's a tie`) 
+            console.log(`it's a tie`, this.hitpoints, defender.hitpoints) 
         } else if (this.hitpoints <= 0 && defender.hitpoints > 0){
-            console.log(`${defender.name} wins!`);
+            console.log(`${defender.name} wins! HP left: `, defender.hitpoints);
             return false;
         } 
         else if (this.hitpoints > 0 && defender.hitpoints <= 0){
-            console.log(`${this.name} wins!`);
+            console.log(`${this.name} wins! HP left: `, this.hitpoints);
             return true;
         } 
     }
 }
 
-let player = new Adventurer("Hero");
-let computer = new Adventurer("Nemesis");
-console.log(player);
-console.log(computer);
+class Hero extends Character {
+    constructor(name){
+        super(name);
+    }
+    pray(){
+        this.damageAttack += 5 // damage increase +5
+        this.damageDefence += 2 // defence increase +1
+        this.agility += 5 // additional 25% chance to dodge (does not increase because damageDefence value already set before)
+        this.luck *= 1.5 // 50% boost to luck i.e. increase chance to critical attack
+        game.prayed = true;
+        console.log(`Thank God!!!!!!!!!!!!!!!!!!!!!!`, this.damageAttack, this.damageDefence, this.agility, this.luck)
+    }
+    attack(defender){
+        if (this.hitpoints < 40 && defender.hitpoints >= 60) this.pray(); // if HP less than 20 and enemy HP >= 50
 
-// player.battle(computer);
+        let baseDmg = this.damageAttack - defender.damageDefence;
+        let finalDmg;
+    
+        if (Math.random() < this.luck){ // 2.5% to 25% chance to deal critical damage
+            finalDmg = baseDmg + this.criticalHitDamageExtra;
+            console.log(`CRITICAL HIT!`)
+        } else finalDmg = baseDmg;
+    
+        if (finalDmg < 1) finalDmg = 1;
 
-let score = 0;
+        if (Math.random() < this.agility/20){ // 5% - 50% chance to dodge
+            finalDmg = 0;
+            console.log(`DOGED!!!`);
+        } else defender.hitpoints -= finalDmg;
 
+        console.log(`${this.name} attacked for ${finalDmg} damage. ${defender.name} has ${defender.hitpoints}HP left.`)
+    }
+}
 
 function startBattle(human, comp) {
-    // human.battle(comp);
 
     if (human.battle(comp) === true) { // Checking condition Runs the game. if player wins, also does below.
-        console.log(`player won`);
-        score += 10;
-    } else {
-        console.log(`computer won`);
-    }
+        console.log(`10 coins added!`);
+        game.score += 10;
+    } 
 
+    // reset on exit
+    game.prayed = false;
     human.hitpoints = 100;
     comp.hitpoints = 100;
 }
@@ -101,9 +112,19 @@ function startGame(human, comp){
     startBattle(human, comp);
 }
 
+game = {
+    score: 0,
+    prayed: false,
+}
+
+let player = new Hero("Player One");
+let computer = new Character("Nemesis");
+console.log(player);
+console.log(computer);
+
 startGame(player, computer);
 startGame(player, computer);
 startGame(player, computer);
 
 
-console.log(`coins won:`, score);
+console.log(`coins won:`, game.score);
