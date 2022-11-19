@@ -64,12 +64,14 @@ class Hero extends Character {
         super(name);
     }
     pray(){
-        this.damageAttack += 5 // damage increase +5
-        this.damageDefence += 2 // defence increase +1
-        this.agility += 5 // additional 25% chance to dodge (does not increase because damageDefence value already set before)
-        this.luck *= 1.5 // 50% boost to luck i.e. increase chance to critical attack
-        game.prayed = true;
-        console.log(`Thank God!!!!!!!!!!!!!!!!!!!!!!`, this.damageAttack, this.damageDefence, this.agility, this.luck)
+        if (game.prayed === false) {
+            this.damageAttack += 5 // damage increase +5
+            this.damageDefence += 2 // defence increase +1
+            this.agility += 5 // additional 25% chance to dodge (does not increase because damageDefence value already set before)
+            this.luck *= 1.5 // 50% boost to luck i.e. increase chance to critical attack
+            game.prayed = true;
+            console.log(`Thank God!!!!!!!!!!!!!!!!!!!!!!`, this.damageAttack, this.damageDefence, this.agility, this.luck)
+        }
     }
     attack(defender){
         if (this.hitpoints < 40 && defender.hitpoints >= 60) this.pray(); // if HP less than 20 and enemy HP >= 50
@@ -94,16 +96,15 @@ class Hero extends Character {
 }
 
 function startBattle(human, comp) {
+    // reset on start
+    game.prayed = false;
+    human.hitpoints = 100;
+    comp.hitpoints = 100;
 
     if (human.battle(comp) === true) { // Checking condition Runs the game. if player wins, also does below.
         console.log(`10 coins added!`);
         game.score += 10;
     } 
-
-    // reset on exit
-    game.prayed = false;
-    human.hitpoints = 100;
-    comp.hitpoints = 100;
 }
 
 function startGame(human, comp){
@@ -123,8 +124,15 @@ console.log(player);
 console.log(computer);
 
 startGame(player, computer);
-startGame(player, computer);
-startGame(player, computer);
+console.log(player);
+console.log(computer);
 
+startGame(player, computer);
+console.log(player);
+console.log(computer);
+
+startGame(player, computer);
+console.log(player);
+console.log(computer);
 
 console.log(`coins won:`, game.score);
