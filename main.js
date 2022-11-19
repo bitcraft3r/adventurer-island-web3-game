@@ -19,10 +19,6 @@ class Character {
         this.damageDefence = this.agility / 2;
         this.luck = this.wisdom / 40;
         this.criticalHitDamageExtra = this.damageBase + this.generateStat(this.strength);
-        this.agilityOriginal = this.agility;
-        this.damageAttackOriginal = this.damageAttack;
-        this.damageDefenceOriginal = this.damageDefence;
-        this.luckOriginal = this.luck;
     }
     generateStat(number){
         return Math.floor(Math.random()*number) + 1; // returns 1 to number; enter value above 1
@@ -69,15 +65,20 @@ class Character {
 
 class Hero extends Character {
     constructor(name){
-        super(name);
+        // super(name);
+        // this.name = name
+        super(name, name);
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super#using_super_in_classes
+        // super(length, length)
+        // search term: "class extends .js super"
         this.prayed = false;
     }
-    pray(){ // BUG: this causes stats to increase which stays into the next game also
+    pray(){ 
         if (this.prayed === false) {
             this.hitpoints += 10
             this.damageAttack += 5
             this.damageDefence += 2
-            this.agility += 4 // additional 20% chance to dodge (does not increase because damageDefence value already set before)
+            this.agility += 4 // additional 20% chance to dodge
             this.luck *= 1.5 // 50% boost to luck i.e. increase chance to critical attack
             this.prayed = true;
             console.log(`Thank God!!!!!!!!!!!!!!!!!!!!!!`, this.damageAttack, this.damageDefence, this.agility, this.luck)
@@ -89,24 +90,15 @@ class Hero extends Character {
     }
 }
 
-function startBattle(human, comp) {
+function startBattle(name) {
+    console.log(typeof name)
+    let human = new Hero(name);
+    let comp = new Character("Nemesis");
     game.currentRound++;
     console.log(`BATTLE #${game.currentRound} START`)
-    // reset on start
-    human.hitpoints = 100;
-    comp.hitpoints = 100;
-    // reset due to increase from pray
-    human.prayed = false;
-    human.agility = human.agilityOriginal; 
-    human.damageAttack = human.damageAttackOriginal;
-    human.damageDefence = human.damageDefenceOriginal;
-    human.luck = human.luckOriginal;
 
     // start battle
     human.battle(comp);
-    // if (human.battle(comp) === true) { // Checking condition Runs the game. if player wins, also does below.
-        
-    // } 
 
     console.log(human);
     console.log(comp);
@@ -116,11 +108,9 @@ function startBattle(human, comp) {
 }
 
 function startGame(){
-    let player = new Hero("Brian");
-    let computer = new Character("Nemesis");
 
-    startBattle(player, computer);
 
+    startBattle("Brian");
     console.log(`coins won:`, game.score);
 }
 
