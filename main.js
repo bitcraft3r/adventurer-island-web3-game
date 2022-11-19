@@ -62,19 +62,21 @@ class Character {
 class Hero extends Character {
     constructor(name){
         super(name);
+        this.prayed = false;
     }
-    pray(){
-        if (game.prayed === false) {
-            this.damageAttack += 5 // damage increase +5
-            this.damageDefence += 2 // defence increase +1
+    pray(){ // BUG: this causes stats to increase which stays into the next game also
+        if (this.prayed === false) {
+            this.hitpoints += 10
+            this.damageAttack += 5
+            this.damageDefence += 2
             this.agility += 5 // additional 25% chance to dodge (does not increase because damageDefence value already set before)
             this.luck *= 1.5 // 50% boost to luck i.e. increase chance to critical attack
-            game.prayed = true;
+            this.prayed = true;
             console.log(`Thank God!!!!!!!!!!!!!!!!!!!!!!`, this.damageAttack, this.damageDefence, this.agility, this.luck)
         }
     }
     attack(defender){
-        if (this.hitpoints < 40 && defender.hitpoints >= 60) this.pray(); // if HP less than 20 and enemy HP >= 50
+        if (this.hitpoints < 30 && defender.hitpoints >= 50) this.pray(); // if HP less than 20 and enemy HP >= 50
 
         let baseDmg = this.damageAttack - defender.damageDefence;
         let finalDmg;
@@ -97,7 +99,7 @@ class Hero extends Character {
 
 function startBattle(human, comp) {
     // reset on start
-    game.prayed = false;
+    human.prayed = false;
     human.hitpoints = 100;
     comp.hitpoints = 100;
 
@@ -115,7 +117,6 @@ function startGame(human, comp){
 
 game = {
     score: 0,
-    prayed: false,
 }
 
 let player = new Hero("Player One");
