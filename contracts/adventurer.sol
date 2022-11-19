@@ -1415,57 +1415,6 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     ];
     
-    string[] private suffixes = [
-        "of Power",
-        "of Giants",
-        "of Titans",
-        "of Skill",
-        "of Perfection",
-        "of Brilliance",
-        "of Enlightenment",
-        "of Protection",
-        "of Anger",
-        "of Rage",
-        "of Fury",
-        "of Vitriol",
-        "of the Fox",
-        "of Detection",
-        "of Reflection",
-        "of the Twins"
-    ];
-    
-    string[] private namePrefixes = [
-        "Agony", "Apocalypse", "Armageddon", "Beast", "Behemoth", "Blight", "Blood", "Bramble", 
-        "Brimstone", "Brood", "Carrion", "Cataclysm", "Chimeric", "Corpse", "Corruption", "Damnation", 
-        "Death", "Demon", "Dire", "Dragon", "Dread", "Doom", "Dusk", "Eagle", "Empyrean", "Fate", "Foe", 
-        "Gale", "Ghoul", "Gloom", "Glyph", "Golem", "Grim", "Hate", "Havoc", "Honour", "Horror", "Hypnotic", 
-        "Kraken", "Loath", "Maelstrom", "Mind", "Miracle", "Morbid", "Oblivion", "Onslaught", "Pain", 
-        "Pandemonium", "Phoenix", "Plague", "Rage", "Rapture", "Rune", "Skull", "Sol", "Soul", "Sorrow", 
-        "Spirit", "Storm", "Tempest", "Torment", "Vengeance", "Victory", "Viper", "Vortex", "Woe", "Wrath",
-        "Light's", "Shimmering"  
-    ];
-    
-    string[] private nameSuffixes = [
-        "Bane",
-        "Root",
-        "Bite",
-        "Song",
-        "Roar",
-        "Grasp",
-        "Instrument",
-        "Glow",
-        "Bender",
-        "Shadow",
-        "Whisper",
-        "Shout",
-        "Growl",
-        "Tear",
-        "Peak",
-        "Form",
-        "Sun",
-        "Moon"
-    ];
-    
     function random(string memory input) internal pure returns (uint256) {
         return uint256(keccak256(abi.encodePacked(input)));
     }
@@ -1502,23 +1451,9 @@ contract Adventurer is ERC721Enumerable, ReentrancyGuard, Ownable {
         return pluck(tokenId, "LANGUAGE", language);
     }
     
-    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal view returns (string memory) {
+    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal pure returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
         string memory output = sourceArray[rand % sourceArray.length];
-        uint256 greatness = rand % 21;
-        if (greatness > 14) {
-            output = string(abi.encodePacked(output, " ", suffixes[rand % suffixes.length]));
-        }
-        if (greatness >= 19) {
-            string[2] memory name;
-            name[0] = namePrefixes[rand % namePrefixes.length];
-            name[1] = nameSuffixes[rand % nameSuffixes.length];
-            if (greatness == 19) {
-                output = string(abi.encodePacked('"', name[0], ' ', name[1], '" ', output));
-            } else {
-                output = string(abi.encodePacked('"', name[0], ' ', name[1], '" ', output, " +1"));
-            }
-        }
         return output;
     }
 
