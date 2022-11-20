@@ -2,22 +2,18 @@
 
 ## Contract address
 
-TX: https://mumbai.polygonscan.com/tx/0x3a0c7eb882d6cb1d15d61c5022c77521152b06d589041cfdebba8608f28191c7
+TX: https://mumbai.polygonscan.com/tx/0x38d9903bf1862691d61a539648e8a1c5d55856dfebffdc6b531bef10f86f8b36
 
-Contract Address: https://mumbai.polygonscan.com/address/0x01b8f3b7b26ae66398a5915cdeecfdf811c61d26#readContract
+Contract Address: https://mumbai.polygonscan.com/address/0xee249af6f080ce12877bd4f9f590ed0eb28e6dbb#readContract
 
 
 ## Verify contract
 
 ## Playing the game
 
-### 1. mapPlayer()
-
-TX: https://mumbai.polygonscan.com/tx/0x02db9f0f4feff0d3fe6b229d94e2652f42e57345ae367a309f4c034ddc36108a
-
 ### 2. battle(_index)
 
-TX: https://mumbai.polygonscan.com/tx/0x43634edc05c4a245cf72010cf8736f9adb1f9300f9c952e6a81d38db007a32d6
+TX: https://mumbai.polygonscan.com/tx/0xddf4f9f9366f0700d9d4c0dc676f109c97851220247a1b99356e2c66a438862a
 
 ### View results
 
@@ -27,8 +23,8 @@ TX: https://mumbai.polygonscan.com/tx/0x43634edc05c4a245cf72010cf8736f9adb1f9300
 
 #### getSpawn(index)
 
-![Spawn stats after 1 battle](https://user-images.githubusercontent.com/8282076/202903710-83b98e9d-ac26-4e7b-9987-88ca85172b4d.png)
+![Spawn stats after 1 battle](https://user-images.githubusercontent.com/8282076/202905769-139e5fda-6100-4505-87e5-bc11d630480d.png)
 
 #### getScore()
 
-![Game Score after 1 battle](https://user-images.githubusercontent.com/8282076/202898835-ce0a9200-68fe-4dd4-bbe5-553b980acaaf.png)
+![Game Score after 1 battle](https://user-images.githubusercontent.com/8282076/202905825-861cd83f-b274-45fc-94e2-398cfbb936a0.png)
