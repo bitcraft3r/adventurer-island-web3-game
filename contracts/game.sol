@@ -26,7 +26,20 @@ contract Game {
 
     Hero[] players;
     Spawn[] spawns;
-    Round [] rounds;
+    Round[] rounds;
+
+    int[] attributesArray = [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+    ];
 
     function addHero(string memory _name, int _health, int _strength, int _agility, int _wisdom) private {
         Hero memory newHero = Hero(_name, _health, _strength, _agility, _wisdom);
@@ -43,25 +56,49 @@ contract Game {
         rounds.push(newRound);
     } 
 
-    // TODO: generate pseudo-random nos for attributes
-
-    // function getStrength(uint256 tokenId) public view returns (string memory) {
-    //     return pluck(tokenId, "STRENGTH", strength);
-    // }
+    // Generate pseudo-random nos for attributes
+    // Inspired by Loot contract - MIT license
+    // https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7#code
+    function getStrength(uint256 _index) public view returns (int) {
+        return pluck(_index, "STRENGTH", attributesArray);
+    }
     
-    // function getAgility(uint256 tokenId) public view returns (string memory) {
-    //     return pluck(tokenId, "AGILITY", agility);
-    // }
+    function getAgility(uint256 _index) public view returns (int) {
+        return pluck(_index, "AGILITY", attributesArray);
+    }
     
-    // function getWisdom(uint256 tokenId) public view returns (string memory) {
-    //     return pluck(tokenId, "WISDOM", wisdom);
-    // }
+    function getWisdom(uint256 _index) public view returns (int) {
+        return pluck(_index, "WISDOM", attributesArray);
+    }
 
-    // function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal pure returns (string memory) {
-    //     uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
-    //     string memory output = sourceArray[rand % sourceArray.length];
-    //     return output;
-    // }
+    function random(string memory input) internal pure returns (uint256) {
+        return uint256(keccak256(abi.encodePacked(input)));
+    }
+
+    function toString(uint256 value) internal pure returns (string memory) {
+        if (value == 0) {
+            return "0";
+        }
+        uint256 temp = value;
+        uint256 digits;
+        while (temp != 0) {
+            digits++;
+            temp /= 10;
+        }
+        bytes memory buffer = new bytes(digits);
+        while (value != 0) {
+            digits -= 1;
+            buffer[digits] = bytes1(uint8(48 + uint256(value % 10)));
+            value /= 10;
+        }
+        return string(buffer);
+    }
+
+    function pluck(uint256 _index, string memory keyPrefix, int[] memory sourceArray) internal pure returns (int) {
+        uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(_index))));
+        int output = sourceArray[rand % sourceArray.length];
+        return output;
+    }
 
     function getHero(uint _index) public view returns (string memory, int, int, int, int) {
         Hero memory heroToReturn = players[_index];
@@ -85,7 +122,7 @@ contract Game {
     
     function battle(uint _index) public {
 
-        addSpawn(100, 5, 5, 5);
+        addSpawn(100, getStrength(_index), getAgility(_index), getWisdom(_index));
 
         // start battle
         while (players[_index].health > 0 && spawns[_index].health > 0){
@@ -104,6 +141,5 @@ contract Game {
         // }
 
         addRound(_index, true, 10);
-
     }
 }

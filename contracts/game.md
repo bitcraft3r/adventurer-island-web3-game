@@ -2,9 +2,9 @@
 
 ## Contract address
 
-TX: https://mumbai.polygonscan.com/tx/0xa264b1364c1b6f3fedaca06aae3880b7390d113cdc239841998b9affa3bc05e3
+TX: https://mumbai.polygonscan.com/tx/0x3a0c7eb882d6cb1d15d61c5022c77521152b06d589041cfdebba8608f28191c7
 
-Contract Address: https://mumbai.polygonscan.com/address/0xddaaca03de097532d541fc2501fdae352094b544
+Contract Address: https://mumbai.polygonscan.com/address/0x01b8f3b7b26ae66398a5915cdeecfdf811c61d26#readContract
 
 
 ## Verify contract
@@ -13,21 +13,21 @@ Contract Address: https://mumbai.polygonscan.com/address/0xddaaca03de097532d541f
 
 ### 1. mapPlayer()
 
-TX: https://mumbai.polygonscan.com/tx/0xbb97be97caf6ee1693efaa2ab52dd5e0bd38e31c5897086aaba48c58d14bfa8f
+TX: https://mumbai.polygonscan.com/tx/0x02db9f0f4feff0d3fe6b229d94e2652f42e57345ae367a309f4c034ddc36108a
 
 ### 2. battle(_index)
 
-TX: https://mumbai.polygonscan.com/tx/0x0363250c1ca88cea487852b448c58ea1b6bbd18c492918f3e3c234eb2242a122
+TX: https://mumbai.polygonscan.com/tx/0x43634edc05c4a245cf72010cf8736f9adb1f9300f9c952e6a81d38db007a32d6
 
 ### View results
 
 #### getHero(index)
 
-![Adventurer stats after 1 battle](https://user-images.githubusercontent.com/8282076/202898827-cbb17b2f-8d5e-468e-af24-15d939fa0516.png)
+![Adventurer stats after 1 battle](https://user-images.githubusercontent.com/8282076/202903728-7e08797e-e4cc-4dcc-b3bf-83830e9c4486.png)
 
 #### getSpawn(index)
 
-![Spawn stats after 1 battle](https://user-images.githubusercontent.com/8282076/202898840-808de1c9-a21c-4723-bafe-67aaac8ade4a.png)
+![Spawn stats after 1 battle](https://user-images.githubusercontent.com/8282076/202903710-83b98e9d-ac26-4e7b-9987-88ca85172b4d.png)
 
 #### getScore()
 
