@@ -2,9 +2,9 @@
 
 ## Contract address
 
-TX: https://mumbai.polygonscan.com/tx/0x6887d2c0514fa51671c63aaac54a8732dcb3b1eb5d06bd311fc697c413d74686
+TX: https://mumbai.polygonscan.com/tx/0xa264b1364c1b6f3fedaca06aae3880b7390d113cdc239841998b9affa3bc05e3
 
-Contract Address: https://mumbai.polygonscan.com/address/0x4174a2635cd36c1730a1238d6eb0b6a4aa36f9ac
+Contract Address: https://mumbai.polygonscan.com/address/0xddaaca03de097532d541fc2501fdae352094b544
 
 
 ## Verify contract
@@ -13,15 +13,11 @@ Contract Address: https://mumbai.polygonscan.com/address/0x4174a2635cd36c1730a12
 
 ### 1. mapPlayer()
 
-TX: https://mumbai.polygonscan.com/tx/0x626a426d808e21bb0a62754482e6b4a59008f48348ffa05301e7596191490474
+TX: https://mumbai.polygonscan.com/tx/0xbb97be97caf6ee1693efaa2ab52dd5e0bd38e31c5897086aaba48c58d14bfa8f
 
-### 2. mapSpawn()
+### 2. battle(_index)
 
-TX: https://mumbai.polygonscan.com/tx/0xf061e9ac8d0041c03ad6b335f9a03f02b89d778bd739bc206dfc7bf0a634ed61
-
-### 3. battle(_index)
-
-TX: https://mumbai.polygonscan.com/tx/0x2f4433d5dd2ad61367597655c3d50409e7b5a50d43efb57f89ba5afcab22994f
+TX: https://mumbai.polygonscan.com/tx/0x0363250c1ca88cea487852b448c58ea1b6bbd18c492918f3e3c234eb2242a122
 
 ### View results
 

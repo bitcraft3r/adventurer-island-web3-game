@@ -3,9 +3,7 @@ pragma solidity ^0.8.0;
 
 contract Game {
 
-    // uint score;
-
-    struct Hero { // only to define the structure; not to define any values to elements;
+    struct Hero {
         string name;
         int health;
         int strength;
@@ -31,7 +29,7 @@ contract Game {
     Round [] rounds;
 
     function addHero(string memory _name, int _health, int _strength, int _agility, int _wisdom) private {
-        Hero memory newHero = Hero(_name, _health, _strength, _agility, _wisdom); // Create an `instance` of `Hero`
+        Hero memory newHero = Hero(_name, _health, _strength, _agility, _wisdom);
         players.push(newHero);
     } 
 
@@ -80,35 +78,16 @@ contract Game {
         return (roundToReturn.roundNo, roundToReturn.result, roundToReturn.coinsWon);
     }
 
-    // function getScore() public view returns(uint){
-    //     return score;
-    // }
-
     function mapPlayer(string memory _name, int _str, int _agi, int _wis) public returns (uint) {
         addHero(_name, 100, _str, _agi, _wis);
         return players.length-1; // return index of newly mapped player
     }
-
-    function mapSpawn(int _str, int _agi, int _wis) public returns (uint) {
-        addSpawn(100, _str, _agi, _wis);
-        return spawns.length-1; // return index of newly mapped spawn
-    }
     
     function battle(uint _index) public {
-        // players[_index].health;
-        // players[_index].strength;
-        // players[_index].agility;
-        // players[_index].wisdom;
 
-        // spawns[_index].health;
-        // spawns[_index].strength;
-        // spawns[_index].agility;
-        // spawns[_index].wisdom;
+        addSpawn(100, 5, 5, 5);
 
-        // addRound(_index, false);
-        // rounds[_index].roundNo;
-
-        // start game
+        // start battle
         while (players[_index].health > 0 && spawns[_index].health > 0){
             players[_index].health -= spawns[_index].strength;
             spawns[_index].health -= players[_index].strength;
