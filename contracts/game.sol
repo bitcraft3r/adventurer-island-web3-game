@@ -44,31 +44,31 @@ contract Game {
     function addHero(string memory _name, int _health, int _strength, int _agility, int _wisdom) private {
         Hero memory newHero = Hero(_name, _health, _strength, _agility, _wisdom);
         players.push(newHero);
-    } 
+    }
 
     function addSpawn(int _health, int _strength, int _agility, int _wisdom) private {
         Spawn memory newSpawn = Spawn(_health, _strength, _agility, _wisdom);
         spawns.push(newSpawn);
-    } 
+    }
 
     function addRound(uint _roundNo, bool _result, uint _score) private {
         Round memory newRound = Round(_roundNo, _result, _score);
         rounds.push(newRound);
-    } 
+    }
 
     // Generate pseudo-random nos for attributes
     // Inspired by Loot contract - MIT license
     // https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7#code
-    function getStrength(uint256 _index) public view returns (int) {
-        return pluck(_index, "STRENGTH", attributesArray);
+    function getStrength(uint256 _index, string memory _name) internal view returns (int) {
+        return pluck(_index, "STRENGTH", attributesArray, _name);
     }
     
-    function getAgility(uint256 _index) public view returns (int) {
-        return pluck(_index, "AGILITY", attributesArray);
+    function getAgility(uint256 _index, string memory _name) internal view returns (int) {
+        return pluck(_index, "AGILITY", attributesArray, _name);
     }
     
-    function getWisdom(uint256 _index) public view returns (int) {
-        return pluck(_index, "WISDOM", attributesArray);
+    function getWisdom(uint256 _index, string memory _name) internal view returns (int) {
+        return pluck(_index, "WISDOM", attributesArray, _name);
     }
 
     function random(string memory input) internal pure returns (uint256) {
@@ -94,8 +94,8 @@ contract Game {
         return string(buffer);
     }
 
-    function pluck(uint256 _index, string memory keyPrefix, int[] memory sourceArray) internal pure returns (int) {
-        uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(_index))));
+    function pluck(uint256 _index, string memory keyPrefix, int[] memory sourceArray, string memory _name) internal pure returns (int) {
+        uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(_index), _name)));
         int output = sourceArray[rand % sourceArray.length];
         return output;
     }
@@ -110,36 +110,40 @@ contract Game {
         return (spawnToReturn.health, spawnToReturn.strength, spawnToReturn.agility, spawnToReturn.wisdom);
     }
 
-    function getRound(uint _index) public view returns (uint, bool, uint) {
+    function roundDetails(uint _index) public view returns (uint, bool, uint) {
         Round memory roundToReturn = rounds[_index];
         return (roundToReturn.roundNo, roundToReturn.result, roundToReturn.coinsWon);
     }
 
-    function mapPlayer(string memory _name, int _str, int _agi, int _wis) public returns (uint) {
-        addHero(_name, 100, _str, _agi, _wis);
+    function mapPlayer(string memory _name, int _strength, int _agility, int _wisdom) internal returns (uint) {
+        addHero(_name, 100, _strength, _agility, _wisdom);
         return players.length-1; // return index of newly mapped player
     }
     
-    function battle(uint _index) public {
+    function battle(string memory _name, int _strength, int _agility, int _wisdom) public {
+        // initialize player
+        mapPlayer(_name, _strength, _agility, _wisdom);
+        uint currentIndex = players.length-1;
 
-        addSpawn(100, getStrength(_index), getAgility(_index), getWisdom(_index));
+        // initialize spawn
+        addSpawn(100, getStrength(currentIndex, _name), getAgility(currentIndex, _name), getWisdom(currentIndex, _name));
 
         // start battle
-        while (players[_index].health > 0 && spawns[_index].health > 0){
-            players[_index].health -= spawns[_index].strength;
-            spawns[_index].health -= players[_index].strength;
+        while (players[currentIndex].health > 0 && spawns[currentIndex].health > 0){
+            players[currentIndex].health -= spawns[currentIndex].strength;
+            spawns[currentIndex].health -= players[currentIndex].strength;
         }
 
         // // check winner
-        // if (players[_index].health < 0 && spawns[_index].health < 0){
-        //     addRound(_index, false, 0);
-        // } else if (players[_index].health > 0 && spawns[_index].health <= 0){
-        //     addRound(_index, true, 10);
+        // if (players[currentIndex].health < 0 && spawns[currentIndex].health < 0){
+        //     addRound(currentIndex, false, 0);
+        // } else if (players[currentIndex].health > 0 && spawns[currentIndex].health <= 0){
+        //     addRound(currentIndex, true, 10);
         //     // score++;
-        // } else if (players[_index].health <= 0 && spawns[_index].health > 0){
-        //     addRound(_index, false, 10);
+        // } else if (players[currentIndex].health <= 0 && spawns[currentIndex].health > 0){
+        //     addRound(currentIndex, false, 10);
         // }
 
-        addRound(_index, true, 10);
+        addRound(currentIndex, true, 10);
     }
 }
