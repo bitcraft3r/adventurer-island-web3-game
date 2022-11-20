@@ -19,7 +19,7 @@ TX: https://mumbai.polygonscan.com/tx/0xddf4f9f9366f0700d9d4c0dc676f109c97851220
 
 #### getHero(index)
 
-![Adventurer stats after 1 battle](https://user-images.githubusercontent.com/8282076/202903728-7e08797e-e4cc-4dcc-b3bf-83830e9c4486.png)
+![Adventurer stats after 1 battle](https://user-images.githubusercontent.com/8282076/202905916-d3001a46-62df-4ae5-8f19-041c39972a80.png)
 
 #### getSpawn(index)
 
