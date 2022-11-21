@@ -33,7 +33,6 @@ contract Game {
         uint coinsWon;
     }
 
-    // Record all attacks of every battle
     struct Attack {
         uint roundIndex;
         uint attackIndex;
@@ -156,14 +155,11 @@ contract Game {
         // initialize player
         mapPlayer(_name, _strength, _agility, _wisdom);
         uint256 currentIndex = players.length-1;
-
         // initialize spawn
         addSpawn(100, getStrength(currentIndex, _name), getAgility(currentIndex, _name), getWisdom(currentIndex, _name));
-
         // initialize variables used for entire battle (round)
         uint attackCounter = 0;
         uint startAttackIndex = 0 + attacks.length;
-
         // spawn has passive skill harden(): if player has unfair advantage, spawn gets a boost in attributes
         int playerTotalStats = players[currentIndex].strength + players[currentIndex].agility + players[currentIndex].wisdom;
         int spawnTotalStats = spawns[currentIndex].strength + spawns[currentIndex].agility + spawns[currentIndex].wisdom;
@@ -180,41 +176,30 @@ contract Game {
             spawns[currentIndex].agility += 6;
             spawns[currentIndex].wisdom += 3;
         }
-
         // start battle
         while (players[currentIndex].health > 0 && spawns[currentIndex].health > 0){
-        
             // initialize variables only used in 1 attack
             int heroDamageDealt = 0;
             int spawnDamageDealt = 0;
             int bonusDamage = 0;
             int bonusDefence = 0;
-
             // player has passive skill pray() that triggers when low HP
             if (players[currentIndex].health < 25){
                 players[currentIndex].health += 2; // add 2 HP before every attack
                 bonusDamage = 2; // attack with 2 additional damage
                 bonusDefence = 1; // take 1 less damage from spawn
             }
-
-            // TODO: Add CRITICAL HIT
-            // TODO: Add DODGE ATTACK
-
             // player attacks
             heroDamageDealt = 5 + players[currentIndex].strength - spawns[currentIndex].agility/2 + players[currentIndex].wisdom/spawns[currentIndex].wisdom + bonusDamage;
             spawns[currentIndex].health -= heroDamageDealt;
-
             // spawn attacks
             spawnDamageDealt = 5 + spawns[currentIndex].strength - players[currentIndex].agility/2 + spawns[currentIndex].wisdom/players[currentIndex].wisdom - bonusDefence;
             players[currentIndex].health -= spawnDamageDealt;
-            
             // log attack
             addAttack(currentIndex, attackCounter, players[currentIndex].health, heroDamageDealt, spawns[currentIndex].health, spawnDamageDealt);
-
             // increment attack counter
             attackCounter++;
         }
-
         // check winner
         if (players[currentIndex].health <= 0 && spawns[currentIndex].health <= 0){
             addRound(currentIndex, attackCounter, startAttackIndex, attacks.length-1, false, 5);
@@ -223,7 +208,6 @@ contract Game {
         } else if (players[currentIndex].health <= 0 && spawns[currentIndex].health > 0){
             addRound(currentIndex, attackCounter, startAttackIndex, attacks.length-1, false, 0);
         }
-
         // end game
         return rounds.length-1; // return index of this battle
     }
