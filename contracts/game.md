@@ -2,61 +2,77 @@
 
 ## Contract address
 
-TX: https://mumbai.polygonscan.com/tx/0x10e629f47b422ec64d6f60cbd7af4e6e2cd3fe7129fc48a16bfdd2f30c7ca467
+TX: https://mumbai.polygonscan.com/tx/0x6144c68b96964508dc50cb660d8700ca6897cb09100cc33396641392dcfc1019
 
-Contract Address: https://mumbai.polygonscan.com/address/0xb710fda663ca2921fbb86979c554ac36c0a15017
-
-## Verify contract
+Contract Address: https://mumbai.polygonscan.com/address/0xd6983c07fe3f65ab21689fb5373efadd7b8a5e70
 
 ## Playing the game
 
-### Write > battle(_index)
+### **Write -> battle(_index)**
 
 NOTES:
 - If unable to battle (error creating tx), try changing the name input.
 - If unable to view stats, refresh polygonscan page
 
-### View results
+## View results
+
+### **Read ->**
 
 - getHero(index)
 - getSpawn (index)
 - roundDetails(index)
 - attackDetails(attackIndex)
+- lastGameIndex()
 
-#### WIN case
+### WIN case
 
-roundIndex: 1
+> roundIndex: 0
 
-![Game Score after win game](https://user-images.githubusercontent.com/8282076/202982582-864dec40-7f22-4fb1-9634-6a64b6473e89.png)
+#### **roundDetails(0)**
 
-![Adventurer stats win game](https://user-images.githubusercontent.com/8282076/202982640-96dc495a-839f-4f7d-937d-731506fb0a47.png)
+![Game Score after win game](https://user-images.githubusercontent.com/8282076/203008424-bacafa86-7faa-43f1-8609-27e3ec705b6d.png)
+- 0: Round Index number
+- 7: Total Attacks in this round
+- 0: Index of first attack in this round
+- 6: Index of last attack in this round
+- true: Result of the round, true if win, false if lose
+- 20: Coins won = 20 if win, 5 if tie
 
-![Spawn stats after win game](https://user-images.githubusercontent.com/8282076/202982699-9f2779de-6cf4-44e3-9619-edf20b9844ef.png)
+#### **getHero(0)**
 
-![attackDetails firstAttackIndex](https://user-images.githubusercontent.com/8282076/202982950-af5ae491-38ee-468e-942f-1ff5fefbc69f.png)
+![Adventurer stats win game](https://user-images.githubusercontent.com/8282076/203008491-36954df7-2818-42d5-aac5-00ab993cdf90.png)
+- adv0: Player Name
+- 37: Player HP (at the end of battle)
+- 7: STR
+- 7: AGI
+- 7: IS
 
-![attackDetails lastAttackIndex](https://user-images.githubusercontent.com/8282076/202982986-d4c5f516-4352-4fce-bcc9-9bbd2fb75bdb.png)
+#### **getSpawn(0)**
 
-#### LOSE case
+![Spawn stats after win game](https://user-images.githubusercontent.com/8282076/203008523-59a01715-833b-4cf6-9685-35dff8c286c0.png)
+- -5: Spawn HP (at the end of battle)
+- 7: STR
+- 8: AGI
+- 1: WIS
 
-roundIndex: 0 
+#### **attackDetails(0)**
 
-![Game Score after 1 battle](https://user-images.githubusercontent.com/8282076/202982413-01fdee59-c6a5-48da-83a6-bd74c5892c43.png)
+![attackDetails firstAttackIndex](https://user-images.githubusercontent.com/8282076/203008588-274fdbb2-0c25-49a1-a2cb-9ea4c5a72c5c.png)
+- 0: Index of Round
+- 0: Index of the attack within the round (attackCount - resets every battle)
+- 91: Player HP (at the end of battle)
+- 15: Damage dealt by Player this round
+- 85: Spawn HP (at the end of battle)
+- 9: Damage dealt by Spawn this round
 
-#### TIE case
+#### **attackDetails(6)**
 
-roundIndex: 9
+![attackDetails lastAttackIndex](https://user-images.githubusercontent.com/8282076/203008678-1ea5b0e8-489e-423a-b14e-e75a70412020.png)
 
-![Game Score after tie game](https://user-images.githubusercontent.com/8282076/202982316-1a5d6ff5-19fa-45ba-bef7-73657e892e6b.png)
+### LOSE case
 
-## NEW CONTRACT - Add getter for lastGameIndex()
+> roundIndex: 7 
 
-- Contract: https://mumbai.polygonscan.com/address/0x8e7d87357f4dd4da2b3c33fb381d8d40385dcfc1
+### TIE case
 
-NOTES: Calling battle() also returns index of battle's round.
-
-## NEW CONTRACT - Add passive pray() skill
-
-- Contract: https://mumbai.polygonscan.com/address/0x0a02d6d14af21063d478c90a2ed876489c2a0b94
-
-Gives player better chance to win enemies that are slightly stronger
+> roundIndex: 1

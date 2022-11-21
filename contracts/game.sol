@@ -1,6 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+/** 
+ *  GM Adventurer!
+ *  The town is filled with monsters and we need your help! 
+ *  Battle and slay them and we'll pay you a hefty sum of gold and silver!
+ */
+
 contract Game {
 
     struct Hero {
@@ -137,6 +143,15 @@ contract Game {
         return players.length-1; // return index of newly mapped player // return value unused
     }
     
+/** 
+ *  A spawn with randomized attributes is generated every battle.
+ *  - STR: Determines attack damage
+ *  - AGI: Determines defence armour (reduces attack damage received)
+ *  - WIS: Add bonus damage if player WIS is higher than spawn WIS
+ *  - Player passive skill: Pray()
+ *  - Spawn passive skill: Harden()
+ */
+
     function battle(string memory _name, int _strength, int _agility, int _wisdom) public returns (uint) {
         // initialize player
         mapPlayer(_name, _strength, _agility, _wisdom);
@@ -148,6 +163,23 @@ contract Game {
         // initialize variables used for entire battle (round)
         uint attackCounter = 0;
         uint startAttackIndex = 0 + attacks.length;
+
+        // spawn has passive skill harden(): if player has unfair advantage, spawn gets a boost in attributes
+        int playerTotalStats = players[currentIndex].strength + players[currentIndex].agility + players[currentIndex].wisdom;
+        int spawnTotalStats = spawns[currentIndex].strength + spawns[currentIndex].agility + spawns[currentIndex].wisdom;
+        if (playerTotalStats > spawnTotalStats + 5){
+            spawns[currentIndex].strength += 2;
+            spawns[currentIndex].agility += 2;
+            spawns[currentIndex].wisdom += 1;
+        } else if (playerTotalStats > spawnTotalStats + 10){
+            spawns[currentIndex].strength += 4;
+            spawns[currentIndex].agility += 4;
+            spawns[currentIndex].wisdom += 2;
+        } else if (playerTotalStats > spawnTotalStats + 15){
+            spawns[currentIndex].strength += 6;
+            spawns[currentIndex].agility += 6;
+            spawns[currentIndex].wisdom += 3;
+        }
 
         // start battle
         while (players[currentIndex].health > 0 && spawns[currentIndex].health > 0){
