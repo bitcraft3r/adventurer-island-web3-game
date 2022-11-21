@@ -18,33 +18,33 @@ NOTES:
 
 ### View results
 
-#### getHero(index)
-#### getSpawn (index)
-#### roundDetails(index)
-#### attackDetails(attackIndex)
-
-<!-- ### View results
+- getHero(index)
+- getSpawn (index)
+- roundDetails(index)
+- attackDetails(attackIndex)
 
 #### WIN case
 
-![Adventurer stats after 1 battle](https://user-images.githubusercontent.com/8282076/202961193-cf3c8c1c-6e2a-4171-af0b-604bc1cf9ff2.png)
+roundIndex: 1
 
-![Spawn stats after 1 battle](https://user-images.githubusercontent.com/8282076/202961211-4001b323-4f63-431a-a1b5-648b0a26313a.png)
+![Game Score after win game](https://user-images.githubusercontent.com/8282076/202982582-864dec40-7f22-4fb1-9634-6a64b6473e89.png)
 
-![Game Score after 1 battle](https://user-images.githubusercontent.com/8282076/202961228-a60b00e6-589e-4e6f-9bfe-0daf5a6c2c8b.png)
+![Adventurer stats win game](https://user-images.githubusercontent.com/8282076/202982640-96dc495a-839f-4f7d-937d-731506fb0a47.png)
+
+![Spawn stats after win game](https://user-images.githubusercontent.com/8282076/202982699-9f2779de-6cf4-44e3-9619-edf20b9844ef.png)
+
+![attackDetails firstAttackIndex](https://user-images.githubusercontent.com/8282076/202982950-af5ae491-38ee-468e-942f-1ff5fefbc69f.png)
+
+![attackDetails lastAttackIndex](https://user-images.githubusercontent.com/8282076/202982986-d4c5f516-4352-4fce-bcc9-9bbd2fb75bdb.png)
 
 #### LOSE case
 
-![Adventurer stats after 1 battle](https://user-images.githubusercontent.com/8282076/202961352-20d3bc95-2081-416f-92e2-43f3219e62ea.png)
+roundIndex: 0 
 
-![Spawn stats after 1 battle](https://user-images.githubusercontent.com/8282076/202961364-c1758524-b941-4733-a8ab-455fa1f38c14.png)
-
-![Game Score after 1 battle](https://user-images.githubusercontent.com/8282076/202961377-dee51a6f-0766-4463-9b50-7a1104f30d16.png)
+![Game Score after 1 battle](https://user-images.githubusercontent.com/8282076/202982413-01fdee59-c6a5-48da-83a6-bd74c5892c43.png)
 
 #### TIE case
 
-![Adventurer stats after 1 battle](https://user-images.githubusercontent.com/8282076/202961427-650d6488-1d0c-4188-b316-e23b4c95d54f.png)
+roundIndex: 9
 
-![Spawn stats after 1 battle](https://user-images.githubusercontent.com/8282076/202961437-5642a690-4cfe-489d-830e-f496f34cb239.png)
-
-![Game Score after 1 battle](https://user-images.githubusercontent.com/8282076/202961445-81f3eaad-caec-4d0e-839c-ed9168f63018.png) -->
+![Game Score after tie game](https://user-images.githubusercontent.com/8282076/202982316-1a5d6ff5-19fa-45ba-bef7-73657e892e6b.png)
