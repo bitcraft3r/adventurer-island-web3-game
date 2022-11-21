@@ -18,11 +18,11 @@ TX: https://mumbai.polygonscan.com/tx/0x9a09587e9a44e4b8bf8bd829fd4a7d678a3475c2
 
 #### WIN case
 
-![Adventurer stats after 1 battle](https://user-images.githubusercontent.com/8282076/202935748-aa638725-042a-4648-aec3-2a2288a3d8ec.png)
+![Adventurer stats after 1 battle](https://user-images.githubusercontent.com/8282076/202936253-7aa3c488-a8cb-4eff-ac37-3245eabff03a.png)
 
-![Spawn stats after 1 battle](https://user-images.githubusercontent.com/8282076/202935765-3694c1d4-effe-473c-bed5-0907d35acd36.png)
+![Spawn stats after 1 battle](https://user-images.githubusercontent.com/8282076/202936262-438d7789-53aa-4c0b-9297-3ef6ba42c54b.png)
 
-![Game Score after 1 battle](https://user-images.githubusercontent.com/8282076/202935778-72df966e-28a1-4364-9280-add3eb8a72eb.png)
+![Game Score after 1 battle](https://user-images.githubusercontent.com/8282076/202936272-a12c696e-fd6c-4bb7-9c77-c31580d6bc65.png)
 
 #### LOSE case
 
