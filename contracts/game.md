@@ -21,7 +21,7 @@ NOTES:
 #### getHero(index)
 #### getSpawn (index)
 #### roundDetails(index)
-#### getAttacks(attackIndex)
+#### attackDetails(attackIndex)
 
 <!-- ### View results
 
