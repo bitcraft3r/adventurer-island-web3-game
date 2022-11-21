@@ -134,16 +134,13 @@ contract Game {
             spawns[currentIndex].health -= players[currentIndex].strength;
         }
 
-        // // check winner
-        // if (players[currentIndex].health < 0 && spawns[currentIndex].health < 0){
-        //     addRound(currentIndex, false, 0);
-        // } else if (players[currentIndex].health > 0 && spawns[currentIndex].health <= 0){
-        //     addRound(currentIndex, true, 10);
-        //     // score++;
-        // } else if (players[currentIndex].health <= 0 && spawns[currentIndex].health > 0){
-        //     addRound(currentIndex, false, 10);
-        // }
-
-        addRound(currentIndex, true, 10);
+        // check winner
+        if (players[currentIndex].health <= 0 && spawns[currentIndex].health <= 0){
+            addRound(currentIndex, false, 5);
+        } else if (players[currentIndex].health > 0 && spawns[currentIndex].health <= 0){
+            addRound(currentIndex, true, 20);
+        } else if (players[currentIndex].health <= 0 && spawns[currentIndex].health > 0){
+            addRound(currentIndex, false, 0);
+        }
     }
 }
