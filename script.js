@@ -212,10 +212,38 @@ const gameContractABI = [
 	}
 ]
 
+
+async function connectMetamask (){
+    if(typeof window.ethereum !== "undefined"){
+        try
+        {
+            await ethereum.request({ method: "eth_requestAccounts" });
+        }
+        catch (error) {
+            console.log(error);
+        }
+       
+        document.getElementById("connectButton").innerHTML = "Connected";
+        
+        const accounts = await ethereum.request({ method: "eth_accounts" });
+        console.log(accounts);
+    }
+    else {
+        document.getElementById("connectButton").innerHTML ="Please install MetaMask";
+      }
+}
 async function getLastGameIndex(){
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const gameContract = new ethers.Contract(gameContractAddress, gameContractABI, provider);
 
     const latestGameIndex = await gameContract.lastGameIndex();
+    console.log(latestGameIndex.toString());
+}
+
+async function startBattle(){
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const gameContract = new ethers.Contract(gameContractAddress, gameContractABI, provider.getSigner());
+
+    const latestGameIndex = await gameContract.battle("Webventurer", 7, 7, 7);
     console.log(latestGameIndex.toString());
 }
