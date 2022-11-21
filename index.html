@@ -10,7 +10,17 @@
 <body>
     <button onclick="getLastGameIndex()">Get last game index</button>
     <button onclick="startBattle()">Start Battle!!!</button>
-    <button id="connectButton" onclick ="connectMetamask()">Connect Metamask</button>
+    <button onclick="getRoundDetails()" id="roundDetails">Get Round details</button>
+    <button onclick="getHeroDetails()" id="heroDetails">Get Hero details</button>
+    <button onclick="getSpawnDetails()" id="spawnDetails">Get Spawn details</button>
+    <button onclick ="connectMetamask()" id="connectButton">Connect Metamask</button>
+
+    <div>
+        <p id="round"></p>
+        <p id="hero"></p>
+        <p id="spawn"></p>
+    </div>
+
     <script src="script.js"></script>
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
         type="application/javascript"></script>

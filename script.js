@@ -1,5 +1,4 @@
 // To interact w contract, need 2 things: address, contract abi
-
 const gameContractAddress = "0xd6983c07fe3f65ab21689fb5373efadd7b8a5e70";
 const gameContractABI = [
 	{
@@ -212,7 +211,6 @@ const gameContractABI = [
 	}
 ]
 
-
 async function connectMetamask (){
     if(typeof window.ethereum !== "undefined"){
         try
@@ -236,7 +234,7 @@ async function getLastGameIndex(){
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const gameContract = new ethers.Contract(gameContractAddress, gameContractABI, provider);
 
-    const latestGameIndex = await gameContract.lastGameIndex();
+    latestGameIndex = await gameContract.lastGameIndex();
     console.log(latestGameIndex.toString());
 }
 
@@ -244,6 +242,39 @@ async function startBattle(){
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const gameContract = new ethers.Contract(gameContractAddress, gameContractABI, provider.getSigner());
 
-    const latestGameIndex = await gameContract.battle("Webventurer", 7, 7, 7);
-    console.log(latestGameIndex.toString());
+    const battle = await gameContract.battle("Webventurer", 7, 7, 7);
+    console.log(`battle!`);
 }
+
+async function getRoundDetails(){
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const gameContract = new ethers.Contract(gameContractAddress, gameContractABI, provider);
+
+    const roundDetails = await gameContract.roundDetails(9);
+    document.querySelector("#round").innerText = roundDetails;
+    console.log( roundDetails.toString() );
+}
+
+async function getHeroDetails(){
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const gameContract = new ethers.Contract(gameContractAddress, gameContractABI, provider);
+
+    const heroDetails = await gameContract.getHero(9);
+    document.querySelector("#hero").innerText = heroDetails;
+    console.log( heroDetails.toString() );
+}
+
+async function getSpawnDetails(){
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const gameContract = new ethers.Contract(gameContractAddress, gameContractABI, provider);
+
+    const spawnDetails = await gameContract.getSpawn(9);
+    document.querySelector("#spawn").innerText = spawnDetails.toString();
+    console.log( spawnDetails.toString() );
+}
+
+// const stats = document.querySelector["#stats"];
+// stats.innerText = latestGameIndex;
+
+// const webSpawnDetails = "";
+// document.querySelector("p").innerText = spawnDetails.toString()
