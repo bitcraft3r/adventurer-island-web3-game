@@ -234,7 +234,8 @@ async function getLastGameIndex(){
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const gameContract = new ethers.Contract(gameContractAddress, gameContractABI, provider);
 
-    latestGameIndex = await gameContract.lastGameIndex();
+    const latestGameIndex = await gameContract.lastGameIndex();
+    document.querySelector("#gameIndex").innerText += ` ${latestGameIndex}`;
     console.log(latestGameIndex.toString());
 }
 
@@ -251,7 +252,7 @@ async function getRoundDetails(){
     const gameContract = new ethers.Contract(gameContractAddress, gameContractABI, provider);
 
     const roundDetails = await gameContract.roundDetails(9);
-    document.querySelector("#round").innerText = roundDetails;
+    document.querySelector("#round").innerText += ` ${roundDetails}`;
     console.log( roundDetails.toString() );
 }
 
@@ -260,7 +261,7 @@ async function getHeroDetails(){
     const gameContract = new ethers.Contract(gameContractAddress, gameContractABI, provider);
 
     const heroDetails = await gameContract.getHero(9);
-    document.querySelector("#hero").innerText = heroDetails;
+    document.querySelector("#hero").innerText += ` ${heroDetails}`;
     console.log( heroDetails.toString() );
 }
 
@@ -269,7 +270,7 @@ async function getSpawnDetails(){
     const gameContract = new ethers.Contract(gameContractAddress, gameContractABI, provider);
 
     const spawnDetails = await gameContract.getSpawn(9);
-    document.querySelector("#spawn").innerText = spawnDetails.toString();
+    document.querySelector("#spawn").innerText += ` ${spawnDetails}`;
     console.log( spawnDetails.toString() );
 }
 
