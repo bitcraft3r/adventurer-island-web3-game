@@ -159,7 +159,7 @@ contract Game {
 
     function mapPlayer(string memory _name, int _strength, int _agility, int _wisdom) internal returns (uint) {
         addHero(_name, 100, _strength, _agility, _wisdom);
-        return players.length-1; // return index of newly mapped player
+        return players.length-1; // return index of newly mapped player // return value unused
     }
     
     function battle(string memory _name, int _strength, int _agility, int _wisdom) public returns (uint) {
@@ -180,16 +180,25 @@ contract Game {
             // initialize variables only used in 1 attack
             int heroDamageDealt = 0;
             int spawnDamageDealt = 0;
+            int bonusDamage = 0;
+            int bonusDefence = 0;
+
+            // player has passive skill pray() that triggers when low HP
+            if (players[currentIndex].health < 25){
+                players[currentIndex].health += 2; // add 2 HP before every attack
+                bonusDamage = 2; // attack with 2 additional damage
+                bonusDefence = 1; // take 1 less damage from spawn
+            }
 
             // TODO: Add CRITICAL HIT
             // TODO: Add DODGE ATTACK
 
             // player attacks
-            heroDamageDealt = 5 + players[currentIndex].strength - spawns[currentIndex].agility/2 + players[currentIndex].wisdom/spawns[currentIndex].wisdom;
+            heroDamageDealt = 5 + players[currentIndex].strength - spawns[currentIndex].agility/2 + players[currentIndex].wisdom/spawns[currentIndex].wisdom + bonusDamage;
             spawns[currentIndex].health -= heroDamageDealt;
 
             // spawn attacks
-            spawnDamageDealt = 5 + spawns[currentIndex].strength - players[currentIndex].agility/2 + spawns[currentIndex].wisdom/players[currentIndex].wisdom;
+            spawnDamageDealt = 5 + spawns[currentIndex].strength - players[currentIndex].agility/2 + spawns[currentIndex].wisdom/players[currentIndex].wisdom - bonusDefence;
             players[currentIndex].health -= spawnDamageDealt;
             
             // log attack

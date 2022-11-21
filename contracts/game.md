@@ -54,3 +54,9 @@ roundIndex: 9
 - Contract: https://mumbai.polygonscan.com/address/0x8e7d87357f4dd4da2b3c33fb381d8d40385dcfc1
 
 NOTES: Calling battle() also returns index of battle's round.
+
+## NEW CONTRACT - Add passive pray() skill
+
+- Contract: https://mumbai.polygonscan.com/address/0x0a02d6d14af21063d478c90a2ed876489c2a0b94
+
+Gives player better chance to win enemies that are slightly stronger
