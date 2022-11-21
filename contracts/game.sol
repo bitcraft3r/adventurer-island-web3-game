@@ -177,37 +177,46 @@ contract Game {
             int spawnDamageDealt = 0;
 
             // TODO: FIX ATTACKS. currently CRIT/DODGE not working correctly.
+
             // player attacks
-            // 2%-25% chance for spawn to dodge
-            if (4*pluck(currentIndex, "DODGE", randomizerArray, _name) > 10*spawns[currentIndex].agility){
-                // attack
-                // 2%-25% chance for player to deal critical damage
-                if (4*pluck(currentIndex, "CRITICAL HIT", randomizerArray, _name) <= 10*players[currentIndex].wisdom){
-                    // attack w critical hit
-                    heroDamageDealt = 5 + players[currentIndex].strength - spawns[currentIndex].agility/2 + 5 + getStrength(currentIndex, _name);
-                    spawns[currentIndex].health -= heroDamageDealt;
-                } else {
-                    // attack w/o critical hit
-                    heroDamageDealt = 5 + players[currentIndex].strength - spawns[currentIndex].agility/2;
-                    spawns[currentIndex].health -= heroDamageDealt;
-                }
-            } else { heroDamageDealt = 0; } // else dodge
+            heroDamageDealt = 5 + players[currentIndex].strength - spawns[currentIndex].agility/2 + players[currentIndex].wisdom/spawns[currentIndex].wisdom;
+            spawns[currentIndex].health -= heroDamageDealt;
 
             // spawn attacks
-            // 2%-25% chance for player to dodge
-            if (4*pluck(currentIndex, "DODGE", randomizerArray, _name) > 10*players[currentIndex].agility){
-                // attack
-                // 2%-25% chance for spawn to deal critical damage
-                if (4*pluck(currentIndex, "CRITICAL HIT", randomizerArray, _name) <= 10*spawns[currentIndex].wisdom){
-                    // attack w critical hit
-                    spawnDamageDealt = 5 + spawns[currentIndex].strength - players[currentIndex].agility/2 + 5 + getStrength(currentIndex, _name);
-                    players[currentIndex].health -= spawnDamageDealt;
-                } else {
-                    // attack w/o critical hit
-                    spawnDamageDealt = 5 + spawns[currentIndex].strength - players[currentIndex].agility/2;
-                    players[currentIndex].health -= spawnDamageDealt;
-                }
-            } else { spawnDamageDealt = 0; } // else dodge
+            spawnDamageDealt = 5 + spawns[currentIndex].strength - players[currentIndex].agility/2 + spawns[currentIndex].wisdom/players[currentIndex].wisdom;
+            players[currentIndex].health -= spawnDamageDealt;
+
+            // // player attacks
+            // // 2%-25% chance for spawn to dodge
+            // if (4*pluck(currentIndex, "DODGE", randomizerArray, _name) > 10*spawns[currentIndex].agility){
+            //     // attack
+            //     // 2%-25% chance for player to deal critical damage
+            //     if (4*pluck(currentIndex, "CRITICAL HIT", randomizerArray, _name) <= 10*players[currentIndex].wisdom){
+            //         // attack w critical hit
+            //         heroDamageDealt = 5 + players[currentIndex].strength - spawns[currentIndex].agility/2 + 5 + getStrength(currentIndex, _name);
+            //         spawns[currentIndex].health -= heroDamageDealt;
+            //     } else {
+            //         // attack w/o critical hit
+            //         heroDamageDealt = 5 + players[currentIndex].strength - spawns[currentIndex].agility/2;
+            //         spawns[currentIndex].health -= heroDamageDealt;
+            //     }
+            // } else { heroDamageDealt = 0; } // else dodge
+
+            // // spawn attacks
+            // // 2%-25% chance for player to dodge
+            // if (4*pluck(currentIndex, "DODGE", randomizerArray, _name) > 10*players[currentIndex].agility){
+            //     // attack
+            //     // 2%-25% chance for spawn to deal critical damage
+            //     if (4*pluck(currentIndex, "CRITICAL HIT", randomizerArray, _name) <= 10*spawns[currentIndex].wisdom){
+            //         // attack w critical hit
+            //         spawnDamageDealt = 5 + spawns[currentIndex].strength - players[currentIndex].agility/2 + 5 + getStrength(currentIndex, _name);
+            //         players[currentIndex].health -= spawnDamageDealt;
+            //     } else {
+            //         // attack w/o critical hit
+            //         spawnDamageDealt = 5 + spawns[currentIndex].strength - players[currentIndex].agility/2;
+            //         players[currentIndex].health -= spawnDamageDealt;
+            //     }
+            // } else { spawnDamageDealt = 0; } // else dodge
             
             addAttack(currentIndex, attackCounter, players[currentIndex].health, heroDamageDealt, spawns[currentIndex].health, spawnDamageDealt);
 

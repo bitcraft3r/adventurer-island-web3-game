@@ -2,9 +2,9 @@
 
 ## Contract address
 
-TX: https://mumbai.polygonscan.com/tx/0x0094dd980f507f19557df060f2612392c56800817c357e73b3c8b020576dbfc5
+TX: https://mumbai.polygonscan.com/tx/0x10e629f47b422ec64d6f60cbd7af4e6e2cd3fe7129fc48a16bfdd2f30c7ca467
 
-Contract Address: https://mumbai.polygonscan.com/address/0x756147b68a632e00e4f0de519c5261b9ebd5d3b0
+Contract Address: https://mumbai.polygonscan.com/address/0xb710fda663ca2921fbb86979c554ac36c0a15017
 
 ## Verify contract
 
@@ -12,11 +12,16 @@ Contract Address: https://mumbai.polygonscan.com/address/0x756147b68a632e00e4f0d
 
 ### 2. battle(_index)
 
-TX: https://mumbai.polygonscan.com/tx/0xbd859897165f4bf7d6d463fa1a3a9e8f5c81e2867b712b2070319cdc97419b5b
-
 NOTES:
 - If unable to battle (error creating tx), try changing the name input.
 - If unable to view stats, refresh polygonscan page
+
+### View results
+
+#### getHero(index)
+#### getSpawn (index)
+#### roundDetails(index)
+#### getAttacks(attackIndex)
 
 <!-- ### View results
 
@@ -43,7 +48,3 @@ NOTES:
 ![Spawn stats after 1 battle](https://user-images.githubusercontent.com/8282076/202961437-5642a690-4cfe-489d-830e-f496f34cb239.png)
 
 ![Game Score after 1 battle](https://user-images.githubusercontent.com/8282076/202961445-81f3eaad-caec-4d0e-839c-ed9168f63018.png) -->
-
-#### BUG?
-
-Every attack in the same game/round/battle has the same damage.
