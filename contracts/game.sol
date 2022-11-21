@@ -153,12 +153,16 @@ contract Game {
         return (attackToReturn.roundIndex, attackToReturn.attackIndex, attackToReturn.heroHealth, attackToReturn.heroDamageDealt, attackToReturn.spawnHealth, attackToReturn.spawnDamageDealt);
     }
 
+    function lastGameIndex() public view returns (uint) {
+        return rounds.length-1;
+    }
+
     function mapPlayer(string memory _name, int _strength, int _agility, int _wisdom) internal returns (uint) {
         addHero(_name, 100, _strength, _agility, _wisdom);
         return players.length-1; // return index of newly mapped player
     }
     
-    function battle(string memory _name, int _strength, int _agility, int _wisdom) public {
+    function battle(string memory _name, int _strength, int _agility, int _wisdom) public returns (uint) {
         // initialize player
         mapPlayer(_name, _strength, _agility, _wisdom);
         uint256 currentIndex = players.length-1;
@@ -203,5 +207,8 @@ contract Game {
         } else if (players[currentIndex].health <= 0 && spawns[currentIndex].health > 0){
             addRound(currentIndex, attackCounter, startAttackIndex, attacks.length-1, false, 0);
         }
+
+        // end game
+        return rounds.length-1; // return index of this battle
     }
 }

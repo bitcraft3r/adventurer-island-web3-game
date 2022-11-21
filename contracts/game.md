@@ -10,7 +10,7 @@ Contract Address: https://mumbai.polygonscan.com/address/0xb710fda663ca2921fbb86
 
 ## Playing the game
 
-### 2. battle(_index)
+### Write > battle(_index)
 
 NOTES:
 - If unable to battle (error creating tx), try changing the name input.
@@ -48,3 +48,9 @@ roundIndex: 0
 roundIndex: 9
 
 ![Game Score after tie game](https://user-images.githubusercontent.com/8282076/202982316-1a5d6ff5-19fa-45ba-bef7-73657e892e6b.png)
+
+## NEW CONTRACT - Add getter for lastGameIndex()
+
+- Contract: https://mumbai.polygonscan.com/address/0x8e7d87357f4dd4da2b3c33fb381d8d40385dcfc1
+
+NOTES: Calling battle() also returns index of battle's round.
