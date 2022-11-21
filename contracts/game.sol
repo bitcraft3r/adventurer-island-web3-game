@@ -9,6 +9,7 @@ contract Game {
         int strength;
         int agility;
         int wisdom;
+        // add pray() function; // TODO
     }
 
     struct Spawn {
@@ -20,21 +21,27 @@ contract Game {
 
     struct Round {
         uint roundNo;
+        uint totalAttacks;
+        // uint firstAttackIndex; // TODO
+        // uint lastAttackIndex; // TODO
         bool result;
         uint coinsWon;
     }
 
-    // struct Attacks {
-    //     uint attackNo;
-    //     uint 
-    // }
-
-    // uint attackCounter = 0;
-    // // attackCounter++ in the attacks
+    // Record all attacks of every battle
+    struct Attack {
+        uint roundIndex;
+        uint attackIndex;
+        int heroHealth;
+        int heroDamageDealt;
+        int spawnHealth;
+        int spawnDamageDealt;
+    }
 
     Hero[] players;
     Spawn[] spawns;
     Round[] rounds;
+    Attack[] attacks;
 
     int[] attributesArray = [
         1,
@@ -72,9 +79,14 @@ contract Game {
         spawns.push(newSpawn);
     }
 
-    function addRound(uint _roundNo, bool _result, uint _score) private {
-        Round memory newRound = Round(_roundNo, _result, _score);
+    function addRound(uint _roundNo, uint _totalAttacks, bool _result, uint _score) private {
+        Round memory newRound = Round(_roundNo, _totalAttacks, _result, _score);
         rounds.push(newRound);
+    }
+
+    function addAttack(uint _roundIndex, uint _attackIndex, int _heroHealth, int _heroDamageDealt, int _spawnHealth, int _spawnDamageDealt) private {
+        Attack memory newAttack = Attack(_roundIndex, _attackIndex, _heroHealth, _heroDamageDealt, _spawnHealth, _spawnDamageDealt);
+        attacks.push(newAttack);
     }
 
     // Generate pseudo-random nos for attributes
@@ -131,9 +143,14 @@ contract Game {
         return (spawnToReturn.health, spawnToReturn.strength, spawnToReturn.agility, spawnToReturn.wisdom);
     }
 
-    function roundDetails(uint _index) public view returns (uint, bool, uint) {
+    function roundDetails(uint _index) public view returns (uint, uint, bool, uint) {
         Round memory roundToReturn = rounds[_index];
-        return (roundToReturn.roundNo, roundToReturn.result, roundToReturn.coinsWon);
+        return (roundToReturn.roundNo, roundToReturn.totalAttacks, roundToReturn.result, roundToReturn.coinsWon);
+    }
+
+    function attackDetails(uint _index) public view returns (uint, uint, int, int, int, int) {
+        Attack memory attackToReturn = attacks[_index];
+        return (attackToReturn.roundIndex, attackToReturn.attackIndex, attackToReturn.heroHealth, attackToReturn.heroDamageDealt, attackToReturn.spawnHealth, attackToReturn.spawnDamageDealt);
     }
 
     function mapPlayer(string memory _name, int _strength, int _agility, int _wisdom) internal returns (uint) {
@@ -149,8 +166,17 @@ contract Game {
         // initialize spawn
         addSpawn(100, getStrength(currentIndex, _name), getAgility(currentIndex, _name), getWisdom(currentIndex, _name));
 
+        // initialize variables used for entire battle (round)
+        uint attackCounter = 0;
+
         // start battle
         while (players[currentIndex].health > 0 && spawns[currentIndex].health > 0){
+        
+            // initialize variables only used in 1 attack
+            int heroDamageDealt = 0;
+            int spawnDamageDealt = 0;
+
+            // TODO: FIX ATTACKS. currently CRIT/DODGE not working correctly.
             // player attacks
             // 2%-25% chance for spawn to dodge
             if (4*pluck(currentIndex, "DODGE", randomizerArray, _name) > 10*spawns[currentIndex].agility){
@@ -158,12 +184,14 @@ contract Game {
                 // 2%-25% chance for player to deal critical damage
                 if (4*pluck(currentIndex, "CRITICAL HIT", randomizerArray, _name) <= 10*players[currentIndex].wisdom){
                     // attack w critical hit
-                    spawns[currentIndex].health -= 5 + players[currentIndex].strength - spawns[currentIndex].agility/2 + 5 + getStrength(currentIndex, _name);
+                    heroDamageDealt = 5 + players[currentIndex].strength - spawns[currentIndex].agility/2 + 5 + getStrength(currentIndex, _name);
+                    spawns[currentIndex].health -= heroDamageDealt;
                 } else {
                     // attack w/o critical hit
-                    spawns[currentIndex].health -= 5 + players[currentIndex].strength - spawns[currentIndex].agility/2;
+                    heroDamageDealt = 5 + players[currentIndex].strength - spawns[currentIndex].agility/2;
+                    spawns[currentIndex].health -= heroDamageDealt;
                 }
-            } // else dodge
+            } else { heroDamageDealt = 0; } // else dodge
 
             // spawn attacks
             // 2%-25% chance for player to dodge
@@ -172,21 +200,28 @@ contract Game {
                 // 2%-25% chance for spawn to deal critical damage
                 if (4*pluck(currentIndex, "CRITICAL HIT", randomizerArray, _name) <= 10*spawns[currentIndex].wisdom){
                     // attack w critical hit
-                    players[currentIndex].health -= 5 + spawns[currentIndex].strength - players[currentIndex].agility/2 + 5 + getStrength(currentIndex, _name);
+                    spawnDamageDealt = 5 + spawns[currentIndex].strength - players[currentIndex].agility/2 + 5 + getStrength(currentIndex, _name);
+                    players[currentIndex].health -= spawnDamageDealt;
                 } else {
                     // attack w/o critical hit
-                    players[currentIndex].health -= 5 + spawns[currentIndex].strength - players[currentIndex].agility/2;
+                    spawnDamageDealt = 5 + spawns[currentIndex].strength - players[currentIndex].agility/2;
+                    players[currentIndex].health -= spawnDamageDealt;
                 }
-            }  // else dodge
+            } else { spawnDamageDealt = 0; } // else dodge
+            
+            addAttack(currentIndex, attackCounter, players[currentIndex].health, heroDamageDealt, spawns[currentIndex].health, spawnDamageDealt);
+
+            // increment attack counter
+            attackCounter++;
         }
 
         // check winner
         if (players[currentIndex].health <= 0 && spawns[currentIndex].health <= 0){
-            addRound(currentIndex, false, 5);
+            addRound(currentIndex, attackCounter, false, 5);
         } else if (players[currentIndex].health > 0 && spawns[currentIndex].health <= 0){
-            addRound(currentIndex, true, 20);
+            addRound(currentIndex, attackCounter, true, 20);
         } else if (players[currentIndex].health <= 0 && spawns[currentIndex].health > 0){
-            addRound(currentIndex, false, 0);
+            addRound(currentIndex, attackCounter, false, 0);
         }
     }
 }

@@ -2,9 +2,9 @@
 
 ## Contract address
 
-TX: https://mumbai.polygonscan.com/tx/0x43308e85afc641b80100579e149677a9d40c80606e2d1818422230d6b807c9ce
+TX: https://mumbai.polygonscan.com/tx/0x0094dd980f507f19557df060f2612392c56800817c357e73b3c8b020576dbfc5
 
-Contract Address: https://mumbai.polygonscan.com/address/0xf205a351189f2f7126c197de45be9493bdf38a54
+Contract Address: https://mumbai.polygonscan.com/address/0x756147b68a632e00e4f0de519c5261b9ebd5d3b0
 
 ## Verify contract
 
@@ -12,13 +12,13 @@ Contract Address: https://mumbai.polygonscan.com/address/0xf205a351189f2f7126c19
 
 ### 2. battle(_index)
 
-TX: https://mumbai.polygonscan.com/tx/0xecde3f5cf8d82aa49d3893026f9d7e6b668b62a5a5420a4daceea770cceffe4c
+TX: https://mumbai.polygonscan.com/tx/0xbd859897165f4bf7d6d463fa1a3a9e8f5c81e2867b712b2070319cdc97419b5b
 
 NOTES:
-- If unable to battle (error creating tx), try changing the name input. input should not have spaces.
-- If unable to view stats, refresh etherscan page
+- If unable to battle (error creating tx), try changing the name input.
+- If unable to view stats, refresh polygonscan page
 
-### View results
+<!-- ### View results
 
 #### WIN case
 
@@ -42,11 +42,8 @@ NOTES:
 
 ![Spawn stats after 1 battle](https://user-images.githubusercontent.com/8282076/202961437-5642a690-4cfe-489d-830e-f496f34cb239.png)
 
-![Game Score after 1 battle](https://user-images.githubusercontent.com/8282076/202961445-81f3eaad-caec-4d0e-839c-ed9168f63018.png)
+![Game Score after 1 battle](https://user-images.githubusercontent.com/8282076/202961445-81f3eaad-caec-4d0e-839c-ed9168f63018.png) -->
 
 #### BUG?
 
-For Index = 2,
-Player was left with 100 HP.
-
-![Bug? Player and Spawn stats after 1 battle](https://user-images.githubusercontent.com/8282076/202961570-e10eef2f-3cdd-416e-ae22-7b45fdb0da26.png)
+Every attack in the same game/round/battle has the same damage.
