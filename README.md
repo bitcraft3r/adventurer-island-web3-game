@@ -17,5 +17,8 @@ Adventurer is an on-chain RPG.
 #### Check token metadata
 In console:
 - `main` will return the URLs of the metadata of each token; click to open
+- `tokens` returns array of tokens (objects)
+    - `tokens[0]` to access first token
+    - `tokens[0].metadata` to access first token's metadata e.g. `tokens[0].metadata.image` and `tokens[0].metadata.attributes[0].value` for strength.
 - `result = await fetch("url-here")`
 - `await result.json()` returns the metadata as a json object

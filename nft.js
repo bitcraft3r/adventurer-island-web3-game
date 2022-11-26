@@ -39,8 +39,9 @@ const main = async () => {
 
     for (let i=0; i<tokens.length; i++){
         const token = tokens[i];
-        const metadata = `${token.tokenURI}`;
-        console.log(metadata);
+        const metadataResponse = await fetch(`${token.tokenURI}`);
+        const metadata = await metadataResponse.json();
+        token.metadata = metadata;
     }
 }
 
