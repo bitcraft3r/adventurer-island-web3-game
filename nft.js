@@ -8,7 +8,13 @@ const connect = async () => {
 
         const currentChainId = await web3.eth.getChainId();
         if (currentChainId != 80001) {
-            return alert("Switch to Polygon Mumbai Network");
+            // return alert("Switch to Polygon Mumbai Network");
+            await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: "0x13881" }] // hexadecimal of the chainId 80001
+
+            })
+            params
         }
 
         let accounts = await web3.eth.getAccounts();
