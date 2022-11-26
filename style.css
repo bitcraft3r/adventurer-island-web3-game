@@ -1,0 +1,33 @@
+body {
+    background-color: burlywood;
+    margin: 20px;
+}
+
+#root {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 1px solid brown;
+    padding: 10px;
+}
+
+.user-nft {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    border: 1px solid bisque;
+    width: 310px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.nft-name {
+    text-align: center;
+}
+
+.attributes {
+    font-weight: bold;
+    text-align: center;
+}
+

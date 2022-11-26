@@ -44,14 +44,14 @@ const main = async () => {
         token.metadata = metadata;
     }
     
-    document.getElementById("root").innerHTML = createElement(tokens[0]);
+    document.getElementById("root").innerHTML = tokens.map(createElement).join("");
 }
 
 function createElement(token){
-    return `        <div>
-    <h1>${token.metadata.name}</h1>
+    return `        <div class="user-nft">
+    <h3 class="nft-name">${token.metadata.name}</h3>
     <img src="${token.metadata.image}" alt="" width="300">
-    <div>
+    <div class="attributes">
         <div>Strength: ${token.metadata.attributes[0].value}</div>
         <div>Agility: ${token.metadata.attributes[1].value}</div>
         <div>Wisdom: ${token.metadata.attributes[2].value}</div>
