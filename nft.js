@@ -1,6 +1,6 @@
 let account = null;
 let contract = null;
-let tokenIds = [];
+let tokens = [];
 
 const connect = async () => {
     if (window.ethereum) {
@@ -33,7 +33,8 @@ const main = async () => {
     const balance = Number(await contract.methods.balanceOf(account).call());
     for (let i=0; i<balance; i++ ){
         const tokenId = await contract.methods.tokenOfOwnerByIndex(account, i).call();
-        tokenIds.push(tokenId);
+        const tokenURI = await contract.methods.tokenURI(tokenId).call();
+        tokens.push({tokenId, tokenURI});
     }
 }
 
