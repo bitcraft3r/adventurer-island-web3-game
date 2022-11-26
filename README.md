@@ -13,3 +13,9 @@ Adventurer is an on-chain RPG.
 - `account` in console; show your connected account address
 - `contract` in console; show the contract object
     - `await contract.methods.balanceOf(account).call()` check balance of account w.r.t. the nft contract
+
+#### Check token metadata
+In console:
+- `main` will return the URLs of the metadata of each token; click to open
+- `result = await fetch("url-here")`
+- `await result.json()` returns the metadata as a json object

@@ -36,6 +36,12 @@ const main = async () => {
         const tokenURI = await contract.methods.tokenURI(tokenId).call();
         tokens.push({tokenId, tokenURI});
     }
+
+    for (let i=0; i<tokens.length; i++){
+        const token = tokens[i];
+        const metadata = `${token.tokenURI}`;
+        console.log(metadata);
+    }
 }
 
 const ABI = [
