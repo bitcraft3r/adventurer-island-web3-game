@@ -1,5 +1,6 @@
 let account = null;
 let contract = null;
+let tokenIds = [];
 
 const connect = async () => {
     if (window.ethereum) {
@@ -28,6 +29,12 @@ const main = async () => {
     await connect();
     // once connected, variables become available: web3 (obj) and account
     contract = new web3.eth.Contract(ABI, ADDRESS);
+
+    const balance = Number(await contract.methods.balanceOf(account).call());
+    for (let i=0; i<balance; i++ ){
+        const tokenId = await contract.methods.tokenOfOwnerByIndex(account, i).call();
+        tokenIds.push(tokenId);
+    }
 }
 
 const ABI = [
