@@ -43,6 +43,20 @@ const main = async () => {
         const metadata = await metadataResponse.json();
         token.metadata = metadata;
     }
+    
+    document.getElementById("root").innerHTML = createElement(tokens[0]);
+}
+
+function createElement(token){
+    return `        <div>
+    <h1>${token.metadata.name}</h1>
+    <img src="${token.metadata.image}" alt="" width="300">
+    <div>
+        <div>Strength: ${token.metadata.attributes[0].value}</div>
+        <div>Agility: ${token.metadata.attributes[1].value}</div>
+        <div>Wisdom: ${token.metadata.attributes[2].value}</div>
+    </div>
+</div>`
 }
 
 const ABI = [
