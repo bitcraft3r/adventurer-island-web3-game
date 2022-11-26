@@ -38,3 +38,25 @@ body {
     text-align: center;
 }
 
+#hero {
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid green;
+}
+
+#selected-adv, #create-hero, #generate-hero {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid darkolivegreen;
+}
+
+#battle {
+    display: flex;
+}
+
+#battle, #your-hero, #battle-screen, #your-spawn {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid red;
+}
