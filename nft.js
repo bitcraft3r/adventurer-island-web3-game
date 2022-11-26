@@ -6,6 +6,11 @@ const connect = async () => {
         await window.ethereum.send('eth_requestAccounts');
         window.web3 = new Web3(window.ethereum);
 
+        const currentChainId = await web3.eth.getChainId();
+        if (currentChainId != 80001) {
+            return alert("Switch to Polygon Mumbai Network");
+        }
+
         let accounts = await web3.eth.getAccounts();
         account = accounts[0];
     } else {
