@@ -25,6 +25,10 @@ In console:
 
 ### Resources
 
+#### Favicon
+
+https://www.favicon.cc/
+
 #### Design patterns for turn-based strategy games
 
 > The answer is twofold: give players many quick-wins throughout the game, and give players deep but manageable strategic options to choose from.
