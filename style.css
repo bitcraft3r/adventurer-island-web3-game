@@ -10,6 +10,12 @@ body {
     padding: 10px;
 }
 
+#learn-more {
+    padding: 10px;
+    margin: 10px;
+    
+}
+
 #root {
     display: flex;
     flex-direction: row;

@@ -101,17 +101,57 @@ function createHero(name, gameClass, str, agi, wis) {
     else console.log("wrong input", name, gameClass, str, agi, wis);
 }
 
-// const selectedNFT = document.querySelectorAll(".user-nft");
-// selectedNFT.addEventListener("click", function(){
-//     console.log(`ahh i got clicked`);
+// /** TODO: FIX - CAN'T REGISTER CLICKING ON THE NEWLY LOADED NFTS */
+
+// const selectNFT = document.querySelectorAll(".user-nft");
+// selectNFT.addEventListener("click", function(){
+//     console.log("clicked you!!");
+//     document.getElementById("selected-adv").innerHTML = `
+//     <h4>Selected Adventurer:</h4>
+//     <div>
+//         <p>ID: Adventurer #???</p>
+//         <p>STR: <span id="select-str">11</span></p>
+//         <p>AGI: <span id="select-agi">11</span></p>
+//         <p>WIS: <span id="select-wis">11</span></p>
+//     </div>
+//     `;
 // })
 
-let myTurn = true;
-let gameOver = false;
+class Game {
+    constructor(){
+        this.battleId = 0;
+        this.hero = {};
+        this.spawn = {};
+        this.roundsFought = 0;
+        this.attacks = [];
+        this.winner = [];
+        this.playerTurn = true;
+        this.gameOver = false;
+    }
+}
+
+let games = [];
+let gameConfig = {
+    currentBattleId: 0,
+}
+
+function startGame() {
+    gameConfig.currentBattleId++;
+
+    let currentGame = new Game();
+    currentGame.battleId = gameConfig.currentBattleId;
+    currentGame.hero = myHero;
+    currentGame.spawn = new Spawn();
+
+    console.log(currentGame);
+
+    games.push(currentGame);
+}
+
+// let myTurn = true;
+// let gameOver = false;
 let myHero;
 let spawns = [];
-
-// window.addEventListener('DOMContentLoaded', init(), false);
 
 const generateHeroButton = document.getElementById("genButton");
 generateHeroButton.addEventListener("click", function() {
@@ -132,33 +172,37 @@ generateHeroButton.addEventListener("click", function() {
 
 const generateSpawnButton = document.getElementById("genSpawnButton");
 generateSpawnButton.addEventListener("click", function(){
-    console.log("Generating Spawn...");
-    spawns.push(new Spawn());
+    console.log("Logging Last Spawn...");
 
     let spawnBox = document.getElementById("show-spawn");
-    spawnBox.innerHTML = `${spawns[0].strength}, ${spawns[0].agility}, ${spawns[0].wisdom}, ${spawns[0].damage}`
+    spawnBox.innerHTML = `${games[games.length-1].spawn.strength}, ${games[games.length-1].spawn.agility}, ${games[games.length-1].spawn.wisdom}, ${games[games.length-1].spawn.damage}`
 
-    console.log(spawns[0]);
+    console.log(games[games.length-1].spawn);
 })
 
 const startGameButton = document.getElementById("start-game-button");
 startGameButton.addEventListener("click", function(){
     console.log(`Starting...`)
+    startGame();
 })
 
 const attackButton = document.getElementById("attack-button");
 attackButton.addEventListener("click", function(){
-    myHero.attack(spawns[0]);
+    myHero.attack(games[games.length-1].spawn);
     document.getElementById("last-attack").innerHTML = `You attacked for ${myHero.damage} DMG!`;
-    document.getElementById("last-defend").innerHTML = `Spawn has ${spawns[0].hp_now}HP left.`;
+    document.getElementById("last-defend").innerHTML = `Spawn has ${games[games.length-1].spawn.hp_now}HP left.`;
 })
 
 const defendButton = document.getElementById("defend-button");
 defendButton.addEventListener("click", function(){
-    spawns[0].attack(myHero);
+    games[games.length-1].spawn.attack(myHero);
     document.getElementById("last-attack").innerHTML = `You have ${myHero.hp_now}HP left.`;
-    document.getElementById("last-defend").innerHTML = `Spawn attacked for ${spawns[0].damage} DMG!`;
+    document.getElementById("last-defend").innerHTML = `Spawn attacked for ${games[games.length-1].spawn.damage} DMG!`;
 })
+
+
+
+
 
 
 // // Start turn-based game
