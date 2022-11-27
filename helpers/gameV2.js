@@ -153,6 +153,8 @@ function startGame() {
 let myHero;
 let spawns = [];
 
+const gameFeed = document.getElementById("game-result");
+
 const generateHeroButton = document.getElementById("genButton");
 generateHeroButton.addEventListener("click", function() {
     console.log("Generating Hero...");
@@ -168,6 +170,12 @@ generateHeroButton.addEventListener("click", function() {
     heroBox.innerHTML = `${myHero.name}, ${myHero.gameClass}, ${myHero.id}, STATS: ${myHero.strength}, ${myHero.agility}, ${myHero.wisdom}, ${myHero.damage}`
 
     console.log(myHero);
+
+    // add to game log
+    let para = document.createElement("p");
+    let node = document.createTextNode(`Hero ${myHero.name} (${myHero.gameClass}) generated.`);
+    para.appendChild(node);
+    gameFeed.appendChild(para);
 });
 
 const generateSpawnButton = document.getElementById("genSpawnButton");
@@ -184,6 +192,12 @@ const startGameButton = document.getElementById("start-game-button");
 startGameButton.addEventListener("click", function(){
     console.log(`Starting...`)
     startGame();
+
+    // add to game log
+    let para = document.createElement("p");
+    let node = document.createTextNode(`Game #${games.length} initiated.`);
+    para.appendChild(node);
+    gameFeed.appendChild(para);
 })
 
 const attackButton = document.getElementById("attack-button");
@@ -191,6 +205,12 @@ attackButton.addEventListener("click", function(){
     myHero.attack(games[games.length-1].spawn);
     document.getElementById("last-attack").innerHTML = `You attacked for ${myHero.damage} DMG!`;
     document.getElementById("last-defend").innerHTML = `Spawn has ${games[games.length-1].spawn.hp_now}HP left.`;
+
+    // add to game log
+    let para = document.createElement("p");
+    let node = document.createTextNode(`You attacked for ${myHero.damage} DMG! Spawn has ${games[games.length-1].spawn.hp_now}HP left.`);
+    para.appendChild(node);
+    gameFeed.appendChild(para);
 })
 
 const defendButton = document.getElementById("defend-button");
@@ -198,11 +218,13 @@ defendButton.addEventListener("click", function(){
     games[games.length-1].spawn.attack(myHero);
     document.getElementById("last-attack").innerHTML = `You have ${myHero.hp_now}HP left.`;
     document.getElementById("last-defend").innerHTML = `Spawn attacked for ${games[games.length-1].spawn.damage} DMG!`;
+
+    // add to game log
+    let para = document.createElement("p");
+    let node = document.createTextNode(`Spawn attacked for ${games[games.length-1].spawn.damage} DMG! You have ${myHero.hp_now}HP left.`);
+    para.appendChild(node);
+    gameFeed.appendChild(para);
 })
-
-
-
-
 
 
 // // Start turn-based game

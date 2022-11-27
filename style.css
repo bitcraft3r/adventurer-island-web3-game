@@ -13,7 +13,7 @@ body {
 #learn-more {
     padding: 10px;
     margin: 10px;
-    
+
 }
 
 #root {
@@ -80,4 +80,9 @@ body {
     padding: 10px;
     margin: 10px;
     border: 1px solid blue;
+}
+
+#game-result {
+    height: 300px;
+    width: 400px;
 }
