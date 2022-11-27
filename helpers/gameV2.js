@@ -4,7 +4,7 @@ class Character {
     constructor(){
         this.hp_max = 100;
         this.hp_now = 100;
-        this.strength = 1;
+        this.strength = 1; // TODO: Group STR/AGI/WIS into ATTRIBUTE Object
         this.agility = 1;
         this.wisdom = 1;
         this.damage = 1;
@@ -137,6 +137,7 @@ let gameConfig = {
 
 function startGame() {
     gameConfig.currentBattleId++;
+    // TODO: Extend Game data and gameConfig
 
     let currentGame = new Game();
     currentGame.battleId = gameConfig.currentBattleId;
@@ -202,28 +203,43 @@ startGameButton.addEventListener("click", function(){
 
 const attackButton = document.getElementById("attack-button");
 attackButton.addEventListener("click", function(){
-    myHero.attack(games[games.length-1].spawn);
-    document.getElementById("last-attack").innerHTML = `You attacked for ${myHero.damage} DMG!`;
-    document.getElementById("last-defend").innerHTML = `Spawn has ${games[games.length-1].spawn.hp_now}HP left.`;
 
-    // add to game log
-    let para = document.createElement("p");
-    let node = document.createTextNode(`You attacked for ${myHero.damage} DMG! Spawn has ${games[games.length-1].spawn.hp_now}HP left.`);
-    para.appendChild(node);
-    gameFeed.appendChild(para);
+    if (games[games.length-1].playerTurn === true) {
+        myHero.attack(games[games.length-1].spawn);
+        document.getElementById("last-attack").innerHTML = `You attacked for ${myHero.damage} DMG!`;
+        document.getElementById("last-defend").innerHTML = `Spawn has ${games[games.length-1].spawn.hp_now}HP left.`;
+
+        // end turn
+        games[games.length-1].playerTurn = false;
+    
+        // add to game log
+        let para = document.createElement("p");
+        let node = document.createTextNode(`You attacked for ${myHero.damage} DMG! Spawn has ${games[games.length-1].spawn.hp_now}HP left.`);
+        para.appendChild(node);
+        gameFeed.appendChild(para);
+    } else console.log(`not your turn`);
+
 })
 
 const defendButton = document.getElementById("defend-button");
 defendButton.addEventListener("click", function(){
-    games[games.length-1].spawn.attack(myHero);
-    document.getElementById("last-attack").innerHTML = `You have ${myHero.hp_now}HP left.`;
-    document.getElementById("last-defend").innerHTML = `Spawn attacked for ${games[games.length-1].spawn.damage} DMG!`;
 
-    // add to game log
-    let para = document.createElement("p");
-    let node = document.createTextNode(`Spawn attacked for ${games[games.length-1].spawn.damage} DMG! You have ${myHero.hp_now}HP left.`);
-    para.appendChild(node);
-    gameFeed.appendChild(para);
+    if (games[games.length-1].playerTurn === false) {
+        
+        games[games.length-1].spawn.attack(myHero);
+        document.getElementById("last-attack").innerHTML = `You have ${myHero.hp_now}HP left.`;
+        document.getElementById("last-defend").innerHTML = `Spawn attacked for ${games[games.length-1].spawn.damage} DMG!`;
+    
+        // end turn
+        games[games.length-1].playerTurn = true;
+
+        // add to game log
+        let para = document.createElement("p");
+        let node = document.createTextNode(`Spawn attacked for ${games[games.length-1].spawn.damage} DMG! You have ${myHero.hp_now}HP left.`);
+        para.appendChild(node);
+        gameFeed.appendChild(para);
+
+    } else console.log(`not spawn turn`);
 })
 
 
