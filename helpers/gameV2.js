@@ -167,7 +167,7 @@ function init() {
         }
         
         if (newSpawn.hp_now <= 0 || thisHero.hp_now <= 0){
-            gameOver === true;
+            gameOver = true;
             console.log(`BATTLE ENDED AFTER ${currentRound} ROUNDS! YOUR HP: ${thisHero.hp_now}. SPAWN HP: ${newSpawn.hp_now}`);
         }
 
