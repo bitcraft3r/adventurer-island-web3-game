@@ -60,3 +60,18 @@ body {
     margin: 10px;
     border: 1px solid red;
 }
+
+#game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid blue;
+}
+
+#start-game, #player-controls, #spawn-controls, #game-result {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid blue;
+}

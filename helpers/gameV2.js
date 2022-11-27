@@ -101,15 +101,21 @@ function createHero(name, gameClass, str, agi, wis) {
     else console.log("wrong input", name, gameClass, str, agi, wis);
 }
 
+// const selectedNFT = document.querySelectorAll(".user-nft");
+// selectedNFT.addEventListener("click", function(){
+//     console.log(`ahh i got clicked`);
+// })
+
 let myTurn = true;
 let gameOver = false;
 let myHero;
+let spawns = [];
 
 // window.addEventListener('DOMContentLoaded', init(), false);
 
 const generateHeroButton = document.getElementById("genButton");
 generateHeroButton.addEventListener("click", function() {
-    console.log("Hello World");
+    console.log("Generating Hero...");
     let inputName = document.getElementById("input-hero-name").value;
     let inputClass = document.getElementById("select-class").value;
     let inputStr = Number(document.getElementById("select-str").innerHTML);
@@ -119,61 +125,107 @@ generateHeroButton.addEventListener("click", function() {
     myHero = createHero(inputName, inputClass, inputStr, inputAgi, inputWis);
     
     let heroBox = document.getElementById("show-hero");
-    heroBox.innerHTML = `${myHero.name}, ${myHero.gameClass}, ${myHero.id}`
+    heroBox.innerHTML = `${myHero.name}, ${myHero.gameClass}, ${myHero.id}, STATS: ${myHero.strength}, ${myHero.agility}, ${myHero.wisdom}, ${myHero.damage}`
 
     console.log(myHero);
 });
 
-function generateHero(){
-}
+const generateSpawnButton = document.getElementById("genSpawnButton");
+generateSpawnButton.addEventListener("click", function(){
+    console.log("Generating Spawn...");
+    spawns.push(new Spawn());
+
+    let spawnBox = document.getElementById("show-spawn");
+    spawnBox.innerHTML = `${spawns[0].strength}, ${spawns[0].agility}, ${spawns[0].wisdom}, ${spawns[0].damage}`
+
+    console.log(spawns[0]);
+})
+
+const startGameButton = document.getElementById("start-game-button");
+startGameButton.addEventListener("click", function(){
+    console.log(`Starting...`)
+})
+
+const attackButton = document.getElementById("attack-button");
+attackButton.addEventListener("click", function(){
+    myHero.attack(spawns[0]);
+    document.getElementById("last-attack").innerHTML = `You attacked for ${myHero.damage} DMG!`;
+    document.getElementById("last-defend").innerHTML = `Spawn has ${spawns[0].hp_now}HP left.`;
+})
+
+const defendButton = document.getElementById("defend-button");
+defendButton.addEventListener("click", function(){
+    spawns[0].attack(myHero);
+    document.getElementById("last-attack").innerHTML = `You have ${myHero.hp_now}HP left.`;
+    document.getElementById("last-defend").innerHTML = `Spawn attacked for ${spawns[0].damage} DMG!`;
+})
 
 
-// Start turn-based game
-function init() {
-    let newSpawn = new Spawn();
+// // Start turn-based game
+// function init() {
+//     spawns.push(new Spawn());
 
     
-    let thisHero = myHero;
+//     let thisHero = myHero;
 
-    let currentRound = 0;
+//     let currentRound = 0;
 
-    console.log(thisHero);
-    console.log(newSpawn);
+//     console.log(thisHero);
+//     console.log(spawns[0]);
 
-    while (newSpawn.hp_now > 0 && thisHero.hp_now > 0 && gameOver === false){
+//     while (spawns[0].hp_now > 0 && thisHero.hp_now > 0 && gameOver === false){
 
-        // // Start round
-        // currentRound++;
-        // console.log(`ROUND ${currentRound}, FIGHT!`);
+//         // // Start round
+//         // currentRound++;
+//         // console.log(`ROUND ${currentRound}, FIGHT!`);
 
-        if (myTurn === true){
-            // Start round
-            currentRound++;
-            console.log(`ROUND ${currentRound}, ATTACK!`);
-            // player select action e.g. attack, use spell
-            thisHero.attack(newSpawn);
-            console.log(`${thisHero.name} attacked with ${thisHero.damage}. Spawn has ${newSpawn.hp_now}HP left.`);
-            // action is executed
-            myTurn = false;// end turn
-        } else if (myTurn === false){
-            // Start round
-            console.log(`ROUND ${currentRound}, DEFEND!`);
-            // computer's turn
-            // action is selected and executed
-            newSpawn.attack(thisHero);
-            console.log(`Spawn attacked with ${newSpawn.damage}. ${thisHero.name} has ${thisHero.hp_now}HP left.`);
-            // end turn
-            myTurn = true;
-        }
+//         if (myTurn === true){
+//             // Start round
+//             currentRound++;
+//             console.log(`ROUND ${currentRound}, ATTACK!`);
+//             // player select action e.g. attack, use spell
+//             document.getElementById("battle-attack").addEventListener("click", function(){
+//                 thisHero.attack(spawns[0]);
+//             })
+//             console.log(`${thisHero.name} attacked with ${thisHero.damage}. Spawn has ${spawns[0].hp_now}HP left.`);
+//             // action is executed
+//             myTurn = false;// end turn
+//         } else if (myTurn === false){
+//             // Start round
+//             console.log(`ROUND ${currentRound}, DEFEND!`);
+//             // computer's turn
+//             // action is selected and executed
+//             spawns[0].attack(thisHero);
+//             console.log(`Spawn attacked with ${spawns[0].damage}. ${thisHero.name} has ${thisHero.hp_now}HP left.`);
+//             // end turn
+//             myTurn = true;
+//         }
         
-        if (newSpawn.hp_now <= 0 || thisHero.hp_now <= 0){
-            gameOver = true;
-            console.log(`BATTLE ENDED AFTER ${currentRound} ROUNDS! YOUR HP: ${thisHero.hp_now}. SPAWN HP: ${newSpawn.hp_now}`);
-        }
+//         if (spawns[0].hp_now <= 0 || thisHero.hp_now <= 0){
+//             gameOver = true;
+//             console.log(`BATTLE ENDED AFTER ${currentRound} ROUNDS! YOUR HP: ${thisHero.hp_now}. SPAWN HP: ${spawns[0].hp_now}`);
+//         }
 
-    }
+//     }
 
-}
+// }
+
+// // example how to add innerHTML
+// document.getElementById("your-hero").innerHTML = ``;
+// document.getElementById("battle-screen").innerHTML = tokens.map(createElement).join("");
+
+// function createElement(token){
+//     return `        <div class="user-nft">
+//     <h3 class="nft-name">${token.metadata.name}</h3>
+//     <img src="${token.metadata.image}" alt="" width="300">
+//     <div class="attributes">
+//         <div>Strength: ${token.metadata.attributes[0].value}</div>
+//         <div>Agility: ${token.metadata.attributes[1].value}</div>
+//         <div>Wisdom: ${token.metadata.attributes[2].value}</div>
+//     </div>
+// </div>`
+// }
+
 
 // init();
 // init("Moonbeam", "Archer");

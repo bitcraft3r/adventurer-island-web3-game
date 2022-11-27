@@ -46,9 +46,30 @@
             <button id="genButton">GENERATE HERO</button>
             <div id="show-hero">show hero here</div>
         </div>
+        <div id="generate-spawn">
+            <button id="genSpawnButton">GENERATE SPAWN</button>
+            <div id="show-spawn">show spawn here</div>
+        </div>
     </div>
 
-    <div id="battle">
+    <div id="game">
+        <div id="start-game">
+            <button id="start-game-button">Start Game</button>
+        </div>
+        <div id="player-controls">
+            <button id="attack-button">Hero Attack</button>
+            <div id="last-attack"></div>
+        </div>
+        <div id="spawn-controls">
+            <button id="defend-button">Spawn Attack</button>
+            <div id="last-defend"></div>
+        </div>
+        <div id="game-result"></div>
+    </div>
+
+    <hr>
+
+    <!-- <div id="battle">
         <button id="start-battle" onclick="init()">Start Battle</button>
         <div id="your-hero">
             <h4>YOUR HERO DETAILS:</h4>
@@ -60,6 +81,9 @@
             <p>ID: Adventurer #2</p>
         </div>
         <div id="battle-screen">
+            <button id="battle-attack">Attack</button>
+        </div>
+        <div id="battle-log">
             <div>Round 1</div>
             <div>Round 2</div>
             <div>Round 3</div>
@@ -97,7 +121,7 @@
         <p id="hero">Hero Details: </p>
         <button onclick="getSpawnDetails()" id="spawnDetails">Get Spawn details</button>
         <p id="spawn">Spawn Details: </p>
-    </div>
+    </div> -->
 
     <script src="script.js"></script>
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"

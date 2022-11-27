@@ -42,3 +42,12 @@ Source: https://www.reddit.com/r/gamedev/comments/1wxofc/game_design_patterns_an
 > I recommend reading through Eric Lippert's [Wizards and Warriors](https://ericlippert.com/2015/04/27/wizards-and-warriors-part-one/) blog posts. He approaches a similar problem from a few angles and examines the consequences of each design. Hopefully it gives you some ideas for your particular situation.
 
 Source: https://www.reddit.com/r/gamedev/comments/70kodf/design_pattern_for_attacks_as_well_as/
+
+> https://designpatternsgame.com/patterns
+> https://www.haroldserrano.com/blog/design-patterns-in-game-engine-development
+> Saving game in browser localStorage: https://www.freecodecamp.org/news/learning-javascript-by-making-a-game-4aca51ad9030/
+
+#### Videos:
+- https://www.youtube.com/watch?v=fyi4vfbKEeo
+- https://www.youtube.com/watch?v=W4SVdtY6wZs
+- https://www.youtube.com/watch?v=R1S_NhKkvGA
