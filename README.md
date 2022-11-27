@@ -1,4 +1,4 @@
-# Adeventurer
+# Adventurer
 
 Adventurer is an on-chain RPG.
 
