@@ -142,6 +142,7 @@ function startGame() {
     let currentGame = new Game();
     currentGame.battleId = gameConfig.currentBattleId;
     currentGame.hero = myHero;
+    // currentGame.hero.hp_now = 100; // TODO reset hp ; create new hero instance every game
     currentGame.spawn = new Spawn();
 
     console.log(currentGame);
@@ -151,6 +152,7 @@ function startGame() {
 
 // let myTurn = true;
 // let gameOver = false;
+
 let myHero;
 let spawns = [];
 
@@ -201,45 +203,71 @@ startGameButton.addEventListener("click", function(){
     gameFeed.appendChild(para);
 })
 
+// TODO: Add new Attacks/Skills
+
 const attackButton = document.getElementById("attack-button");
 attackButton.addEventListener("click", function(){
 
-    if (games[games.length-1].playerTurn === true) {
-        myHero.attack(games[games.length-1].spawn);
-        document.getElementById("last-attack").innerHTML = `You attacked for ${myHero.damage} DMG!`;
-        document.getElementById("last-defend").innerHTML = `Spawn has ${games[games.length-1].spawn.hp_now}HP left.`;
+    let currentGame = games[games.length-1];
 
-        // end turn
-        games[games.length-1].playerTurn = false;
+    if (currentGame.gameOver === false) {
+
+        if (currentGame.playerTurn === true) {
+            currentGame.hero.attack(currentGame.spawn);
+            document.getElementById("last-attack").innerHTML = `You attacked for ${currentGame.hero.damage} DMG!`;
+            document.getElementById("last-defend").innerHTML = `Spawn has ${currentGame.spawn.hp_now}HP left.`;
     
-        // add to game log
-        let para = document.createElement("p");
-        let node = document.createTextNode(`You attacked for ${myHero.damage} DMG! Spawn has ${games[games.length-1].spawn.hp_now}HP left.`);
-        para.appendChild(node);
-        gameFeed.appendChild(para);
-    } else console.log(`not your turn`);
+            // end turn
+            currentGame.playerTurn = false;
+        
+            // add to game log
+            let para = document.createElement("p");
+            let node = document.createTextNode(`You attacked for ${currentGame.hero.damage} DMG! Spawn has ${currentGame.spawn.hp_now}HP left.`);
+            para.appendChild(node);
+            gameFeed.appendChild(para);
+        } else console.log(`not your turn`);
+
+        if (currentGame.spawn.hp_now <= 0) {
+            currentGame.gameOver = true;
+            alert(`You WON!`);
+        }
+
+    } else console.log(`game is over`);
+
 
 })
 
 const defendButton = document.getElementById("defend-button");
 defendButton.addEventListener("click", function(){
 
-    if (games[games.length-1].playerTurn === false) {
+    let currentGame = games[games.length-1];
+
+    if (currentGame.gameOver === false) {
+
+        if (currentGame.playerTurn === false) {
+            
+            currentGame.spawn.attack(currentGame.hero);
+            document.getElementById("last-attack").innerHTML = `You have ${currentGame.hero.hp_now}HP left.`;
+            document.getElementById("last-defend").innerHTML = `Spawn attacked for ${currentGame.spawn.damage} DMG!`;
         
-        games[games.length-1].spawn.attack(myHero);
-        document.getElementById("last-attack").innerHTML = `You have ${myHero.hp_now}HP left.`;
-        document.getElementById("last-defend").innerHTML = `Spawn attacked for ${games[games.length-1].spawn.damage} DMG!`;
+            // end turn
+            currentGame.playerTurn = true;
     
-        // end turn
-        games[games.length-1].playerTurn = true;
+            // add to game log
+            let para = document.createElement("p");
+            let node = document.createTextNode(`Spawn attacked for ${currentGame.spawn.damage} DMG! You have ${currentGame.hero.hp_now}HP left.`);
+            para.appendChild(node);
+            gameFeed.appendChild(para);
+    
+        } else console.log(`not spawn turn`);
 
-        // add to game log
-        let para = document.createElement("p");
-        let node = document.createTextNode(`Spawn attacked for ${games[games.length-1].spawn.damage} DMG! You have ${myHero.hp_now}HP left.`);
-        para.appendChild(node);
-        gameFeed.appendChild(para);
+        if (currentGame.hero.hp_now <= 0) {
+            currentGame.gameOver = true;
+            alert(`You LOST!`);
+        }
 
-    } else console.log(`not spawn turn`);
+    } else console.log(`game is over`);
+
 })
 
 
