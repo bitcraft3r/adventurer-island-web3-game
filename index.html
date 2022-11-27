@@ -26,26 +26,30 @@
             <h4>Selected Adventurer:</h4>
             <div>
                 <p>ID: Adventurer #2</p>
-                <p>STR: 7</p>
-                <p>AGI: 6</p>
-                <p>WIS: 6</p>
+                <p>STR: <span id="select-str">7</span></p>
+                <p>AGI: <span id="select-agi">6</span></p>
+                <p>WIS: <span id="select-wis">6</span></p>
             </div>
         </div>
         <div id="create-hero">
             <h4>Create Hero:</h4>
-            <div>Enter your Hero's name: <input></div>
+            <div>Enter your Hero's name: <input id="input-hero-name"></div>
             <div>Select your Hero's Class:
-                <button>Warrior</button>
-                <button>Archer</button>
-                <button>Mage</button>
+                <select id="select-class">
+                    <option value="Warrior">Warrior</option>
+                    <option value="Archer">Archer</option>
+                    <option value="Wizard">Wizard</option>
+                </select>
             </div>
         </div>
         <div id="generate-hero">
             <button id="genButton">GENERATE HERO</button>
+            <div id="show-hero">show hero here</div>
         </div>
     </div>
 
     <div id="battle">
+        <button id="start-battle" onclick="init()">Start Battle</button>
         <div id="your-hero">
             <h4>YOUR HERO DETAILS:</h4>
             <p>Name: Moonfury</p>
@@ -100,5 +104,6 @@
         type="application/javascript"></script>
     <script src="nft.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="./helpers/gameV2.js"></script>
 </body>
 </html>

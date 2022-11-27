@@ -98,22 +98,49 @@ function createHero(name, gameClass, str, agi, wis) {
     } else if (gameClass === "Wizard"){
         return new Wizard(name, gameClass, str, agi, wis);    
     }
-    else console.log("wrong input");
+    else console.log("wrong input", name, gameClass, str, agi, wis);
 }
 
 let myTurn = true;
 let gameOver = false;
+let myHero;
+
+// window.addEventListener('DOMContentLoaded', init(), false);
+
+const generateHeroButton = document.getElementById("genButton");
+generateHeroButton.addEventListener("click", function() {
+    console.log("Hello World");
+    let inputName = document.getElementById("input-hero-name").value;
+    let inputClass = document.getElementById("select-class").value;
+    let inputStr = Number(document.getElementById("select-str").innerHTML);
+    let inputAgi = Number(document.getElementById("select-agi").innerHTML);
+    let inputWis = Number(document.getElementById("select-wis").innerHTML);
+
+    myHero = createHero(inputName, inputClass, inputStr, inputAgi, inputWis);
+    
+    let heroBox = document.getElementById("show-hero");
+    heroBox.innerHTML = `${myHero.name}, ${myHero.gameClass}, ${myHero.id}`
+
+    console.log(myHero);
+});
+
+function generateHero(){
+}
+
 
 // Start turn-based game
-function init(name, gameClass) {
+function init() {
     let newSpawn = new Spawn();
-    let yourHero = createHero(name, gameClass, 7, 6, 6);
+
+    
+    let thisHero = myHero;
+
     let currentRound = 0;
 
-    console.log(yourHero);
+    console.log(thisHero);
     console.log(newSpawn);
 
-    while (newSpawn.hp_now > 0 && yourHero.hp_now > 0 && gameOver === false){
+    while (newSpawn.hp_now > 0 && thisHero.hp_now > 0 && gameOver === false){
 
         // // Start round
         // currentRound++;
@@ -124,8 +151,8 @@ function init(name, gameClass) {
             currentRound++;
             console.log(`ROUND ${currentRound}, ATTACK!`);
             // player select action e.g. attack, use spell
-            yourHero.attack(newSpawn);
-            console.log(`${yourHero.name} attacked with ${yourHero.damage}. Spawn has ${newSpawn.hp_now}HP left.`);
+            thisHero.attack(newSpawn);
+            console.log(`${thisHero.name} attacked with ${thisHero.damage}. Spawn has ${newSpawn.hp_now}HP left.`);
             // action is executed
             myTurn = false;// end turn
         } else if (myTurn === false){
@@ -133,21 +160,21 @@ function init(name, gameClass) {
             console.log(`ROUND ${currentRound}, DEFEND!`);
             // computer's turn
             // action is selected and executed
-            newSpawn.attack(yourHero);
-            console.log(`Spawn attacked with ${newSpawn.damage}. ${yourHero.name} has ${yourHero.hp_now}HP left.`);
+            newSpawn.attack(thisHero);
+            console.log(`Spawn attacked with ${newSpawn.damage}. ${thisHero.name} has ${thisHero.hp_now}HP left.`);
             // end turn
             myTurn = true;
         }
         
-        if (newSpawn.hp_now <= 0 || yourHero.hp_now <= 0){
+        if (newSpawn.hp_now <= 0 || thisHero.hp_now <= 0){
             gameOver === true;
-            console.log(`BATTLE ENDED AFTER ${currentRound} ROUNDS! YOUR HP: ${yourHero.hp_now}. SPAWN HP: ${newSpawn.hp_now}`);
+            console.log(`BATTLE ENDED AFTER ${currentRound} ROUNDS! YOUR HP: ${thisHero.hp_now}. SPAWN HP: ${newSpawn.hp_now}`);
         }
 
     }
 
 }
 
-init("Moonfury", "Warrior");
+// init();
 // init("Moonbeam", "Archer");
 // init("Moondust", "Wizard");
