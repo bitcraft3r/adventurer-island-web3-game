@@ -59,14 +59,45 @@ class Warrior extends Adventurer {
         this.agility = agi; // use DOM input retrieved from NFT metadata
         this.wisdom = wis; // use DOM input retrieved from NFT metadata
         this.id = "Adventurer #2"; // use DOM input retrieved from NFT metadata
-        this.damage = 5 + this.strength;
+        this.damage = 5 + this.strength; // warrior damage based on STR
     }
 }
-class Archer extends Adventurer {}
-class Wizard extends Adventurer {}
+
+class Archer extends Adventurer {
+    constructor(name, gameClass, str, agi, wis){
+        super(name);
+        this.name = name;
+        this.gameClass = gameClass;
+        this.strength = str; 
+        this.agility = agi + 1; // get bonus +1 agi for archer
+        this.wisdom = wis;
+        this.id = "Adventurer #5";
+        this.damage = 5 + this.agility; // archer damage based on AGI
+    }
+}
+
+class Wizard extends Adventurer {
+    constructor(name, gameClass, str, agi, wis){
+        super(name);
+        this.name = name;
+        this.gameClass = gameClass;
+        this.strength = str;
+        this.agility = agi;
+        this.wisdom = wis + 1; // get bonus +1 wis for wizard
+        this.id = "Adventurer #7";
+        this.damage = 5 + this.wisdom; // wizard damage based on WIS
+    }
+}
 
 function createHero(name, gameClass, str, agi, wis) {
-    return new Warrior(name, gameClass, str, agi, wis);
+    if (gameClass === "Warrior"){
+        return new Warrior(name, gameClass, str, agi, wis);    
+    } else if (gameClass === "Archer"){
+        return new Archer(name, gameClass, str, agi, wis);    
+    } else if (gameClass === "Wizard"){
+        return new Wizard(name, gameClass, str, agi, wis);    
+    }
+    else console.log("wrong input");
 }
 
 function startBattle(name, gameClass) {
@@ -96,4 +127,6 @@ function startBattle(name, gameClass) {
     console.log(`BATTLE ENDED AFTER ${currentRound} ROUNDS! YOUR HP: ${yourHero.hitpoints}. SPAWN HP: ${newSpawn.hitpoints}`);
 }
 
-startBattle("Moonfury", "Warrior");
+// startBattle("Moonfury", "Warrior");
+// startBattle("Moonbeam", "Archer");
+startBattle("Moondust", "Wizard");
