@@ -10,6 +10,12 @@ for (let i=0; i<collisions.length; i+=70){
     collisionsMap.push(collisions.slice(i, 70 + i));
 }
 
+// create 2D array of battleZones
+const battleZonesMap = [];
+for (let i=0; i<battleZonesData.length; i+=70){
+    battleZonesMap.push(battleZonesData.slice(i, 70 + i));
+}
+
 const boundaries = [];
 const offset = {
     x: -735,
@@ -22,8 +28,12 @@ collisionsMap.forEach((row, i) => {
     })
 })
 
-c.fillStyle = "grey";
-c.fillRect(0, 0, 1024, 576);
+const battleZones = [];
+battleZonesMap.forEach((row, i) => {
+    row.forEach((symbol, j) => {
+        if (symbol === 1025) battleZones.push(new Boundary({position: {x:j*Boundary.width+offset.x, y:i*Boundary.height+offset.y}}))
+    })
+})
 
 const bgImage = new Image();
 bgImage.src = "./img/pelletTown.png";
@@ -72,7 +82,7 @@ const keys = {
     d: { pressed: false },
 }
 
-const movables = [background, ...boundaries, foreground]; // spread operator to take all items within the array, so there's no 2D arrays
+const movables = [background, ...boundaries, foreground, ...battleZones]; // spread operator to take all items within the array, so there's no 2D arrays
 
 function rectangularCollision({rectangle1, rectangle2}){
     return (
@@ -90,8 +100,26 @@ function animate() {
     boundaries.forEach(boundary => {
         boundary.draw();
     })
+    battleZones.forEach(battleZone => {
+        battleZone.draw();
+    })
     player.draw();
     foreground.draw();
+
+    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
+        for (let i=0; i<battleZones.length; i++){
+            const battleZone = battleZones[i];
+            if ( 
+                rectangularCollision({
+                    rectangle1: player, 
+                    rectangle2: battleZone 
+                }) 
+            ){ 
+                console.log(`battle zone collision`)
+                break;
+            };
+        }
+    }
     
     let moving = true;
     
@@ -111,7 +139,6 @@ function animate() {
                     }} 
                 }) 
             ){ 
-                console.log(`colliding`);
                 moving = false;
                 break;
             };
@@ -131,7 +158,6 @@ function animate() {
                     }} 
                 }) 
             ){ 
-                console.log(`colliding`);
                 moving = false;
                 break;
             };
@@ -151,7 +177,6 @@ function animate() {
                     }} 
                 }) 
             ){ 
-                console.log(`colliding`);
                 moving = false;
                 break;
             };
@@ -171,7 +196,6 @@ function animate() {
                     }} 
                 }) 
             ){ 
-                console.log(`colliding`);
                 moving = false;
                 break;
             };
