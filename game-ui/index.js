@@ -7,9 +7,17 @@ canvas.height = 576;
 c.fillStyle = "grey";
 c.fillRect(0, 0, 1024, 576);
 
-const image = new Image(); // Canvas api does not allow us to place image url directly within the image constructor, hence require next line
+const image = new Image();
 image.src = "./img/pelletTown.png";
 
-image.onload = () => { // wait for background to load
-    c.drawImage(image, -725, -550);
+const playerImage = new Image();
+playerImage.src = "./img/playerDown.png";
+
+image.onload = () => { 
+    c.drawImage(image, -738, -600);
+    c.drawImage(
+        playerImage, 
+        canvas.width/2 - playerImage.width/2, 
+        canvas.height/2 - playerImage.height/2
+    ); // player sprite is smaller file than bg; can expect bg to load first
 }
