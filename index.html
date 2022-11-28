@@ -15,6 +15,8 @@
 
     <div id="controls">
         <button id="getAllNFT" onclick="main()">Load Adventurers</button>
+        <div id="learn-more"><a href="https://testnets.opensea.io/collection/adventurer-nzfwridt0f" target="_blank">Learn More</a></div>
+        <div id="learn-more"><a href="https://mumbai.polygonscan.com/address/0x2e340632f482ed6ef4053028f4ad16c321ad97a7#writeContract" target="_blank">Mint for Free</a></div>
     </div>
 
     <div id="root">
@@ -26,26 +28,53 @@
             <h4>Selected Adventurer:</h4>
             <div>
                 <p>ID: Adventurer #2</p>
-                <p>STR: 7</p>
-                <p>AGI: 6</p>
-                <p>WIS: 6</p>
+                <p>STR: <span id="select-str">7</span></p>
+                <p>AGI: <span id="select-agi">6</span></p>
+                <p>WIS: <span id="select-wis">6</span></p>
             </div>
         </div>
         <div id="create-hero">
             <h4>Create Hero:</h4>
-            <div>Enter your Hero's name: <input></div>
+            <div>Enter your Hero's name: <input id="input-hero-name"></div>
             <div>Select your Hero's Class:
-                <button>Warrior</button>
-                <button>Archer</button>
-                <button>Mage</button>
+                <select id="select-class">
+                    <option value="Warrior">Warrior</option>
+                    <option value="Archer">Archer</option>
+                    <option value="Wizard">Wizard</option>
+                </select>
             </div>
         </div>
         <div id="generate-hero">
             <button id="genButton">GENERATE HERO</button>
+            <div id="show-hero">show hero here</div>
+        </div>
+        <div id="generate-spawn">
+            <button id="genSpawnButton">LOG LAST SPAWN</button>
+            <div id="show-spawn">show spawn here</div>
         </div>
     </div>
 
-    <div id="battle">
+    <div id="game">
+        <div id="start-game">
+            <button id="start-game-button">Start Game</button>
+        </div>
+        <div id="player-controls">
+            <button id="attack-button">Hero Attack</button>
+            <div id="last-attack"></div>
+        </div>
+        <div id="spawn-controls">
+            <button id="defend-button">Spawn Attack</button>
+            <div id="last-defend"></div>
+        </div>
+        <div id="game-result">
+            <h3>Game Log</h3>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- <div id="battle">
+        <button id="start-battle" onclick="init()">Start Battle</button>
         <div id="your-hero">
             <h4>YOUR HERO DETAILS:</h4>
             <p>Name: Moonfury</p>
@@ -56,6 +85,9 @@
             <p>ID: Adventurer #2</p>
         </div>
         <div id="battle-screen">
+            <button id="battle-attack">Attack</button>
+        </div>
+        <div id="battle-log">
             <div>Round 1</div>
             <div>Round 2</div>
             <div>Round 3</div>
@@ -93,12 +125,13 @@
         <p id="hero">Hero Details: </p>
         <button onclick="getSpawnDetails()" id="spawnDetails">Get Spawn details</button>
         <p id="spawn">Spawn Details: </p>
-    </div>
+    </div> -->
 
     <script src="script.js"></script>
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
         type="application/javascript"></script>
     <script src="nft.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="./helpers/gameV2.js"></script>
 </body>
 </html>
