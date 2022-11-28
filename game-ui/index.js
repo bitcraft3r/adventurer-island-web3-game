@@ -19,7 +19,7 @@ class Sprite {
         this.image = image;
     }
     draw(){
-        c.drawImage(this.image, -735, -600);
+        c.drawImage(this.image, this.position.x, this.position.y);
     }
 }
 
@@ -27,6 +27,13 @@ const background = new Sprite({
     position: {x:-735, y:-600},
     image: bgImage,
 });
+
+const keys = {
+    w: { pressed: false },
+    a: { pressed: false },
+    s: { pressed: false },
+    d: { pressed: false },
+}
 
 function animate() {
     window.requestAnimationFrame(animate);
@@ -42,23 +49,49 @@ function animate() {
         playerImage.width/4, // size of output width
         playerImage.height, // size of output height
     );
-    console.log(`animate`);
+
+    if (keys.w.pressed && lastKey === 'w') background.position.y += 5;
+    else if (keys.a.pressed && lastKey === 'a') background.position.x += 5;
+    else if (keys.s.pressed && lastKey === 's') background.position.y -= 5;
+    else if (keys.d.pressed && lastKey === 'd') background.position.x -= 5;
 }
 animate();
 
+let lastKey = '';
 window.addEventListener("keydown", (e) => {
     switch (e.key) {
         case 'w':
-            console.log('pressed w');
+            keys.w.pressed = true;
+            lastKey = 'w';
             break;
         case 'a':
-            console.log('pressed a');
+            keys.a.pressed = true;
+            lastKey = 'a';
             break;
         case 's':
-            console.log('pressed s');
+            keys.s.pressed = true;
+            lastKey = 's';
             break;
         case 'd':
-            console.log('pressed d');
+            keys.d.pressed = true;
+            lastKey = 'd';
+            break;
+    }
+});
+
+window.addEventListener("keyup", (e) => {
+    switch (e.key) {
+        case 'w':
+            keys.w.pressed = false;
+            break;
+        case 'a':
+            keys.a.pressed = false;
+            break;
+        case 's':
+            keys.s.pressed = false;
+            break;
+        case 'd':
+            keys.d.pressed = false;
             break;
     }
 });
