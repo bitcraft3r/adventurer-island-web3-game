@@ -14,10 +14,16 @@ const playerImage = new Image();
 playerImage.src = "./img/playerDown.png";
 
 image.onload = () => { 
-    c.drawImage(image, -738, -600);
+    c.drawImage(image, -735, -600);
     c.drawImage(
         playerImage, 
-        canvas.width/2 - playerImage.width/2, 
-        canvas.height/2 - playerImage.height/2
-    ); // player sprite is smaller file than bg; can expect bg to load first
+        0, // x coordinate to being cropping from
+        0, // y coordinate to begin cropping from
+        playerImage.width/4, // crop width
+        playerImage.height, // crop height
+        canvas.width/2 - playerImage.width/4/2, 
+        canvas.height/2 - playerImage.height/2,
+        playerImage.width/4, // size of output width
+        playerImage.height, // size of output height
+    );
 }
