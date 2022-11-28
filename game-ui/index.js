@@ -19,7 +19,7 @@ class Boundary {
         this.height = 48;
     }
     draw(){
-        c.fillStyle = 'red';
+        c.fillStyle = 'rgba(255,0,0,0)';
         c.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 }
@@ -112,21 +112,83 @@ function animate() {
     // draw boundaries before player so player moves above boundaries
     boundaries.forEach(boundary => {
         boundary.draw();
-        if ( rectangularCollision({rectangle1: player, rectangle2: boundary}) ){
-            console.log(`colliding`)
-        };
     })
     player.draw();
-
-
+    
+    let moving = true;
+    
     if (keys.w.pressed && lastKey === 'w'){
-        movables.forEach(movable => movable.position.y += 5)
+        for (let i=0; i<boundaries.length; i++){
+            const boundary = boundaries[i];
+            if ( 
+                rectangularCollision({
+                    rectangle1: player, 
+                    rectangle2: {...boundary, position: { // `...` to create clone of boundary obj w/o rewriting original obj
+                        x: boundary.position.x,
+                        y: boundary.position.y + 5
+                    }} 
+                }) 
+            ){ 
+                console.log(`colliding`);
+                moving = false;
+                break;
+            };
+        }
+        if (moving) movables.forEach(movable => movable.position.y += 5);
     } else if (keys.a.pressed && lastKey === 'a'){
-        movables.forEach(movable => movable.position.x += 5)
+        for (let i=0; i<boundaries.length; i++){
+            const boundary = boundaries[i];
+            if ( 
+                rectangularCollision({
+                    rectangle1: player, 
+                    rectangle2: {...boundary, position: { // `...` to create clone of boundary obj w/o rewriting original obj
+                        x: boundary.position.x + 5,
+                        y: boundary.position.y
+                    }} 
+                }) 
+            ){ 
+                console.log(`colliding`);
+                moving = false;
+                break;
+            };
+        }
+        if (moving) movables.forEach(movable => movable.position.x += 5);
     } else if (keys.s.pressed && lastKey === 's'){
-        movables.forEach(movable => movable.position.y -= 5)
+        for (let i=0; i<boundaries.length; i++){
+            const boundary = boundaries[i];
+            if ( 
+                rectangularCollision({
+                    rectangle1: player, 
+                    rectangle2: {...boundary, position: { // `...` to create clone of boundary obj w/o rewriting original obj
+                        x: boundary.position.x,
+                        y: boundary.position.y - 5
+                    }} 
+                }) 
+            ){ 
+                console.log(`colliding`);
+                moving = false;
+                break;
+            };
+        }
+        if (moving) movables.forEach(movable => movable.position.y -= 5)
     } else if (keys.d.pressed && lastKey === 'd'){
-        movables.forEach(movable => movable.position.x -= 5)
+        for (let i=0; i<boundaries.length; i++){
+            const boundary = boundaries[i];
+            if ( 
+                rectangularCollision({
+                    rectangle1: player, 
+                    rectangle2: {...boundary, position: { // `...` to create clone of boundary obj w/o rewriting original obj
+                        x: boundary.position.x - 5,
+                        y: boundary.position.y
+                    }} 
+                }) 
+            ){ 
+                console.log(`colliding`);
+                moving = false;
+                break;
+            };
+        }
+        if (moving) movables.forEach(movable => movable.position.x -= 5)
     } 
 }
 animate();
