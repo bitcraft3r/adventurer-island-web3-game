@@ -93,8 +93,12 @@ function rectangularCollision({rectangle1, rectangle2}){
     )
 }
 
+const battle = {
+    initiated: false
+}
+
 function animate() {
-    window.requestAnimationFrame(animate);
+    const animationId = window.requestAnimationFrame(animate);
     background.draw();
     // draw boundaries before player so player moves above boundaries
     boundaries.forEach(boundary => {
@@ -106,6 +110,12 @@ function animate() {
     player.draw();
     foreground.draw();
 
+    let moving = true;
+    player.moving = false;
+
+    console.log(animationId)
+    if (battle.initiated) return;
+    // activate a battle
     if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
         for (let i=0; i<battleZones.length; i++){
             const battleZone = battleZones[i];
@@ -118,15 +128,35 @@ function animate() {
                 overlappingArea > (player.width * player.height)/3 // require player to be at least 33% on the battleZone area
                 && Math.random() < 0.01 // 1% chance to activate battle
             ){ 
-                console.log(`battle zone collision`)
+                console.log(`activate battle`)
+                // deactivate current animation loop
+                window.cancelAnimationFrame(animationId);
+                battle.initiated = true;
+                // https://greensock.com/docs/
+                gsap.to("#overlappingDiv", {
+                    opacity: 1,
+                    repeat: 3,
+                    yoyo: true,
+                    duration: 0.4,
+                    onComplete(){
+                        gsap.to("#overlappingDiv", {
+                            opacity: 1,
+                            duration: 0.4,
+                            onComplete(){
+                                // activate a new animation loop
+                                animateBattle()
+                                gsap.to("#overlappingDiv", {
+                                    opacity: 0,
+                                    duration: 0.4
+                                })
+                            }
+                        })
+                    }
+                })
                 break;
             };
         }
     }
-    
-    let moving = true;
-    
-    player.moving = false;
 
     if (keys.w.pressed && lastKey === 'w'){
         player.moving = true;
@@ -207,6 +237,16 @@ function animate() {
     } 
 }
 animate();
+
+const battleBackgroundImage = new Image();
+battleBackgroundImage.src = "./img/battleBackground.png";
+const battleBackground = new Sprite({position: {x:0, y:0}, image: battleBackgroundImage})
+function animateBattle() {
+    window.requestAnimationFrame(animateBattle);
+    battleBackground.draw();
+}
+
+// animateBattle();
 
 let lastKey = '';
 window.addEventListener("keydown", (e) => {
