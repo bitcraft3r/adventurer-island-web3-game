@@ -11,7 +11,7 @@ button {
     border: 0;
     font-size: 16px;
 }
-button:hover {
+button:hover, #viewNft:hover {
     background-color: #ddd;
     cursor: pointer;
 }
@@ -68,6 +68,28 @@ span {
 }
 #heroButton {
     top: 75%; 
+}
+#viewNft, a {
+    color: blue;
+}
+#nftScreen {
+    display: none;
+    position: absolute;
+    top: 10%; left: 10%; right: 10%; bottom: 10%;
+    background-color: white;
+    border: #232323 double 4px;
+}
+#showNfts {
+    display: flex;
+}
+#userNft { /* TODO: FIX NFT GALLERY CSS */
+    border: #232323 solid 2px;
+    background: black;
+}
+#nftScreenButton {
+    position: absolute;
+    bottom: 10%; left: 40%; right: 40%;
+    border: #232323 solid 2px;
 }
 #userInterface {
     display: none;
