@@ -138,6 +138,7 @@ class Monster extends Sprite {
         }
     }
     faint(){
+        audio.battle.stop();
         audio.victory.play();
         document.querySelector("#dialogueBox").innerHTML = `${this.name} fainted!`;
         gsap.to(this.position, {
