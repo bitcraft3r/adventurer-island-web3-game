@@ -69,6 +69,19 @@ function initBattle() {
                     queue.push(()=>{
                     emby.faint();
                     })
+                    queue.push(()=>{
+                        gsap.to("#overlappingDiv", {
+                            opacity: 1,
+                            onComplete: () => {
+                                cancelAnimationFrame(battleAnimationId);
+                                animate();
+                                document.querySelector("#userInterface").style.display = `none`;
+                                gsap.to("#overlappingDiv", {
+                                    opacity: 0
+                                })
+                            }
+                        })
+                    })
                 }
             })
         })
