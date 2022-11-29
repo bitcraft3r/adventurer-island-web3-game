@@ -259,6 +259,19 @@ function animateBattle() {
 
 animateBattle();
 
+// event listeners related to battle
+document.querySelectorAll("button").forEach((button) => {
+    button.addEventListener("click", ()=>{
+        emby.attack({ attack: {
+            name: 'Tackle',
+            damage: 10,
+            type: 'Normal'
+        },
+        recipient: draggle
+        })
+    })
+})
+
 let lastKey = '';
 window.addEventListener("keydown", (e) => {
     switch (e.key) {
