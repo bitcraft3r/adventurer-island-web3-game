@@ -9,9 +9,12 @@ let battleAnimationId;
 let queue;
 
 let randomMonster = () => {
-    if (Math.random() < 0.5) {
+    if (Math.random() < 0.33) {
         document.querySelector("#enemyName").innerHTML = "Draggle"
         return monsters.Draggle;
+    } else if (Math.random() > 0.33) {
+        document.querySelector("#enemyName").innerHTML = "Momo"
+        return monsters.Momo;
     } else {
         document.querySelector("#enemyName").innerHTML = "Emby"
         return monsters.Emby;
