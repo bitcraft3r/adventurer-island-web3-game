@@ -48,13 +48,14 @@ class Sprite {
 }
 
 class Monster extends Sprite {
-    constructor({ position, image, frames = {max:1, hold:10}, sprites, animate=false, rotation=0, isEnemy=false, name, attacks, drops, gold }) {
+    constructor({ position, image, frames = {max:1, hold:10}, sprites, animate=false, rotation=0, isEnemy=false, name, attacks, drops, rareDrops, gold }) {
         super({ position, image, frames, sprites, animate, rotation });
         this.health = 100;
         this.isEnemy = isEnemy;
         this.name = name;
         this.attacks = attacks;
         this.drops = drops;
+        this.rareDrops = rareDrops;
         this.gold = gold;
     }
     attack({attack, recipient, renderedSprites}){

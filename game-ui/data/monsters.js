@@ -15,7 +15,8 @@ const monsters = {
         isEnemy: true, 
         name:"Emby",
         attacks: [attacks.Tackle, attacks.Fireball],
-        drops: [{ ash: 1 }, { sword: 1 }],
+        drops: [{ ash: 1 }],
+        rareDrops: [{ sword: 1 }],
         gold: 20,
     },
     Draggle: {
@@ -26,7 +27,8 @@ const monsters = {
         isEnemy: true, 
         name:"Draggle",
         attacks: [attacks.Tackle],
-        drops: [{ leather: 1 }, { wand: 1 }],
+        drops: [{ leather: 1 }],
+        rareDrops: [{ wand: 1 }],
         gold: 15,
     }
 }
