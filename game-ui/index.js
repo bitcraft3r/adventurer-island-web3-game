@@ -288,3 +288,7 @@ addEventListener("click", ()=>{
         clicked = true;
     }
 })
+
+document.querySelector("#startButton").addEventListener("click", (e)=>{
+    document.querySelector("#startScreen").style.display = 'none';
+} )

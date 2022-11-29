@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adventurer</title>
+    <title>Adventurer Island</title>
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -38,6 +39,11 @@
             <div id="goldOverlay">GOLD: 0</div>
             <div id="itemOverlay">ITEMS: 0</div>
             <div id="xpOverlay">XP: 0</div>
+        </div>
+
+        <div id="startScreen" style="position: absolute; top:0; left: 0; bottom: 0; right: 0; background-color: grey">
+            <img src="img/startScreen.png" alt="">
+            <button id="startButton" style="position: absolute; top: 65%; left: 35%; right: 35%; font-size: 24px; height: 50px; border: black solid 4px">START GAME</button>
         </div>
 
         <div id="userInterface" style="display: none">
