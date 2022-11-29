@@ -51,6 +51,7 @@ function initBattle() {
                             gsap.to("#overlappingDiv", {
                                 opacity: 0
                             })
+                            battle.initiated = false;
                         }
                     })
                 })
@@ -79,6 +80,7 @@ function initBattle() {
                                 gsap.to("#overlappingDiv", {
                                     opacity: 0
                                 })
+                                battle.initiated = false;
                             }
                         })
                     })
