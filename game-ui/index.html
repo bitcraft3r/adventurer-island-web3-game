@@ -36,9 +36,27 @@
         <canvas></canvas>
 
         <div id="mapOverlay" style="position: absolute; bottom:20px; left: 20px">
+            <div id="nameOverlay"></div>
+            <br>
             <div id="goldOverlay">GOLD: 0</div>
             <div id="itemOverlay">ITEMS: 0</div>
             <div id="xpOverlay">XP: 0</div>
+        </div>
+
+        <div id="startScreen2" style="position: absolute; top:0; left: 0; bottom: 0; right: 0; background-color: grey">
+            <img src="img/startScreen2.png" alt="">
+
+            <div style="position: absolute; top: 25%; left: 30%; right: 35%; font-size: 24px; height: 50px;" style="font-size: 24px">Name: <input id="chooseName" style="font-size: 24px;"></div>
+
+            <div style="position: absolute; top: 45%; left: 30%; right: 35%; font-size: 24px; height: 50px;">Select Class:
+                <select id="chooseClass" style="font-size: 20px">
+                    <option value="Warrior">Warrior</option>
+                    <option value="Archer">Archer</option>
+                    <option value="Wizard">Wizard</option>
+                </select>
+            </div>
+
+            <button id="heroButton" style="position: absolute; top: 75%; left: 35%; right: 35%; font-size: 24px; height: 50px; border: black solid 4px">CONTINUE</button>
         </div>
 
         <div id="startScreen" style="position: absolute; top:0; left: 0; bottom: 0; right: 0; background-color: grey">

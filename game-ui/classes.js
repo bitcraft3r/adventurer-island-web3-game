@@ -15,6 +15,7 @@ class Sprite {
         this.xp = 0;
         this.bag = [];
         this.gold = 0;
+        this.gameClass = "";
     }
     draw(){
         c.save();
