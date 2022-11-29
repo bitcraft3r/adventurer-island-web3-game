@@ -22,6 +22,7 @@ The *ADVENTURER NFT* is an ERC-721 token on the MATIC (Polygon) network.
 - [Howler](https://cdnjs.com/libraries/howler) for audio
 - [GSAP](https://greensock.com/docs/) for animations
 - [Web3.js](https://github.com/web3/web3.js/blob/1.x/README.md) for Ethereum JS API
+- Font: [Press Start 2P](https://fonts.google.com/specimen/Press+Start+2P)
 
 ### Resources
 
