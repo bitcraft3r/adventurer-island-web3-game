@@ -26,7 +26,7 @@ const monsters = {
         animate: true, 
         isEnemy: true, 
         name:"Draggle",
-        attacks: [attacks.Tackle],
+        attacks: [attacks.Tackle, attacks.Dive],
         drops: [{ leather: 1 }],
         rareDrops: [{ wand: 1 }],
         gold: 15,

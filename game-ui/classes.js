@@ -140,6 +140,38 @@ class Monster extends Sprite {
                     x: this.position.x,
                 })
             break;
+            case 'Dive':
+                const tl2 = gsap.timeline();
+
+                tl2.to(this.position, {
+                    y: this.position.y - 80,
+                    duration: 0.4,
+                }).to(this.position, {
+                    y: this.position.y,
+                    duration: 0.1,
+                    onComplete: () => {
+                        // Enemy actually gets hit
+                        audio.tackleHit.play();
+                        gsap.to(healthBar, {
+                            width: recipient.health + "%"
+                        })
+                        gsap.to(recipient.position, {
+                            x: recipient.position.x + 10,
+                            yoyo: true,
+                            repeat: 5,
+                            duration: 0.08,
+                        })
+                        gsap.to(recipient, {
+                            opacity: 0,
+                            repeat: 5,
+                            yoyo: true,
+                            duration: 0.08
+                        })
+                    }
+                }).to(this.position, {
+                    x: this.position.x,
+                })
+            break;
         }
     }
     faint(){
