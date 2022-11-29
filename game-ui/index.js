@@ -244,7 +244,7 @@ const battleBackground = new Sprite({position: {x:0, y:0}, image: battleBackgrou
 
 const draggleImage = new Image();
 draggleImage.src = "./img/draggleSprite.png";
-const draggle = new Sprite({position: {x:800, y:100}, image: draggleImage, frames: {max:4, hold:20}, animate: true})
+const draggle = new Sprite({position: {x:800, y:100}, image: draggleImage, frames: {max:4, hold:20}, animate: true, isEnemy: true})
 
 const embyImage = new Image();
 embyImage.src = "./img/embySprite.png";
