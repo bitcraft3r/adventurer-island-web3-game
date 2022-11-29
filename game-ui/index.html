@@ -43,11 +43,16 @@
                     <option value="1">Generate Random</option>
                     <option value="2">Adventurer #9</option>
                     <option value="3">Adventurer #777</option>
-                </select><span> (View)</span><br>
+                </select><span id="viewNft"> (View)</span><br>
                 <span><a href="https://mumbai.polygonscan.com/address/0x2e340632f482ed6ef4053028f4ad16c321ad97a7#writeContract" target="_blank">(Mint for free)</a></span>
             </div>
 
             <button id="heroButton">CONTINUE</button>
+        </div>
+
+        <div id="nftScreen">
+            <div id="showNfts"></div>
+            <button id="nftScreenButton">Select</button>
         </div>
 
         <div id="startScreen">
@@ -89,6 +94,8 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="nft.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script src="data/audio.js"></script>
     <script src="data/battleZones.js"></script>
     <script src="data/collisions.js"></script>

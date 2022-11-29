@@ -289,10 +289,12 @@ addEventListener("click", ()=>{
     }
 })
 
+// Start screen click to continue
 document.querySelector("#startButton").addEventListener("click", ()=>{
     document.querySelector("#startScreen").style.display = 'none';
 } )
 
+// Character screen click to continue
 document.querySelector("#heroButton").addEventListener("click", ()=>{
     document.querySelector("#startScreen2").style.display = 'none';
 
@@ -301,3 +303,17 @@ document.querySelector("#heroButton").addEventListener("click", ()=>{
     document.querySelector("#nameOverlay").innerHTML = `${inputName} (${inputClass})`;
     player.gameClass = inputClass;
 } )
+
+// (load and) show NFTs
+document.querySelector("#viewNft").addEventListener("click", ()=>{
+    document.querySelector("#nftScreen").style.display = "flex";
+    document.querySelector("#showNfts").replaceChildren(); // TODO: how to prevent Loading NFTs more than once?
+    main();
+})
+
+// close NFT gallery
+document.querySelector("#nftScreenButton").addEventListener("click", ()=>{
+    document.querySelector("#nftScreen").style.display = "none";
+})
+
+// TODO: User SELECT nft, to be used to create character
