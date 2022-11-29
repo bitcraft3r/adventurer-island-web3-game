@@ -113,7 +113,7 @@ function animate() {
     let moving = true;
     player.animate = false;
 
-    console.log(animationId)
+    // console.log(animationId)
     if (battle.initiated) return;
     // activate a battle
     if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
@@ -128,9 +128,12 @@ function animate() {
                 overlappingArea > (player.width * player.height)/3 // require player to be at least 33% on the battleZone area
                 && Math.random() < 0.01 // 1% chance to activate battle
             ){ 
-                console.log(`activate battle`)
+                // console.log(`activate battle`)
                 // deactivate current animation loop
                 window.cancelAnimationFrame(animationId);
+                audio.Map.stop();
+                audio.initBattle.play();
+                audio.battle.play();
                 battle.initiated = true;
                 // https://greensock.com/docs/
                 gsap.to("#overlappingDiv", {
@@ -277,3 +280,11 @@ window.addEventListener("keyup", (e) => {
             break;
     }
 });
+
+let clicked = false;
+addEventListener("click", ()=>{
+    if (!clicked) {
+        audio.Map.play();
+        clicked = true;
+    }
+})
