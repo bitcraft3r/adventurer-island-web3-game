@@ -48,6 +48,9 @@ function initBattle() {
             })
 
             if (enemy.health <= 0) {
+                player.bag.push(enemy.drops[0]);
+                if (Math.random() < 0.1) player.bag.push(enemy.drops[1]); // rare item
+                player.gold += enemy.gold - Math.floor(Math.random() * enemy.gold/4); // e.g. minus (up to ~25%)
                 queue.push(()=>{
                 enemy.faint();
                 })
