@@ -12,6 +12,8 @@ class Sprite {
         this.sprites = sprites;
         this.opacity = 1;
         this.rotation = rotation;
+        this.bag = [];
+        this.gold = 0;
     }
     draw(){
         c.save();

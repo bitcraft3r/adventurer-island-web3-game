@@ -1,11 +1,22 @@
 const monsters = {
+    Fighter: {
+        position: {x:260, y:280}, 
+        image: {src: "./img/playerBattle.png"}, 
+        frames: {max:4, hold:20}, 
+        animate: true, 
+        name:"Fighter",
+        attacks: [attacks.Tackle, attacks.Fireball]
+    },
     Emby: {
-        position: {x:280, y:325}, 
+        position: {x:800, y:100}, 
         image: {src: "./img/embySprite.png"}, 
         frames: {max:4, hold:20}, 
         animate: true, 
+        isEnemy: true, 
         name:"Emby",
-        attacks: [attacks.Tackle, attacks.Fireball]
+        attacks: [attacks.Tackle, attacks.Fireball],
+        drops: [{ ash: 1 }],
+        gold: 10,
     },
     Draggle: {
         position: {x:800, y:100}, 
@@ -14,6 +25,8 @@ const monsters = {
         animate: true, 
         isEnemy: true, 
         name:"Draggle",
-        attacks: [attacks.Tackle, attacks.Fireball]
+        attacks: [attacks.Tackle],
+        drops: [{ leather: 1 }],
+        gold: 10,
     }
 }
