@@ -4,62 +4,83 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adventurer</title>
+    <title>Adventurer Island</title>
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <style>
-        * {
-            font-family: 'Press Start 2P', cursive;
-        }
-        body {
-            background-color: #232323;
-        }
-        h1 {
-            margin: 0;
-        }
-        button {
-            border: 0;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #ddd;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
-    <div style="display: inline-block; position: relative;">
-        <div id="overlappingDiv" style="background-color: black; position:absolute; top:0; left: 0; bottom: 0; right: 0; opacity: 0; pointer-events: none; z-index: 10;"></div>
+    <div id="root">
+        <div id="overlappingDiv"></div>
 
         <canvas></canvas>
 
-        <div id="userInterface" style="display: none">
+        <div id="mapOverlay">
+            <div id="nameOverlay"></div>
+            <br>
+            <div id="goldOverlay">GOLD: 0</div>
+            <div id="itemOverlay">ITEMS: 0</div>
+            <div id="xpOverlay">XP: 0</div>
+        </div>
+
+        <div id="startScreen2">
+            <img src="img/startScreen2.png" alt="">
+
+            <div id="nameBox">Name: <input id="chooseName"></div>
+
+            <div id="classBox">Select Class:
+                <select id="chooseClass">
+                    <option value="Warrior">Warrior</option>
+                    <option value="Archer">Archer</option>
+                    <option value="Wizard">Wizard</option>
+                </select>
+            </div>
+
+            <div id="nftBox">Select NFT: 
+                <select id="chooseNft">
+                    <option value="1">Generate Random</option>
+                    <option value="2">Adventurer #9</option>
+                    <option value="3">Adventurer #777</option>
+                </select><span> (View)</span><br>
+                <span><a href="https://mumbai.polygonscan.com/address/0x2e340632f482ed6ef4053028f4ad16c321ad97a7#writeContract" target="_blank">(Mint for free)</a></span>
+            </div>
+
+            <button id="heroButton">CONTINUE</button>
+        </div>
+
+        <div id="startScreen">
+            <img src="img/startScreen.png" alt="">
+            <button id="startButton">START GAME</button>
+        </div>
+
+        <div id="userInterface">
 
             <!-- enemy health bar -->
-            <div style="background-color: white; width: 250px; position: absolute; top: 50px; left: 50px; border: 4px black solid; padding: 12px">
-                <h3 style="font-size: 16px">Draggle</h3>
-                <div style="position: relative;">
-                    <div style="height: 5px; background-color: #ccc; margin-top: 10px;"></div>
-                    <div id="enemyHealthBar" style="height: 5px; background-color: green; position: absolute; top: 0; left: 0; right: 0;"></div>
+            <div id="enemyHealthBox">
+                <h3 id="enemyName">Draggle</h3>
+                <div id="healthWrapper">
+                    <div id="greyBox"></div>
+                    <div id="enemyHealthBar"></div>
                 </div>
             </div>
 
             <!-- player health bar -->
-            <div style="background-color: white; width: 250px; position: absolute; top: 330px; right: 50px; border: 4px black solid; padding: 12px">
-                <h3 style="font-size: 16px">Emby</h3>
-                <div style="position: relative;">
-                    <div style="height: 5px; background-color: #ccc; margin-top: 10px;"></div>
-                    <div id="playerHealthBar" style="height: 5px; background-color: green; position: absolute; top: 0; left: 0; right: 0;"></div>
+            <div id="playerHealthBox">
+                <h3 id="playerName">Adventurer</h3>
+                <div id="healthWrapper">
+                    <div id="greyBox"></div>
+                    <div id="playerHealthBar"></div>
                 </div>
             </div>
 
-            <div style="background-color: white; height: 140px; position: absolute; bottom: 0; right: 0; left: 0; border-top: 4px solid black; display: flex;">
-                <div id="dialogueBox" style="position:absolute; top: 0; right: 0; bottom: 0; left: 0; background: white; padding: 12px; display: none; cursor: pointer;">Placeholder for Dialogue Box</div>
-                <div id="attacksBox" style="width: 66.66%; display: grid; grid-template-columns: repeat(2, 1fr);">
+            <div id="dialogueWrapper">
+                <div id="dialogueBox">Placeholder for Dialogue Box</div>
+                <div id="attacksBox">
                 </div>
-                <div style="display: flex; align-items: center; justify-content: center; width: 33.33%; border-left: 4px solid black;">
-                    <h3 id="attackType" style="font-size: 16px;">Attack Type</h3>
+                <div id="attackTypeWrapper">
+                    <h3 id="attackType">Attack Type</h3>
                 </div>
             </div>
 

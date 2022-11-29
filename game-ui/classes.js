@@ -12,6 +12,10 @@ class Sprite {
         this.sprites = sprites;
         this.opacity = 1;
         this.rotation = rotation;
+        this.xp = 0;
+        this.bag = [];
+        this.gold = 0;
+        this.gameClass = "";
     }
     draw(){
         c.save();
@@ -46,12 +50,16 @@ class Sprite {
 }
 
 class Monster extends Sprite {
-    constructor({ position, image, frames = {max:1, hold:10}, sprites, animate=false, rotation=0, isEnemy=false, name, attacks }) {
+    constructor({ position, image, frames = {max:1, hold:10}, sprites, animate=false, rotation=0, isEnemy=false, name, attacks, xp, drops, rareDrops, gold }) {
         super({ position, image, frames, sprites, animate, rotation });
         this.health = 100;
         this.isEnemy = isEnemy;
         this.name = name;
         this.attacks = attacks;
+        this.xp = xp;
+        this.drops = drops;
+        this.rareDrops = rareDrops;
+        this.gold = gold;
     }
     attack({attack, recipient, renderedSprites}){
         document.querySelector("#dialogueBox").style.display = 'block';
@@ -111,6 +119,38 @@ class Monster extends Sprite {
                     x: this.position.x - movementDistance,
                 }).to(this.position, {
                     x: this.position.x + movementDistance*2,
+                    duration: 0.1,
+                    onComplete: () => {
+                        // Enemy actually gets hit
+                        audio.tackleHit.play();
+                        gsap.to(healthBar, {
+                            width: recipient.health + "%"
+                        })
+                        gsap.to(recipient.position, {
+                            x: recipient.position.x + 10,
+                            yoyo: true,
+                            repeat: 5,
+                            duration: 0.08,
+                        })
+                        gsap.to(recipient, {
+                            opacity: 0,
+                            repeat: 5,
+                            yoyo: true,
+                            duration: 0.08
+                        })
+                    }
+                }).to(this.position, {
+                    x: this.position.x,
+                })
+            break;
+            case 'Dive':
+                const tl2 = gsap.timeline();
+
+                tl2.to(this.position, {
+                    y: this.position.y - 80,
+                    duration: 0.4,
+                }).to(this.position, {
+                    y: this.position.y,
                     duration: 0.1,
                     onComplete: () => {
                         // Enemy actually gets hit

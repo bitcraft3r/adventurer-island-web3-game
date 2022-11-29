@@ -288,3 +288,16 @@ addEventListener("click", ()=>{
         clicked = true;
     }
 })
+
+document.querySelector("#startButton").addEventListener("click", ()=>{
+    document.querySelector("#startScreen").style.display = 'none';
+} )
+
+document.querySelector("#heroButton").addEventListener("click", ()=>{
+    document.querySelector("#startScreen2").style.display = 'none';
+
+    let inputName = document.getElementById("chooseName").value;
+    let inputClass = document.getElementById("chooseClass").value;
+    document.querySelector("#nameOverlay").innerHTML = `${inputName} (${inputClass})`;
+    player.gameClass = inputClass;
+} )

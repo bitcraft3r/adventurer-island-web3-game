@@ -2,11 +2,24 @@ const battleBackgroundImage = new Image();
 battleBackgroundImage.src = "./img/battleBackground.png";
 const battleBackground = new Sprite({position: {x:0, y:0}, image: battleBackgroundImage})
 
-let draggle;
-let emby;
+let enemy;
+let fighter;
 let renderedSprites;
 let battleAnimationId;
 let queue;
+
+let randomMonster = () => {
+    if (Math.random() < 0.33) {
+        document.querySelector("#enemyName").innerHTML = "Draggle"
+        return monsters.Draggle;
+    } else if (Math.random() > 0.33) {
+        document.querySelector("#enemyName").innerHTML = "Momo"
+        return monsters.Momo;
+    } else {
+        document.querySelector("#enemyName").innerHTML = "Emby"
+        return monsters.Emby;
+    }
+}
 
 function initBattle() {
     document.querySelector("#userInterface").style.display = "block";
@@ -15,12 +28,12 @@ function initBattle() {
     document.querySelector("#playerHealthBar").style.width = "100%";
     document.querySelector("#attacksBox").replaceChildren();
 
-    draggle = new Monster(monsters.Draggle);
-    emby = new Monster(monsters.Emby);
-    renderedSprites = [draggle, emby];
+    enemy = new Monster(randomMonster());
+    fighter = new Monster(monsters.Fighter);
+    renderedSprites = [fighter, enemy];
     queue = [];
 
-    emby.attacks.forEach(attack => {
+    fighter.attacks.forEach(attack => {
         // populate attacksBox dynamically with player's available attacks
         const button = document.createElement('button');
         button.innerHTML = attack.name;
@@ -31,15 +44,29 @@ function initBattle() {
     document.querySelectorAll("button").forEach((button) => {
         button.addEventListener("click", (e)=>{
             const selectedAttack = attacks[e.currentTarget.innerHTML];
-            emby.attack({ 
+            fighter.attack({ 
                 attack: selectedAttack,
-                recipient: draggle,
+                recipient: enemy,
                 renderedSprites
             })
 
-            if (draggle.health <= 0) {
+            if (enemy.health <= 0) {
+                // handle drops
+                player.bag.push(enemy.drops[0]);
+                if (Math.random() < 0.2) player.bag.push(enemy.rareDrops[0]); // rare item
+                document.querySelector("#itemOverlay").innerHTML = `ITEMS: ${player.bag.length}`;
+
+                // handle gold
+                player.gold += enemy.gold - Math.floor(Math.random() * enemy.gold/4); // e.g. minus (up to ~25%)
+                document.querySelector("#goldOverlay").innerHTML = `GOLD: ${player.gold}`;
+
+                // handle XP
+                player.xp += enemy.xp;
+                document.querySelector("#xpOverlay").innerHTML = `XP: ${player.xp}`;
+
+
                 queue.push(()=>{
-                draggle.faint();
+                enemy.faint();
                 })
                 queue.push(()=>{
                     gsap.to("#overlappingDiv", {
@@ -59,17 +86,17 @@ function initBattle() {
             }
 
             // enemy attacks
-            const randomAttack = draggle.attacks[Math.floor(Math.random() * draggle.attacks.length)];
+            const randomAttack = enemy.attacks[Math.floor(Math.random() * enemy.attacks.length)];
 
             queue.push(()=>{
-                draggle.attack({ 
+                enemy.attack({ 
                     attack: randomAttack,
-                    recipient: emby,
+                    recipient: fighter,
                     renderedSprites
                 })
-                if (emby.health <= 0) {
+                if (fighter.health <= 0) {
                     queue.push(()=>{
-                    emby.faint();
+                    fighter.faint();
                     })
                     queue.push(()=>{
                         gsap.to("#overlappingDiv", {
