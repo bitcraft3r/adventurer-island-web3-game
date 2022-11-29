@@ -1,0 +1,129 @@
+* {
+    font-family: 'Press Start 2P', cursive;
+}
+body {
+    background-color: #232323;
+}
+h1 {
+    margin: 0;
+}
+button {
+    border: 0;
+    font-size: 16px;
+}
+button:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+#root {
+    display: inline-block; 
+    position: relative;
+}
+#overlappingDiv {
+    background-color: black; 
+    position:absolute; 
+    top:0; left: 0; bottom: 0; right: 0; 
+    opacity: 0; 
+    pointer-events: none; 
+    z-index: 10;
+}
+#mapOverlay {
+    position: absolute; 
+    bottom:20px; 
+    left: 20px;
+}
+#startScreen, #startScreen2 {
+    position: absolute; 
+    top:0; left: 0; bottom: 0; right: 0; 
+    background-color: grey;
+}
+#nameBox, #classBox {
+    position: absolute; 
+    top: 25%; left: 30%; right: 30%; 
+    font-size: 24px; 
+    height: 50px;
+}
+#classBox {
+    top: 45%; 
+}
+#chooseName {
+    font-size: 24px;
+}
+#chooseClass {
+    font-size: 20px;
+}
+#startButton, #heroButton {
+    position: absolute; 
+    top: 65%; left: 35%; right: 35%; 
+    font-size: 24px; 
+    height: 50px; 
+    border: black solid 4px;
+}
+#heroButton {
+    top: 75%; 
+}
+#userInterface {
+    display: none;
+}
+#enemyHealthBox, #playerHealthBox {
+    background-color: white; 
+    width: 250px; 
+    position: absolute; 
+    border: 4px black solid; 
+    padding: 12px;
+}
+#enemyHealthBox {
+    top: 50px; left: 50px; 
+}
+#playerHealthBox {
+    top: 330px; right: 50px;
+}
+#enemyName, #playerName {
+    font-size: 16px
+}
+#enemyHealthBar, #playerHealthBar {
+    height: 5px; 
+    background-color: green; 
+    position: absolute; 
+    top: 0; left: 0; right: 0;
+}
+#greyBox {
+    height: 5px; 
+    background-color: #ccc; 
+    margin-top: 10px;
+}
+#healthWrapper {
+    position: relative;
+}
+#dialogueWrapper {
+    background-color: white; 
+    height: 140px; 
+    position: absolute; 
+    bottom: 0; right: 0; left: 0; 
+    border-top: 4px solid black; 
+    display: flex;
+}
+#dialogueBox {
+    position:absolute; 
+    top: 0; right: 0; bottom: 0; left: 0; 
+    background: white; 
+    padding: 12px; 
+    display: none; 
+    cursor: pointer;
+}
+#attacksBox {
+    width: 66.66%; 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+}
+#attackTypeWrapper {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 33.33%; 
+    border-left: 4px solid black;
+}
+#attackType {
+    font-size: 16px;
+}
