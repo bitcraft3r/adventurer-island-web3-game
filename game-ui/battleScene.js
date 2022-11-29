@@ -7,10 +7,14 @@ const emby = new Monster(monsters.Emby);
 
 const renderedSprites = [draggle, emby];
 
-// populate attacksBox dynamically with player's available attacks
-const button = document.createElement('button');
-button.innerHTML = 'Fireball';
-document.querySelector("#attacksBox").append(button);
+emby.attacks.forEach(attack => {
+    // populate attacksBox dynamically with player's available attacks
+    const button = document.createElement('button');
+    button.innerHTML = attack.name;
+    document.querySelector("#attacksBox").append(button);
+
+})
+
 
 function animateBattle() {
     window.requestAnimationFrame(animateBattle);
