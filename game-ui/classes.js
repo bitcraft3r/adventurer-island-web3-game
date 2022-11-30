@@ -61,6 +61,7 @@ class Adventurer {
             defence: 1,
             xp: 0,
             hp: 100,
+            level: 1,
         };
         this.class = "";
         this.bag = {};

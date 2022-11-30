@@ -62,11 +62,14 @@ function initBattle() {
                 renderedSprites
             })
 
+            // IF PLAYER WINS THE BATTLE
             if (enemy.health <= 0) {
                 // handle drops
                 let newKey = enemy.drops[0];
-                if (!adv.bag[`${newKey}`]) adv.bag[`${newKey}`] = 0; // if no such key, initiate it
-                adv.bag[`${newKey}`] += 1;
+                if (Math.random() < 0.75) {
+                    if (!adv.bag[`${newKey}`]) adv.bag[`${newKey}`] = 0; // if no such key, initiate it
+                    adv.bag[`${newKey}`] += 1; // 75% chance to get normal drop
+                }
 
                 // handle rare drops
                 let newKeyRare = enemy.rareDrops[0];
@@ -83,10 +86,17 @@ function initBattle() {
                 adv.gold += enemy.gold - Math.floor(Math.random() * enemy.gold/4); // e.g. minus (up to ~25%)
                 document.querySelector("#goldOverlay").innerHTML = `GOLD: ${adv.gold}`;
 
-                // handle XP
+                // handle XP gained
                 adv.attr.xp += enemy.xp;
-                document.querySelector("#xpOverlay").innerHTML = `XP: ${adv.attr.xp}`;
 
+                // handle leveling up
+                if (adv.attr.xp >= 30 && adv.attr.xp < 80) adv.attr.level = 2;
+                else if (adv.attr.xp >= 80 && adv.attr.xp < 150) adv.attr.level = 3;
+                else if (adv.attr.xp >= 150 && adv.attr.xp < 250) adv.attr.level = 4;
+                else if (adv.attr.xp >= 250) adv.attr.level = 5;
+
+                // display LEVEL and XP
+                document.querySelector("#xpOverlay").innerHTML = `LEVEL: ${adv.attr.level} (${adv.attr.xp} XP)`;
 
                 queue.push(()=>{
                 enemy.faint();
@@ -107,6 +117,8 @@ function initBattle() {
                     })
                 })
             }
+
+
 
             // enemy attacks
             const randomAttack = enemy.attacks[Math.floor(Math.random() * enemy.attacks.length)];
