@@ -5,6 +5,10 @@ const attacks = {
         // type: 'Normal',
         // color: 'black'
     },
+    Lucky: {
+        name: 'Lucky',
+        damage: 5,
+    },
     Tackle: {
         name: 'Tackle',
         damage: 10,

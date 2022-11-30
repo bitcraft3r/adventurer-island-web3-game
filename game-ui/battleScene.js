@@ -9,15 +9,42 @@ let battleAnimationId;
 let queue;
 
 let randomMonster = () => {
-    if (Math.random() < 0.33) {
-        document.querySelector("#enemyName").innerHTML = "Draggle"
-        return monsters.Draggle;
-    } else if (Math.random() > 0.33) {
+    if (adv.attr.level === 1){
         document.querySelector("#enemyName").innerHTML = "Momo"
         return monsters.Momo;
-    } else {
-        document.querySelector("#enemyName").innerHTML = "Emby"
-        return monsters.Emby;
+    }
+    else if (adv.attr.level === 2){
+        if (Math.random() < 0.4) {
+            document.querySelector("#enemyName").innerHTML = "Momo"
+            return monsters.Momo;
+        } else {
+            document.querySelector("#enemyName").innerHTML = "Draggle"
+            return monsters.Draggle;
+        }
+    }
+    else if (adv.attr.level === 3){
+        if (Math.random() < 0.35) {
+            document.querySelector("#enemyName").innerHTML = "Momo"
+            return monsters.Momo;
+        } else if (Math.random() > 0.6) {
+            document.querySelector("#enemyName").innerHTML = "Draggle"
+            return monsters.Draggle;
+        } else {
+            document.querySelector("#enemyName").innerHTML = "Emby"
+            return monsters.Emby;
+        }
+    }
+    else if (adv.attr.level > 3){
+        if (Math.random() < 0.2) {
+            document.querySelector("#enemyName").innerHTML = "Momo"
+            return monsters.Momo;
+        } else if (Math.random() > 0.7) {
+            document.querySelector("#enemyName").innerHTML = "Draggle"
+            return monsters.Draggle;
+        } else {
+            document.querySelector("#enemyName").innerHTML = "Emby"
+            return monsters.Emby;
+        }
     }
 }
 

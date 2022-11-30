@@ -90,6 +90,19 @@ class Monster extends Sprite {
         let healthBar = "#enemyHealthBar";
         if (this.isEnemy) healthBar = '#playerHealthBar';
 
+
+
+        if (attack.name === "Lucky"){
+            // randomize damage of lucky attack
+            let thisAttackDamageLucky;
+            if (Math.random() < 0.5) thisAttackDamageLucky = adv.attr.damage * 2;
+            else thisAttackDamageLucky = Math.floor(adv.attr.damage / 2);
+    
+            // set damage of player's lucky attack
+            attack.damage = thisAttackDamageLucky;
+        }
+
+
         // handle attack damage
         if (this.isEnemy) { // logic for enemy attacks player
             recipient.health -= attack.damage - adv.attr.defence;
@@ -172,6 +185,39 @@ class Monster extends Sprite {
                     x: this.position.x - movementDistance3,
                 }).to(this.position, {
                     x: this.position.x + movementDistance3*2,
+                    duration: 0.1,
+                    onComplete: () => {
+                        // Enemy actually gets hit
+                        audio.tackleHit.play();
+                        gsap.to(healthBar, {
+                            width: recipient.health + "%"
+                        })
+                        gsap.to(recipient.position, {
+                            x: recipient.position.x + 10,
+                            yoyo: true,
+                            repeat: 5,
+                            duration: 0.08,
+                        })
+                        gsap.to(recipient, {
+                            opacity: 0,
+                            repeat: 5,
+                            yoyo: true,
+                            duration: 0.08
+                        })
+                    }
+                }).to(this.position, {
+                    x: this.position.x,
+                })
+            break;
+            case 'Lucky':
+                const tl4 = gsap.timeline();
+                let movementDistance4 = 20;
+                if (this.isEnemy) movementDistance4 = -20;
+
+                tl4.to(this.position, {
+                    x: this.position.x - movementDistance4,
+                }).to(this.position, {
+                    x: this.position.x + movementDistance4*2,
                     duration: 0.1,
                     onComplete: () => {
                         // Enemy actually gets hit

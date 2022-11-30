@@ -5,7 +5,7 @@ const monsters = {
         frames: {max:4, hold:20}, 
         animate: true, 
         name:"Adventurer",
-        attacks: [attacks.Brawl]
+        attacks: [attacks.Brawl, attacks.Lucky]
     },
     Momo: {
         position: {x:800, y:100}, 
