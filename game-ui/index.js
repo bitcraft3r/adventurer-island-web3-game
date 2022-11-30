@@ -301,8 +301,7 @@ document.querySelector("#heroButton").addEventListener("click", ()=>{
     document.querySelector("#startScreen2").style.display = 'none';
 
     let advName = document.getElementById("chooseName").value;
-    let inputClass = document.getElementById("chooseClass").value;
-    document.querySelector("#nameOverlay").innerHTML = `${advName} (${inputClass})`;
+    document.querySelector("#nameOverlay").innerHTML = `${advName}`;
     
     // get NFT data // also add default values(random) if no nft selected
     let advStr = 6;
@@ -313,13 +312,6 @@ document.querySelector("#heroButton").addEventListener("click", ()=>{
     adv = new Adventurer(advName, advStr, advAgi, advWis);
     
     console.log(adv);
-    
-    adv.class = inputClass;
-
-// set adventurer attr.damage
-if (adv.class === "Warrior") adv.attr.damage += adv.attr.strength;
-else if (adv.class === "Archer") adv.attr.damage += adv.attr.agility;
-else if (adv.class === "Wizard") adv.attr.damage += adv.attr.wisdom;
 
 // set player attacks damage
 attacks.Brawl.damage = adv.attr.damage;
@@ -372,6 +364,77 @@ document.querySelector("#showNfts").addEventListener("click", (e)=>{
 document.querySelector("#levelUpButton").addEventListener("click", ()=>{
     // close levelUpOverlay
     document.querySelector("#levelUpOverlay").style.display = 'none';
+
     // update stats
-    // e.g. for level 2: select class, for level 3: add stats
+
+    // e.g. for level 2: select class
+    if (adv.attr.level === 2){
+        console.log(`before attributes is ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
+        console.log(`before damage is ${adv.attr.damage}`);
+
+        let inputClass = document.getElementById("chooseClass").value;
+        adv.class = inputClass;
+        document.querySelector("#nameOverlay").innerHTML = `${adv.name} (${inputClass})`;
+        // set adventurer attr.damage
+        if (adv.class === "Warrior"){
+            adv.attr.strength += 1;
+            adv.attr.damage += adv.attr.strength/2;
+        } 
+        else if (adv.class === "Archer"){
+            adv.attr.agility += 1;
+            adv.attr.damage += adv.attr.agility/2;
+        } 
+        else if (adv.class === "Wizard"){
+            adv.attr.wisdom += 1;
+            adv.attr.damage += adv.attr.wisdom/2;
+        } 
+
+        console.log(`new attributes is ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
+        console.log(`new damage is ${adv.attr.damage}`);
+    }
+    
+    // for level 3++: add stats
+    if (adv.attr.level >= 3){
+        console.log(`before attributes is ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
+        console.log(`before damage is ${adv.attr.damage}`);
+
+        let strToAdd = Number(document.querySelector("#addStr").value);
+        let agiToAdd = Number(document.querySelector("#addAgi").value);
+        let wisToAdd = Number(document.querySelector("#addWis").value);
+        console.log(strToAdd, agiToAdd, wisToAdd);
+        // increase adventurer attributes
+        adv.attr.strength += strToAdd;
+        adv.attr.agility += agiToAdd;
+        adv.attr.wisdom += wisToAdd;
+        // increase adv damage
+        if (adv.class === "Warrior"){
+            adv.attr.damage += strToAdd/2;
+        } 
+        else if (adv.class === "Archer"){
+            adv.attr.damage += agiToAdd/2;
+        } 
+        else if (adv.class === "Wizard"){
+            adv.attr.damage += wisToAdd/2;
+        } 
+        
+        console.log(`new attributes is ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
+        console.log(`new damage is ${adv.attr.damage}`);
+    }
+
+    if (adv.attr.level === 4){
+        let inputWeapon = document.getElementById("equipWeapon").value;
+        if (inputWeapon !== `none`){
+            adv.gear[`${inputWeapon}`] = 1; // add weapon to gear
+            adv.bag[`${inputWeapon}`] -= 1; // deduct 1 from bag
+            console.log(`attached gear ${adv.gear}`)
+            adv.attr.damage += 3;
+            console.log(`increase dmg by 3, total dmg now ${adv.attr.damage}`)
+        }
+
+        console.log(`after LV 4 EQUIP WEAPON:`)
+        console.log(`new attributes is ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
+        console.log(`new damage is ${adv.attr.damage}`);
+    }
+
+    // document.querySelector(#)
 })

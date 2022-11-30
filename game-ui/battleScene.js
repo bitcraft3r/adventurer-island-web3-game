@@ -76,11 +76,12 @@ function initBattle() {
         // populate attacksBox dynamically with player's available attacks
         const button = document.createElement('button');
         button.innerHTML = attack.name;
+        button.setAttribute("id", "fightButton");
         document.querySelector("#attacksBox").append(button);
     })
 
     // event listeners related to battle
-    document.querySelectorAll("button").forEach((button) => {
+    document.querySelectorAll("#fightButton").forEach((button) => {
         button.addEventListener("click", (e)=>{
             const selectedAttack = attacks[e.currentTarget.innerHTML];
             fighter.attack({ 
@@ -166,7 +167,7 @@ function initBattle() {
                                         </select>
                                     </div>
                                     `;
-                                } else if (levelAfter === 3){
+                                } else if (levelAfter >= 3){
                                     document.querySelector("#levelUpText").innerHTML =`
                                     <div id="addStatsBox">Increase Attributes with Stats Points:
                                         <div id="chooseStats">
@@ -176,6 +177,79 @@ function initBattle() {
                                         </div>
                                     </div>
                                     `;
+                                } 
+                                
+                                if (levelAfter === 4){
+                                    if (adv.class === "Warrior" && adv.bag.sword > 0){
+                                        document.querySelector("#levelUpText").innerHTML =`
+                                            <div id="addStatsBox">Increase Attributes with Stats Points:
+                                                <div id="chooseStats">
+                                                    <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0>
+                                                    <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0>
+                                                    <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0>
+                                                </div>
+                                            </div>
+                                            <div id="equipWeaponBox">
+                                                <select id="equipWeapon">
+                                                    <option value="sword">Sword: (${adv.bag.sword}})</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            `;
+                                    }
+                                    else if (adv.class === "Archer" && adv.bag.bow > 0){
+                                        document.querySelector("#levelUpText").innerHTML =`
+                                        <div id="addStatsBox">Increase Attributes with Stats Points:
+                                            <div id="chooseStats">
+                                                <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0>
+                                                <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0>
+                                                <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0>
+                                            </div>
+                                        </div>
+                                        <div id="equipWeaponBox">
+                                            <select id="equipWeapon">
+                                                <option value="bow">Bow: (${adv.bag.bow}})</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        `;
+                                    }
+                                    else if (adv.class === "Wizard" && adv.bag.wand > 0){
+                                        document.querySelector("#levelUpText").innerHTML =`
+                                        <div id="addStatsBox">Increase Attributes with Stats Points:
+                                            <div id="chooseStats">
+                                                <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0>
+                                                <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0>
+                                                <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0>
+                                            </div>
+                                        </div>
+                                        <div id="equipWeaponBox">
+                                            <select id="equipWeapon">
+                                                <option value="wand">Wand: (${adv.bag.wand}})</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        `;
+                                    } 
+                                    else {
+                                        document.querySelector("#levelUpText").innerHTML =`
+                                            <div id="addStatsBox">Increase Attributes with Stats Points:
+                                                <div id="chooseStats">
+                                                    <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0>
+                                                    <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0>
+                                                    <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0>
+                                                </div>
+                                            </div>
+                                            <div id="equipWeaponBox">
+                                                <select id="equipWeapon">
+                                                    <option value="none">None</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            `;
+                                    }
+
+
                                 }
                             }
                         }

@@ -57,7 +57,7 @@ class Adventurer {
             agility: agi,
             wisdom: wis,
             luck: Math.floor(Math.random()*10) + 1,
-            damage: 5,
+            damage: 10,
             defence: 1,
             xp: 0,
             hp: 100,
@@ -90,8 +90,14 @@ class Monster extends Sprite {
         let healthBar = "#enemyHealthBar";
         if (this.isEnemy) healthBar = '#playerHealthBar';
 
+        // UPDATE ATTACKS DAMAGE
 
+        // UPDATE DAMAGE FOR "Brawl"
+        if (attack.name === "Brawl"){
+            attack.damage = Math.floor(adv.attr.damage);
+        }
 
+        // UPDATE DAMAGE FOR "Lucky"
         if (attack.name === "Lucky"){
             // randomize damage of lucky attack
             let thisAttackDamageLucky;
@@ -128,7 +134,7 @@ class Monster extends Sprite {
 
         // push text to BATTLE LOG after attack is done
         let node = document.createElement("h6");
-        let textnode = document.createTextNode(`${this.name} used ${attack.name}! ${recipient.name} has ${recipient.health}HP left.`);
+        let textnode = document.createTextNode(`${this.name} used ${attack.name} and did ${attack.damage}DMG! ${recipient.name} has ${recipient.health}HP left.`);
         node.appendChild(textnode);
         document.getElementById("battleLogItems").appendChild(node); // https://www.w3schools.com/jsref/met_node_appendchild.asp
 
