@@ -369,9 +369,6 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
 
     // e.g. for level 2: select class
     if (adv.attr.level === 2){
-        console.log(`before attributes is ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
-        console.log(`before damage is ${adv.attr.damage}`);
-
         let inputClass = document.getElementById("chooseClass").value;
         adv.class = inputClass;
         document.querySelector("#nameOverlay").innerHTML = `${adv.name} (${inputClass})`;
@@ -389,14 +386,13 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
             adv.attr.damage += adv.attr.wisdom/2;
         } 
 
-        console.log(`new attributes is ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
-        console.log(`new damage is ${adv.attr.damage}`);
+        console.log(`Selected Class: ${adv.class}. Added +1 to class' primary STAT`);
+        console.log(`new attributes are ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
+        console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
     }
     
     // for level 3++: add stats
     if (adv.attr.level >= 3){
-        console.log(`before attributes is ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
-        console.log(`before damage is ${adv.attr.damage}`);
 
         let strToAdd = Number(document.querySelector("#addStr").value);
         let agiToAdd = Number(document.querySelector("#addAgi").value);
@@ -417,8 +413,9 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
             adv.attr.damage += wisToAdd/2;
         } 
         
-        console.log(`new attributes is ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
-        console.log(`new damage is ${adv.attr.damage}`);
+        console.log(`ADDED ${strToAdd}STR, ${agiToAdd}AGI, ${wisToAdd}WIS`);
+        console.log(`new attributes are ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
+        console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
     }
 
     if (adv.attr.level === 4){
@@ -432,9 +429,13 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
         }
 
         console.log(`after LV 4 EQUIP WEAPON:`)
-        console.log(`new attributes is ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
-        console.log(`new damage is ${adv.attr.damage}`);
+        console.log(`new attributes are ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
+        console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
     }
 
-    // document.querySelector(#)
+    if (adv.attr.level === 5){
+        // add a skill
+        // monsters.Advsdenturer.attacks.push(attacks.NewAttackName)
+    }
+
 })

@@ -104,6 +104,7 @@ function initBattle() {
                 if (Math.random() < 0.2) {
                     if (!adv.bag[`${newKeyRare}`]) adv.bag[`${newKeyRare}`] = 0; 
                     adv.bag[`${newKeyRare}`] += 1; // 20% chance to get rare drop
+                    console.log(`you found a rare item (${newKeyRare})!`)
                 }
 
                 // show on UI
@@ -191,7 +192,7 @@ function initBattle() {
                                             </div>
                                             <div id="equipWeaponBox">
                                                 <select id="equipWeapon">
-                                                    <option value="sword">Sword: (${adv.bag.sword}})</option>
+                                                    <option value="sword">Sword: (${adv.bag.sword})</option>
                                                 </select>
                                                 </div>
                                             </div>
@@ -208,7 +209,7 @@ function initBattle() {
                                         </div>
                                         <div id="equipWeaponBox">
                                             <select id="equipWeapon">
-                                                <option value="bow">Bow: (${adv.bag.bow}})</option>
+                                                <option value="bow">Bow: (${adv.bag.bow})</option>
                                             </select>
                                             </div>
                                         </div>
@@ -225,7 +226,7 @@ function initBattle() {
                                         </div>
                                         <div id="equipWeaponBox">
                                             <select id="equipWeapon">
-                                                <option value="wand">Wand: (${adv.bag.wand}})</option>
+                                                <option value="wand">Wand: (${adv.bag.wand})</option>
                                             </select>
                                             </div>
                                         </div>
