@@ -73,6 +73,7 @@ class Monster extends Sprite {
     constructor({ position, image, frames = {max:1, hold:10}, sprites, animate=false, rotation=0, isEnemy=false, name, attacks, xp, drops, rareDrops, gold }) {
         super({ position, image, frames, sprites, animate, rotation });
         this.health = 100;
+        this.healthMax = 100;
         this.isEnemy = isEnemy;
         this.name = name;
         this.attacks = attacks;
@@ -105,11 +106,11 @@ class Monster extends Sprite {
         let showFighterHealth;
         if (fighter.health < 0) showFighterHealth = 0;
         else showFighterHealth = fighter.health;
-        document.querySelector("#playerHP").innerHTML = `HP: ${showFighterHealth}/${"100"}`;
+        document.querySelector("#playerHP").innerHTML = `HP: ${showFighterHealth}/${this.healthMax}`;
         let showEnemyHealth;
         if (enemy.health < 0) showEnemyHealth = 0;
         else showEnemyHealth = enemy.health;
-        document.querySelector("#enemyHP").innerHTML = `HP: ${showEnemyHealth}/${"100"}`;
+        document.querySelector("#enemyHP").innerHTML = `HP: ${showEnemyHealth}/${enemy.healthMax}`;
 
         // push text to BATTLE LOG after attack is done
         let node = document.createElement("h6");

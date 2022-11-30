@@ -42,8 +42,8 @@ function initBattle() {
     fighter.name = adv.name;
 
     // show HP of adv & monster for start of game
-    document.querySelector("#playerHP").innerHTML = `HP: ${fighter.health}/${"100"}`; 
-    document.querySelector("#enemyHP").innerHTML = `HP: ${enemy.health}/${"100"}`;
+    document.querySelector("#playerHP").innerHTML = `HP: ${fighter.health}/${fighter.healthMax}`; 
+    document.querySelector("#enemyHP").innerHTML = `HP: ${enemy.health}/${enemy.healthMax}`;
 
     fighter.attacks.forEach(attack => {
         // populate attacksBox dynamically with player's available attacks
