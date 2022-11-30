@@ -28,10 +28,22 @@ function initBattle() {
     document.querySelector("#playerHealthBar").style.width = "100%";
     document.querySelector("#attacksBox").replaceChildren();
 
+    // set fight scene's player name as the Adventurer name
+    document.querySelector("#playerName").innerHTML = adv.name;
+
+    // clear/reset log
+    document.querySelector("#battleLogItems").replaceChildren();
+
+    
     enemy = new Monster(randomMonster());
     fighter = new Monster(monsters.Adventurer);
     renderedSprites = [fighter, enemy];
     queue = [];
+    fighter.name = adv.name;
+
+    // show HP of adv & monster for start of game
+    document.querySelector("#playerHP").innerHTML = `HP: ${fighter.health}/${"100"}`; 
+    document.querySelector("#enemyHP").innerHTML = `HP: ${enemy.health}/${"100"}`;
 
     fighter.attacks.forEach(attack => {
         // populate attacksBox dynamically with player's available attacks
@@ -126,11 +138,6 @@ function initBattle() {
                     })
                 }
             })
-        })
-        button.addEventListener("mouseenter", (e) => {
-            const selectedAttack = attacks[e.currentTarget.innerHTML];
-            document.querySelector("#attackType").innerHTML = selectedAttack.type;
-            document.querySelector("#attackType").style.color = selectedAttack.color;
         })
     })
 

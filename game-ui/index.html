@@ -28,7 +28,7 @@
         <div id="startScreen2">
             <img src="img/startScreen2.png" alt="">
 
-            <div id="nameBox">Name: <input id="chooseName"></div>
+            <div id="nameBox">Name: <input id="chooseName" value="Anon"></div>
 
             <div id="classBox">Select Class:
                 <select id="chooseClass">
@@ -66,6 +66,7 @@
             <!-- enemy health bar -->
             <div id="enemyHealthBox">
                 <h3 id="enemyName">Draggle</h3>
+                <h5 id="enemyHP">HP: 100/100</h5>
                 <div id="healthWrapper">
                     <div id="greyBox"></div>
                     <div id="enemyHealthBar"></div>
@@ -75,6 +76,7 @@
             <!-- player health bar -->
             <div id="playerHealthBox">
                 <h3 id="playerName">Adventurer</h3>
+                <h5 id="playerHP">HP: 100/100</h5>
                 <div id="healthWrapper">
                     <div id="greyBox"></div>
                     <div id="playerHealthBar"></div>
@@ -85,8 +87,14 @@
                 <div id="dialogueBox">Placeholder for Dialogue Box</div>
                 <div id="attacksBox">
                 </div>
-                <div id="attackTypeWrapper">
-                    <h3 id="attackType">Attack Type</h3>
+                <div id="logWrapper">
+                    <h3 id="battleLog">Battle Log</h3>
+                    <div id="battleLogItems">
+                        <!-- 
+                            TODO: if too many lines of text, it should not go out of logWrapper container.
+                            Scrollable.
+                        -->
+                    </div>
                 </div>
             </div>
 

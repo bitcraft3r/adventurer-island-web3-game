@@ -105,7 +105,7 @@ span {
     top: 50px; left: 50px; 
 }
 #playerHealthBox {
-    top: 330px; right: 50px;
+    top: 300px; right: 50px;
 }
 #enemyName, #playerName {
     font-size: 16px
@@ -145,13 +145,20 @@ span {
     display: grid; 
     grid-template-columns: repeat(2, 1fr);
 }
-#attackTypeWrapper {
-    display: flex; 
+#logWrapper {
+    /* display: flex; 
     align-items: center; 
-    justify-content: center; 
-    width: 33.33%; 
+    justify-content: center;  */
+    width: 50%; 
     border-left: 4px solid black;
 }
-#attackType {
-    font-size: 16px;
+#battleLog {
+    text-decoration: underline;
+    margin: 10px;
+    font-size: 12px;
+}
+h6 {
+    margin: 5px;
+    margin-left: 10px;
+    font-size: 10px;
 }

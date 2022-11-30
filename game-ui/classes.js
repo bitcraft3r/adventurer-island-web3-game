@@ -83,7 +83,7 @@ class Monster extends Sprite {
     }
     attack({attack, recipient, renderedSprites}){
         document.querySelector("#dialogueBox").style.display = 'block';
-        document.querySelector("#dialogueBox").innerHTML = `${this.name} used ${attack.name}!`
+        document.querySelector("#dialogueBox").innerHTML = `${this.name} used ${attack.name}!`;
 
         let healthBar = "#enemyHealthBar";
         if (this.isEnemy) healthBar = '#playerHealthBar';
@@ -101,6 +101,23 @@ class Monster extends Sprite {
             
         } 
 
+        // update HP of adv & monster after each attack
+        let showFighterHealth;
+        if (fighter.health < 0) showFighterHealth = 0;
+        else showFighterHealth = fighter.health;
+        document.querySelector("#playerHP").innerHTML = `HP: ${showFighterHealth}/${"100"}`;
+        let showEnemyHealth;
+        if (enemy.health < 0) showEnemyHealth = 0;
+        else showEnemyHealth = enemy.health;
+        document.querySelector("#enemyHP").innerHTML = `HP: ${showEnemyHealth}/${"100"}`;
+
+        // push text to BATTLE LOG after attack is done
+        let node = document.createElement("h6");
+        let textnode = document.createTextNode(`${this.name} used ${attack.name}! ${recipient.name} has ${recipient.health}HP left.`);
+        node.appendChild(textnode);
+        document.getElementById("battleLogItems").appendChild(node); // https://www.w3schools.com/jsref/met_node_appendchild.asp
+
+        // handle rotation of fireball
         let rotation = 1;
         if (this.isEnemy) rotation = -3;
 
