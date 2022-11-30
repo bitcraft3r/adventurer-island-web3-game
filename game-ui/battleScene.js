@@ -29,7 +29,7 @@ function initBattle() {
     document.querySelector("#attacksBox").replaceChildren();
 
     enemy = new Monster(randomMonster());
-    fighter = new Monster(monsters.Fighter);
+    fighter = new Monster(monsters.Adventurer);
     renderedSprites = [fighter, enemy];
     queue = [];
 
@@ -58,8 +58,10 @@ function initBattle() {
 
                 // handle rare drops
                 let newKeyRare = enemy.rareDrops[0];
-                if (!adv.bag[`${newKeyRare}`]) adv.bag[`${newKeyRare}`] = 0; 
-                if (Math.random() < 0.2) adv.bag[`${newKeyRare}`] += 1; // 20% chance to get rare drop
+                if (Math.random() < 0.2) {
+                    if (!adv.bag[`${newKeyRare}`]) adv.bag[`${newKeyRare}`] = 0; 
+                    adv.bag[`${newKeyRare}`] += 1; // 20% chance to get rare drop
+                }
 
                 // show on UI
                 document.querySelector("#itemOverlay").innerHTML = `ITEMS: [x]`;

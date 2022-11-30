@@ -1,10 +1,10 @@
 const monsters = {
-    Fighter: {
+    Adventurer: {
         position: {x:260, y:280}, 
         image: {src: "./img/playerBattle.png"}, 
         frames: {max:4, hold:20}, 
         animate: true, 
-        name:"Fighter",
+        name:"Adventurer",
         attacks: [attacks.Tackle, attacks.Fireball]
     },
     Emby: {
