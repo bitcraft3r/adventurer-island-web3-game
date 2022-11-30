@@ -58,7 +58,7 @@ class Adventurer {
             wisdom: wis,
             luck: Math.floor(Math.random()*10) + 1,
             damage: 5,
-            defence: 0,
+            defence: 1,
             xp: 0,
             hp: 100,
         };
@@ -87,10 +87,24 @@ class Monster extends Sprite {
 
         let healthBar = "#enemyHealthBar";
         if (this.isEnemy) healthBar = '#playerHealthBar';
-        recipient.health -= attack.damage;
+
+        // handle attack damage
+        if (this.isEnemy) { // logic for enemy attacks player
+            recipient.health -= attack.damage - adv.attr.defence;
+            // TODO
+            // add chance to evade attack
+        } 
+        else { // logic for player attacks enemy
+            recipient.health -= attack.damage; 
+            // TODO
+            // add critical damage chance
+            
+        } 
+
         let rotation = 1;
         if (this.isEnemy) rotation = -3;
 
+        // handle attack animations
         switch (attack.name) {
             case 'Fireball':
                 audio.initFireball.play();
@@ -128,6 +142,39 @@ class Monster extends Sprite {
                         })
                         renderedSprites.splice(1, 1);
                     }
+                })
+            break;
+            case 'Brawl':
+                const tl3 = gsap.timeline();
+                let movementDistance3 = 20;
+                if (this.isEnemy) movementDistance3 = -20;
+
+                tl3.to(this.position, {
+                    x: this.position.x - movementDistance3,
+                }).to(this.position, {
+                    x: this.position.x + movementDistance3*2,
+                    duration: 0.1,
+                    onComplete: () => {
+                        // Enemy actually gets hit
+                        audio.tackleHit.play();
+                        gsap.to(healthBar, {
+                            width: recipient.health + "%"
+                        })
+                        gsap.to(recipient.position, {
+                            x: recipient.position.x + 10,
+                            yoyo: true,
+                            repeat: 5,
+                            duration: 0.08,
+                        })
+                        gsap.to(recipient, {
+                            opacity: 0,
+                            repeat: 5,
+                            yoyo: true,
+                            duration: 0.08
+                        })
+                    }
+                }).to(this.position, {
+                    x: this.position.x,
                 })
             break;
             case 'Tackle':

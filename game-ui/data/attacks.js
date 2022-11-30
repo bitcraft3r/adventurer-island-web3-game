@@ -1,4 +1,10 @@
 const attacks = {
+    Brawl: {
+        name: 'Brawl',
+        damage: 10,
+        type: 'Normal',
+        color: 'black'
+    },
     Tackle: {
         name: 'Tackle',
         damage: 10,

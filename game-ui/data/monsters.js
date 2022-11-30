@@ -5,7 +5,7 @@ const monsters = {
         frames: {max:4, hold:20}, 
         animate: true, 
         name:"Adventurer",
-        attacks: [attacks.Tackle, attacks.Fireball]
+        attacks: [attacks.Brawl, attacks.Fireball]
     },
     Emby: {
         position: {x:800, y:100}, 

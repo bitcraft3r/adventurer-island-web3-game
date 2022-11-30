@@ -315,6 +315,14 @@ document.querySelector("#heroButton").addEventListener("click", ()=>{
     console.log(adv);
     
     adv.class = inputClass;
+
+// set adventurer attr.damage
+if (adv.class === "Warrior") adv.attr.damage += adv.attr.strength;
+else if (adv.class === "Archer") adv.attr.damage += adv.attr.agility;
+else if (adv.class === "Wizard") adv.attr.damage += adv.attr.wisdom;
+
+// set player attacks damage
+attacks.Brawl.damage = adv.attr.damage;
     
 } )
 
