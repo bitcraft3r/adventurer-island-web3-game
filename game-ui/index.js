@@ -294,14 +294,28 @@ document.querySelector("#startButton").addEventListener("click", ()=>{
     document.querySelector("#startScreen").style.display = 'none';
 } )
 
+let adv;
+
 // Character screen click to continue
 document.querySelector("#heroButton").addEventListener("click", ()=>{
     document.querySelector("#startScreen2").style.display = 'none';
 
-    let inputName = document.getElementById("chooseName").value;
+    let advName = document.getElementById("chooseName").value;
     let inputClass = document.getElementById("chooseClass").value;
-    document.querySelector("#nameOverlay").innerHTML = `${inputName} (${inputClass})`;
-    player.gameClass = inputClass;
+    document.querySelector("#nameOverlay").innerHTML = `${advName} (${inputClass})`;
+    
+    // get NFT data // also add default values(random) if no nft selected
+    let advStr = 6;
+    let advAgi = 5;
+    let advWis = 5;
+    
+    // create new Adventurer player
+    adv = new Adventurer(advName, advStr, advAgi, advWis);
+    
+    console.log(adv);
+    
+    adv.class = inputClass;
+    
 } )
 
 // (load and) show NFTs

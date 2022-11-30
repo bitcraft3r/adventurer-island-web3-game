@@ -12,10 +12,10 @@ class Sprite {
         this.sprites = sprites;
         this.opacity = 1;
         this.rotation = rotation;
-        this.xp = 0;
-        this.bag = [];
-        this.gold = 0;
-        this.gameClass = "";
+        // this.xp = 0;
+        // this.bag = [];
+        // this.gold = 0;
+        // this.gameClass = "";
     }
     draw(){
         c.save();
@@ -46,6 +46,26 @@ class Sprite {
             if (this.frames.val < this.frames.max-1) this.frames.val++;
             else this.frames.val = 0;
         }
+    }
+}
+
+class Adventurer {
+    constructor(name, str, agi, wis){
+        this.name = name;
+        this.attr = {
+            strength: str,
+            agility: agi,
+            wisdom: wis,
+            luck: Math.floor(Math.random()*10) + 1,
+            damage: 5,
+            defence: 0,
+            xp: 0,
+            hp: 100,
+        };
+        this.class = "";
+        this.bag = {};
+        this.gold = 0;
+        this.gear = {};
     }
 }
 

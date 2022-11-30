@@ -52,17 +52,24 @@ function initBattle() {
 
             if (enemy.health <= 0) {
                 // handle drops
-                player.bag.push(enemy.drops[0]);
-                if (Math.random() < 0.2) player.bag.push(enemy.rareDrops[0]); // rare item
-                document.querySelector("#itemOverlay").innerHTML = `ITEMS: ${player.bag.length}`;
+                let newKey = enemy.drops[0];
+                if (!adv.bag[`${newKey}`]) adv.bag[`${newKey}`] = 0; // if no such key, initiate it
+                adv.bag[`${newKey}`] += 1;
+
+                // handle rare drops
+                // if (Math.random() < 0.2) player.bag.push(enemy.rareDrops[0]);
+
+                // show on UI
+                document.querySelector("#itemOverlay").innerHTML = `ITEMS: [x]`;
+                // TODO: show obj length? https://stackoverflow.com/a/6700
 
                 // handle gold
-                player.gold += enemy.gold - Math.floor(Math.random() * enemy.gold/4); // e.g. minus (up to ~25%)
-                document.querySelector("#goldOverlay").innerHTML = `GOLD: ${player.gold}`;
+                adv.gold += enemy.gold - Math.floor(Math.random() * enemy.gold/4); // e.g. minus (up to ~25%)
+                document.querySelector("#goldOverlay").innerHTML = `GOLD: ${adv.gold}`;
 
                 // handle XP
-                player.xp += enemy.xp;
-                document.querySelector("#xpOverlay").innerHTML = `XP: ${player.xp}`;
+                adv.attr.xp += enemy.xp;
+                document.querySelector("#xpOverlay").innerHTML = `XP: ${adv.attr.xp}`;
 
 
                 queue.push(()=>{
