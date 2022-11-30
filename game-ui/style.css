@@ -84,7 +84,7 @@ span {
 }
 #userNft { /* TODO: FIX NFT GALLERY CSS */
     border: #232323 solid 2px;
-    background: black;
+    background: #ddd;
 }
 #nftScreenButton {
     position: absolute;

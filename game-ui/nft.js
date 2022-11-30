@@ -48,10 +48,10 @@ const main = async () => {
 }
 
 function createElement(token){
-    return `<div class="userNft" style="border: #232323 solid 2px; padding: 5px; margin: 5px">
-    <h4 class="userNftName">${token.metadata.name}</h4>
+    return `<div id="userNft" style="border: #232323 solid 2px; padding: 5px; margin: 5px">
+    <h4 id="userNftName">${token.metadata.name}</h4>
     <img src="${token.metadata.image}" alt="" width="200">
-    <div class="userNftAttr" style="font-size: 12px;">
+    <div id="userNftAttr" style="font-size: 12px;">
         <div>Strength: ${token.metadata.attributes[0].value}</div>
         <div>Agility: ${token.metadata.attributes[1].value}</div>
         <div>Wisdom: ${token.metadata.attributes[2].value}</div>

@@ -316,4 +316,31 @@ document.querySelector("#nftScreenButton").addEventListener("click", ()=>{
     document.querySelector("#nftScreen").style.display = "none";
 })
 
-// TODO: User SELECT nft, to be used to create character
+// User SELECT nft, to be used to create character
+/** TODO: FIX - CAN'T ATTACH EVENTLISTENER ON THE NEWLY LOADED NFTS */
+// https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+// https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Synchronous_and_Asynchronous_Requests
+
+// I WANT TO:
+// attach eventListener on the newly loaded "#userNft", not it's parent #showNfts
+// so that I can find data in the children:
+// a) userNftName
+// b) userNftAttr - str, agi, wis
+
+document.querySelector("#showNfts").addEventListener("click", (e)=>{
+// unable select ("#userNft"), because this does not exist on page load.
+    // console.log(e.currentTarget); // currentTarget == showNfts
+    console.log(e.target); // target == the element that's clicked
+
+    // ** i want to make it so currentTarget gets me #userNft
+
+    document.querySelector("#selectedNft").innerHTML = `
+    <h4>Selected Adventurer:</h4>
+    <div>
+        <p>ID: Adventurer #???</p>
+        <p>STR: <span id="selectStr">${1}</span></p>
+        <p>AGI: <span id="selectAgi">${1}</span></p>
+        <p>WIS: <span id="selectWis">${1}</span></p>
+    </div>
+    `;
+})
