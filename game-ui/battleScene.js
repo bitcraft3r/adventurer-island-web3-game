@@ -57,7 +57,9 @@ function initBattle() {
                 adv.bag[`${newKey}`] += 1;
 
                 // handle rare drops
-                // if (Math.random() < 0.2) player.bag.push(enemy.rareDrops[0]);
+                let newKeyRare = enemy.rareDrops[0];
+                if (!adv.bag[`${newKeyRare}`]) adv.bag[`${newKeyRare}`] = 0; 
+                if (Math.random() < 0.2) adv.bag[`${newKeyRare}`] += 1; // 20% chance to get rare drop
 
                 // show on UI
                 document.querySelector("#itemOverlay").innerHTML = `ITEMS: [x]`;

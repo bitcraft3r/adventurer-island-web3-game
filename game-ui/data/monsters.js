@@ -17,7 +17,7 @@ const monsters = {
         attacks: [attacks.Tackle, attacks.Fireball],
         xp: 25,
         drops: ["ash"],
-        rareDrops: [{ sword: 1 }],
+        rareDrops: ["sword"],
         gold: 20,
     },
     Draggle: {
@@ -30,7 +30,7 @@ const monsters = {
         attacks: [attacks.Tackle, attacks.Dive],
         xp: 15,
         drops: [ "leather" ],
-        rareDrops: [{ wand: 1 }],
+        rareDrops: ["wand"],
         gold: 15,
     },
     Momo: {
@@ -43,7 +43,7 @@ const monsters = {
         attacks: [attacks.Tackle, attacks.Dive],
         xp: 15,
         drops: ["spores"],
-        rareDrops: [{ bow: 1 }],
+        rareDrops: ["bow"],
         gold: 15,
     }
 }
