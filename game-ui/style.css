@@ -162,3 +162,10 @@ h6 {
     margin-left: 10px;
     font-size: 10px;
 }
+#levelUpOverlay {
+    display: none;
+    position: absolute;
+    top: 10%; left: 10%; right: 10%; bottom: 10%;
+    background-color: white;
+    border: #232323 double 4px;
+}

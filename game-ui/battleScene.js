@@ -116,11 +116,17 @@ function initBattle() {
                 // handle XP gained
                 adv.attr.xp += enemy.xp;
 
+                // log level before win fight
+                let levelBefore = adv.attr.level;
+
                 // handle leveling up
                 if (adv.attr.xp >= 30 && adv.attr.xp < 80) adv.attr.level = 2;
                 else if (adv.attr.xp >= 80 && adv.attr.xp < 150) adv.attr.level = 3;
                 else if (adv.attr.xp >= 150 && adv.attr.xp < 250) adv.attr.level = 4;
                 else if (adv.attr.xp >= 250) adv.attr.level = 5;
+
+                // log level after win fight
+                let levelAfter = adv.attr.level;
 
                 // display LEVEL and XP
                 document.querySelector("#xpOverlay").innerHTML = `LEVEL: ${adv.attr.level} (${adv.attr.xp} XP)`;
@@ -138,8 +144,40 @@ function initBattle() {
                             gsap.to("#overlappingDiv", {
                                 opacity: 0
                             })
+                            // end battle - player won
                             battle.initiated = false;
                             audio.Map.play();
+                            // open level up screen
+                            if (levelBefore !== levelAfter) {
+                                // show screen
+                                document.querySelector("#levelUpOverlay").style.display = "block";
+
+                                // populate title
+                                document.querySelector("#levelUpTitle").innerHTML = `YOU HAVE REACHED LEVEL ${levelAfter}!`;
+                                
+                                // populate text based on level
+                                if (levelAfter === 2){
+                                    document.querySelector("#levelUpText").innerHTML = `
+                                    <div id="classBox">Select Class:
+                                        <select id="chooseClass">
+                                            <option value="Warrior">Warrior</option>
+                                            <option value="Archer">Archer</option>
+                                            <option value="Wizard">Wizard</option>
+                                        </select>
+                                    </div>
+                                    `;
+                                } else if (levelAfter === 3){
+                                    document.querySelector("#levelUpText").innerHTML =`
+                                    <div id="addStatsBox">Increase Attributes with Stats Points:
+                                        <div id="chooseStats">
+                                            <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0>
+                                            <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0>
+                                            <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0>
+                                        </div>
+                                    </div>
+                                    `;
+                                }
+                            }
                         }
                     })
                 })
@@ -170,6 +208,7 @@ function initBattle() {
                                 gsap.to("#overlappingDiv", {
                                     opacity: 0
                                 })
+                                // end battle - player lost
                                 battle.initiated = false;
                                 audio.Map.play();
                             }

@@ -366,3 +366,12 @@ document.querySelector("#showNfts").addEventListener("click", (e)=>{
     </div>
     `;
 })
+
+
+// CLICK TO CONFIRM on LEVELUP SCREEN
+document.querySelector("#levelUpButton").addEventListener("click", ()=>{
+    // close levelUpOverlay
+    document.querySelector("#levelUpOverlay").style.display = 'none';
+    // update stats
+    // e.g. for level 2: select class, for level 3: add stats
+})
