@@ -210,6 +210,8 @@ function initBattle() {
                                 } else if (levelAfter >= 4){
                                     // clear old text
                                     document.querySelector("#levelUpText").replaceChildren();
+                                    document.querySelector("#levelUpTextMore").replaceChildren();
+                                    
 
                                     // +3 stats points to add to attributes
                                     document.querySelector("#levelUpText").innerHTML =`
