@@ -34,16 +34,40 @@ let randomMonster = () => {
             return monsters.Emby;
         }
     }
-    else if (adv.attr.level > 3){
-        if (Math.random() < 0.2) {
+    else if (adv.attr.level === 4){
+        if (Math.random() < 0.1) {
             document.querySelector("#enemyName").innerHTML = "Momo"
             return monsters.Momo;
-        } else if (Math.random() > 0.7) {
+        } else if (Math.random() < 0.2) {
             document.querySelector("#enemyName").innerHTML = "Draggle"
             return monsters.Draggle;
-        } else {
+        } else if (Math.random() < 0.5) {
             document.querySelector("#enemyName").innerHTML = "Emby"
             return monsters.Emby;
+        } else {
+            document.querySelector("#enemyName").innerHTML = "Woodle"
+            return monsters.Woodle;
+        }
+    }
+    else if (adv.attr.level >= 5){
+        if (Math.random() < 0.025) {
+            document.querySelector("#enemyName").innerHTML = "Momo"
+            return monsters.Momo;
+        } else if (Math.random() < 0.05) {
+            document.querySelector("#enemyName").innerHTML = "Draggle"
+            return monsters.Draggle;
+        } else if (Math.random() < 0.1) {
+            document.querySelector("#enemyName").innerHTML = "Emby"
+            return monsters.Emby;
+        } else if (Math.random() < 0.3) {
+            document.querySelector("#enemyName").innerHTML = "Woodle"
+            return monsters.Woodle;
+        } else if (Math.random() < 0.65) {
+            document.querySelector("#enemyName").innerHTML = "Rocky"
+            return monsters.Rocky;
+        } else {
+            document.querySelector("#enemyName").innerHTML = "Beradin"
+            return monsters.Beradin;
         }
     }
 }
@@ -60,6 +84,15 @@ function initBattle() {
 
     // clear/reset log
     document.querySelector("#battleLogItems").replaceChildren();
+
+    // RESET MONSTER POSITIONS
+    monsters.Adventurer.position = {x:260, y:280};
+    monsters.Momo.position = {x:800, y:100}, 
+    monsters.Draggle.position = {x:800, y:100}, 
+    monsters.Emby.position = {x:800, y:100}, 
+    monsters.Woodle.position = {x:785, y:65}, 
+    monsters.Rocky.position = {x:740, y:60}, 
+    monsters.Beradin.position = {x:780, y:55}, 
 
     
     enemy = new Monster(randomMonster());
@@ -125,7 +158,12 @@ function initBattle() {
                 if (adv.attr.xp >= 30 && adv.attr.xp < 80) adv.attr.level = 2;
                 else if (adv.attr.xp >= 80 && adv.attr.xp < 150) adv.attr.level = 3;
                 else if (adv.attr.xp >= 150 && adv.attr.xp < 250) adv.attr.level = 4;
-                else if (adv.attr.xp >= 250) adv.attr.level = 5;
+                else if (adv.attr.xp >= 250 && adv.attr.xp < 400) adv.attr.level = 5;
+                else if (adv.attr.xp >= 400 && adv.attr.xp < 600) adv.attr.level = 6;
+                else if (adv.attr.xp >= 600 && adv.attr.xp < 850) adv.attr.level = 7;
+                else if (adv.attr.xp >= 850 && adv.attr.xp < 1150) adv.attr.level = 8;
+                else if (adv.attr.xp >= 1150 && adv.attr.xp < 1500) adv.attr.level = 9;
+                else if (adv.attr.xp >= 1500 && adv.attr.xp < 2000) adv.attr.level = 10;
 
                 // log level after win fight
                 let levelAfter = adv.attr.level;
