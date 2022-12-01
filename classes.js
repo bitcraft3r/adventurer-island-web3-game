@@ -91,22 +91,48 @@ class Monster extends Sprite {
         if (this.isEnemy) healthBar = '#playerHealthBar';
 
         // UPDATE ATTACKS DAMAGE
+        if (this.isEnemy) { 
+            // for enemy
+            
+            // UPDATE DAMAGE FOR "Tackle"
+            if (attack.name === "Tackle"){
+                attack.damage = 10;
+            }
 
-        // UPDATE DAMAGE FOR "Brawl"
-        if (attack.name === "Brawl"){
-            attack.damage = Math.floor(adv.attr.damage);
-        }
+            // UPDATE DAMAGE FOR "Dive"
+            if (attack.name === "Dive"){
+                attack.damage = 15;
+            }
 
-        // UPDATE DAMAGE FOR "Lucky"
-        if (attack.name === "Lucky"){
-            // randomize damage of lucky attack
-            let thisAttackDamageLucky;
-            if (Math.random() < 0.5) thisAttackDamageLucky = adv.attr.damage * 2;
-            else thisAttackDamageLucky = Math.floor(adv.attr.damage / 2);
+            // UPDATE DAMAGE FOR "Fireball (enemy)"
+            if (attack.name === "Fireball"){
+                attack.damage = 20;
+            }
+
+        } else { 
+            // for player
+
+            // UPDATE DAMAGE FOR "Brawl"
+            if (attack.name === "Brawl"){
+                if (adv.attr.strength >= 10) attack.damage = adv.attr.strength;
+                else attack.damage = 10;
+            }
     
-            // set damage of player's lucky attack
-            attack.damage = thisAttackDamageLucky;
+            // UPDATE DAMAGE FOR "Lucky"
+            if (attack.name === "Lucky"){
+                if (adv.attr.strength >= 10) attack.damage = adv.attr.strength/2 + Math.ceil(Math.random()*adv.attr.strength*1.5);
+                else attack.damage = 5 + Math.ceil(Math.random()*15);
+            }
+
+            // UPDATE DAMAGE FOR "Slash" "Bullseye" and "Fireball (player)"
+            if (attack.name === "Slash" || attack.name === "Bullseye" || attack.name === "Fireball"){
+                if (adv.class === "Warrior") attack.damage = Math.floor(adv.attr.strength*1.5) + Math.ceil(Math.random() * (adv.attr.strength/2));
+                else if (adv.class === "Archer") attack.damage = Math.floor(adv.attr.agility*1.5) + Math.ceil(Math.random() * (adv.attr.agility/2));
+                else if (adv.class === "Wizard") attack.damage = Math.floor(adv.attr.wisdom*1.5) + Math.ceil(Math.random() * (adv.attr.wisdom/2));
+            }
         }
+
+
 
 
         // handle attack damage

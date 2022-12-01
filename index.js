@@ -313,8 +313,8 @@ document.querySelector("#heroButton").addEventListener("click", ()=>{
     
     console.log(adv);
 
-// set player attacks damage
-attacks.Brawl.damage = adv.attr.damage;
+// // set player attacks damage
+// attacks.Brawl.damage = adv.attr.damage;
     
 } )
 
@@ -375,20 +375,20 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
         // set adventurer attr.damage
         if (adv.class === "Warrior"){
             adv.attr.strength += 1;
-            adv.attr.damage += adv.attr.strength/2;
+            // adv.attr.damage += adv.attr.strength/2;
         } 
         else if (adv.class === "Archer"){
             adv.attr.agility += 1;
-            adv.attr.damage += adv.attr.agility/2;
+            // adv.attr.damage += adv.attr.agility/2;
         } 
         else if (adv.class === "Wizard"){
             adv.attr.wisdom += 1;
-            adv.attr.damage += adv.attr.wisdom/2;
+            // adv.attr.damage += adv.attr.wisdom/2;
         } 
 
-        console.log(`Selected Class: ${adv.class}. Added +1 to class' primary STAT`);
-        console.log(`new attributes are ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
-        console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
+        console.log(`Selected Class: ${adv.class}. Added +1 to class' mainStat`);
+        console.log(`new attributes after select class: ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
+        // console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
     }
     
     // for level 3++: add stats
@@ -404,20 +404,20 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
             adv.attr.strength += strToAdd;
             adv.attr.agility += agiToAdd;
             adv.attr.wisdom += wisToAdd;
-            // increase adv damage
-            if (adv.class === "Warrior"){
-                adv.attr.damage += strToAdd/2;
-            } 
-            else if (adv.class === "Archer"){
-                adv.attr.damage += agiToAdd/2;
-            } 
-            else if (adv.class === "Wizard"){
-                adv.attr.damage += wisToAdd/2;
-            } 
+            // // increase adv damage
+            // if (adv.class === "Warrior"){
+            //     adv.attr.damage += strToAdd/2;
+            // } 
+            // else if (adv.class === "Archer"){
+            //     adv.attr.damage += agiToAdd/2;
+            // } 
+            // else if (adv.class === "Wizard"){
+            //     adv.attr.damage += wisToAdd/2;
+            // } 
             
             console.log(`ADDED ${strToAdd}STR, ${agiToAdd}AGI, ${wisToAdd}WIS`);
-            console.log(`new attributes are ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
-            console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
+            console.log(`new attributes after add stats: ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
+            // console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
         } else {
             document.querySelector("#levelUpOverlay").style.display = 'block';
             alert(`STR + AGI + WIS must be EQUAL TO 3`)
@@ -437,9 +437,14 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
 
                 adv.gear[`${inputWeapon}`] = 1; // add weapon to gear
                 adv.bag[`${inputWeapon}`] -= 1; // deduct 1 from bag
-                console.log(`attached gear ${adv.gear}`)
-                adv.attr.damage += 3;
-                console.log(`increase dmg by 3, total dmg now ${adv.attr.damage}`)
+                console.log(`attached gear: ${inputWeapon}`)
+
+                if (adv.class === "Warrior") adv.attr.strength += 3;
+                else if (adv.class === "Archer") adv.attr.agility += 3;
+                else if (adv.class === "Wizard") adv.attr.wisdom += 3;
+
+                console.log(`increase mainStat by 3`);
+                console.log(`new attributes after weapon equip: ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
 
             }   
         }

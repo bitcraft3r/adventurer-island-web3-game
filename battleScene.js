@@ -23,10 +23,11 @@ let randomMonster = () => {
         }
     }
     else if (adv.attr.level === 3){
-        if (Math.random() < 0.35) {
+        let randomNumber = Math.random();
+        if (randomNumber < 0.4) {
             document.querySelector("#enemyName").innerHTML = "Momo"
             return monsters.Momo;
-        } else if (Math.random() > 0.6) {
+        } else if (randomNumber < 0.85) {
             document.querySelector("#enemyName").innerHTML = "Draggle"
             return monsters.Draggle;
         } else {
@@ -35,13 +36,14 @@ let randomMonster = () => {
         }
     }
     else if (adv.attr.level === 4){
-        if (Math.random() < 0.1) {
+        let randomNumber = Math.random();
+        if (randomNumber < 0.1) {
             document.querySelector("#enemyName").innerHTML = "Momo"
             return monsters.Momo;
-        } else if (Math.random() < 0.2) {
+        } else if (randomNumber < 0.4) {
             document.querySelector("#enemyName").innerHTML = "Draggle"
             return monsters.Draggle;
-        } else if (Math.random() < 0.5) {
+        } else if (randomNumber < 0.8) {
             document.querySelector("#enemyName").innerHTML = "Emby"
             return monsters.Emby;
         } else {
@@ -50,19 +52,20 @@ let randomMonster = () => {
         }
     }
     else if (adv.attr.level >= 5){
-        if (Math.random() < 0.025) {
+        let randomNumber = Math.random();
+        if (randomNumber < 0.025) {
             document.querySelector("#enemyName").innerHTML = "Momo"
             return monsters.Momo;
-        } else if (Math.random() < 0.05) {
+        } else if (randomNumber < 0.05) {
             document.querySelector("#enemyName").innerHTML = "Draggle"
             return monsters.Draggle;
-        } else if (Math.random() < 0.1) {
+        } else if (randomNumber < 0.1) {
             document.querySelector("#enemyName").innerHTML = "Emby"
             return monsters.Emby;
-        } else if (Math.random() < 0.3) {
+        } else if (randomNumber < 0.3) {
             document.querySelector("#enemyName").innerHTML = "Woodle"
             return monsters.Woodle;
-        } else if (Math.random() < 0.65) {
+        } else if (randomNumber < 0.65) {
             document.querySelector("#enemyName").innerHTML = "Rocky"
             return monsters.Rocky;
         } else {

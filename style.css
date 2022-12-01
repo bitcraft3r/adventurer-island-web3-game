@@ -165,6 +165,7 @@ h6 {
     top: 10%; left: 10%; right: 10%; bottom: 10%;
     background-color: white;
     border: #232323 double 4px;
+    z-index: 20;
 }
 #classBox {
     top: 40%; 
