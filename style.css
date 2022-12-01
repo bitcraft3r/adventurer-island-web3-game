@@ -38,6 +38,12 @@ button:hover, #viewNft:hover {
     top:0; left: 0; bottom: 0; right: 0; 
     background-color: grey;
 }
+#startScreen {
+    z-index: 40;
+}
+#startScreen2 {
+    z-index: 30;
+}
 #nameBox, #classBox, #nftBox {
     position: absolute; 
     top: 25%; left: 25%; right: 25%; 
@@ -75,6 +81,7 @@ span {
     top: 10%; left: 10%; right: 10%; bottom: 10%;
     background-color: white;
     border: #232323 double 4px;
+    z-index: 35;
 }
 #showNfts {
     display: flex;
