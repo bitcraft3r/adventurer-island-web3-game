@@ -289,78 +289,83 @@ addEventListener("click", ()=>{
     }
 })
 
-// Start screen click to continue
+// START SCREEN click to continue
 document.querySelector("#startButton").addEventListener("click", ()=>{
     document.querySelector("#startScreen").style.display = 'none';
 } )
 
+// initialize adventurer
 let adv;
 
-// Character screen click to continue
-document.querySelector("#heroButton").addEventListener("click", ()=>{
-    document.querySelector("#startScreen2").style.display = 'none';
+// declare variables for selected nft stats
+let selectedStr;
+let selectedAgi;
+let selectedWis;
 
+// SET CHARACTER SCREEN click to continue
+document.querySelector("#heroButton").addEventListener("click", ()=>{
+    document.querySelector("#startScreen2").style.display = 'none'; // hide this screen
+
+    // set adventurer's name
     let advName = document.getElementById("chooseName").value;
     document.querySelector("#nameOverlay").innerHTML = `${advName}`;
     
-    // get NFT data // also add default values(random) if no nft selected
-    let advStr = 6;
-    let advAgi = 5;
-    let advWis = 5;
+    // set adventurer's attributes
+    let advStr;
+    let advAgi;
+    let advWis;
+    if (selectedStr === "" || selectedStr === undefined ){
+        // if no nft selected, generate random values from 1 to 10
+        advStr = Math.ceil(Math.random() * 10);
+        advAgi = Math.ceil(Math.random() * 10);
+        advWis = Math.ceil(Math.random() * 10);
+    } else {
+        // if nft selected, use those values
+        advStr = selectedStr;
+        advAgi = selectedAgi;
+        advWis = selectedWis;
+    }
     
     // create new Adventurer player
     adv = new Adventurer(advName, advStr, advAgi, advWis);
-    
     console.log(adv);
-
-// // set player attacks damage
-// attacks.Brawl.damage = adv.attr.damage;
-    
 } )
 
-// (load and) show NFTs
+// in SET CHARACTER SCREEN, click "(View)" to LOAD and SHOW nfts
 document.querySelector("#viewNft").addEventListener("click", ()=>{
-    document.querySelector("#nftScreen").style.display = "flex";
-    document.querySelector("#showNfts").replaceChildren(); // TODO: how to prevent Loading NFTs more than once?
+    document.querySelector("#nftScreen").style.display = "flex"; // show nft gallery
+
+    // call function in `nft.js` which will:
+    // a) connect player's Metamask to website, and 
+    // b) load nfts of adv collection that are owned by this player
     main();
 })
 
-// close NFT gallery
+// click to close nft gallery
 document.querySelector("#nftScreenButton").addEventListener("click", ()=>{
+
+    // get stats from selected nft
+    selectedStr = Number(document.querySelector("#selectStr").innerHTML);
+    selectedAgi = Number(document.querySelector("#selectAgi").innerHTML);
+    selectedWis = Number(document.querySelector("#selectWis").innerHTML);
+
+    // if an nft was selected,
+    if (selectedStr !== undefined){
+        // change the #chooseNft select box selected option to `Adventurer NFT`
+        const selected = document.querySelector('#chooseNft');
+        selected.value = '2'
+    }
+
+    // hide nft screen
     document.querySelector("#nftScreen").style.display = "none";
+
+    // empty the content
+    document.querySelector("#showNfts").replaceChildren(); 
+    // TODO: how to prevent Loading NFTs more than once?
+    // it does delete the targeted DIVs, but when click #viewNft again, it loads the old "deleted" divs too
 })
 
-// User SELECT nft, to be used to create character
-/** TODO: FIX - CAN'T ATTACH EVENTLISTENER ON THE NEWLY LOADED NFTS */
-// https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
-// https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Synchronous_and_Asynchronous_Requests
-
-// I WANT TO:
-// attach eventListener on the newly loaded "#userNft", not it's parent #showNfts
-// so that I can find data in the children:
-// a) userNftName
-// b) userNftAttr - str, agi, wis
-
-document.querySelector("#showNfts").addEventListener("click", (e)=>{
-// unable select ("#userNft"), because this does not exist on page load.
-    // console.log(e.currentTarget); // currentTarget == showNfts
-    console.log(e.target); // target == the element that's clicked
-
-    // ** i want to make it so currentTarget gets me #userNft
-
-    document.querySelector("#selectedNft").innerHTML = `
-    <h4>Selected Adventurer:</h4>
-    <div>
-        <p>ID: Adventurer #???</p>
-        <p>STR: <span id="selectStr">${1}</span></p>
-        <p>AGI: <span id="selectAgi">${1}</span></p>
-        <p>WIS: <span id="selectWis">${1}</span></p>
-    </div>
-    `;
-})
-
-
-// CLICK TO CONFIRM on LEVELUP SCREEN
+// LEVEL UP SCREEN click to confirm/continue
 document.querySelector("#levelUpButton").addEventListener("click", ()=>{
     // close levelUpOverlay
     document.querySelector("#levelUpOverlay").style.display = 'none';

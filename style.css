@@ -40,7 +40,7 @@ button:hover, #viewNft:hover {
 }
 #nameBox, #classBox, #nftBox {
     position: absolute; 
-    top: 25%; left: 30%; right: 30%; 
+    top: 25%; left: 25%; right: 25%; 
     font-size: 24px; 
     height: 50px;
 }

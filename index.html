@@ -46,11 +46,10 @@
                 </select>
             </div> -->
 
-            <div id="nftBox">Select NFT: 
+            <div id="nftBox">Create Adventurer: 
                 <select id="chooseNft">
-                    <option value="1">Generate Random</option>
-                    <option value="2">Adventurer #9</option>
-                    <option value="3">Adventurer #777</option>
+                    <option value="1">Random Stats</option>
+                    <option value="2">Adventurer NFT</option>
                 </select><span id="viewNft"> (View)</span><br>
                 <span><a href="https://mumbai.polygonscan.com/address/0x2e340632f482ed6ef4053028f4ad16c321ad97a7#writeContract" target="_blank">(Mint for free)</a></span>
             </div>
@@ -60,7 +59,15 @@
 
         <div id="nftScreen">
             <div id="showNfts"></div>
-            <div id="selectedNft"></div>
+            <div id="selectedNft">
+                <h4></h4>
+                <div>
+                    <p></p>
+                    <p><span id="selectStr"></span></p>
+                    <p><span id="selectAgi"></span></p>
+                    <p><span id="selectWis"></span></p>
+                </div>
+            </div>
             <button id="nftScreenButton">Select</button>
         </div>
 
