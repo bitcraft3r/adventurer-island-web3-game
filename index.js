@@ -370,93 +370,80 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
     // close levelUpOverlay
     document.querySelector("#levelUpOverlay").style.display = 'none';
 
-    // update stats
+    // levelUp logic
 
-    // e.g. for level 2: select class
+    // level 2: select class
     if (adv.attr.level === 2){
         let inputClass = document.getElementById("chooseClass").value;
         adv.class = inputClass;
         document.querySelector("#nameOverlay").innerHTML = `${adv.name} (${inputClass})`;
-        // set adventurer attr.damage
-        if (adv.class === "Warrior"){
-            adv.attr.strength += 1;
-            // adv.attr.damage += adv.attr.strength/2;
-        } 
-        else if (adv.class === "Archer"){
-            adv.attr.agility += 1;
-            // adv.attr.damage += adv.attr.agility/2;
-        } 
-        else if (adv.class === "Wizard"){
-            adv.attr.wisdom += 1;
-            // adv.attr.damage += adv.attr.wisdom/2;
-        } 
 
+        // increase adventurer's mainStat attribute
+        if (adv.class === "Warrior") adv.attr.strength += 1;
+        else if (adv.class === "Archer") adv.attr.agility += 1;
+        else if (adv.class === "Wizard") adv.attr.wisdom += 1;
+
+        // logs
         console.log(`Selected Class: ${adv.class}. Added +1 to class' mainStat`);
         console.log(`new attributes after select class: ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
-        // console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
     }
     
-    // for level 3++: add stats
+    // level 4++: add total 3 stats points to any combination of attributes every level
     if (adv.attr.level >= 4){
-
+        // get input values
         let strToAdd = Number(document.querySelector("#addStr").value);
         let agiToAdd = Number(document.querySelector("#addAgi").value);
         let wisToAdd = Number(document.querySelector("#addWis").value);
+        // log
         console.log(strToAdd, agiToAdd, wisToAdd);
 
         if (strToAdd+agiToAdd+wisToAdd === 3) {
-            // increase adventurer attributes
+            // if sum is exactly 3, increase adventurer attributes
             adv.attr.strength += strToAdd;
             adv.attr.agility += agiToAdd;
             adv.attr.wisdom += wisToAdd;
-            // // increase adv damage
-            // if (adv.class === "Warrior"){
-            //     adv.attr.damage += strToAdd/2;
-            // } 
-            // else if (adv.class === "Archer"){
-            //     adv.attr.damage += agiToAdd/2;
-            // } 
-            // else if (adv.class === "Wizard"){
-            //     adv.attr.damage += wisToAdd/2;
-            // } 
             
+            // logs
             console.log(`ADDED ${strToAdd}STR, ${agiToAdd}AGI, ${wisToAdd}WIS`);
             console.log(`new attributes after add stats: ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
-            // console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
-        } else {
+        } else { 
+            // otherwise keep showing this screen and prompt user
             document.querySelector("#levelUpOverlay").style.display = 'block';
-            alert(`STR + AGI + WIS must be EQUAL TO 3`)
+            alert(`STR + AGI + WIS must be EQUAL TO 3`);
         } 
-
-
     }
 
+    // level 5: equip class weapon if available
     if (adv.attr.level === 5){
+        // get data added on dom from battleScene.js
         let inputWeapon = document.getElementById("equipWeapon").value;
-        if (inputWeapon !== `none`){            
 
-            // check if object is empty
+        if (inputWeapon !== `none`){            
+            // if there's data (i.e. weapon is available), do the following:
+            
+            // check if adv.gear (object) is empty
             // https://bobbyhadz.com/blog/javascript-check-if-object-is-empty
             const obj = adv.gear;
             if (Object.keys(obj).length === 0) {
+                // if empty, equip weapon:
 
+                // manage inventory
                 adv.gear[`${inputWeapon}`] = 1; // add weapon to gear
                 adv.bag[`${inputWeapon}`] -= 1; // deduct 1 from bag
-                console.log(`attached gear: ${inputWeapon}`)
+                console.log(`attached ${inputWeapon} to gear`)
 
+                // manage stats increase
                 if (adv.class === "Warrior") adv.attr.strength += 3;
                 else if (adv.class === "Archer") adv.attr.agility += 3;
                 else if (adv.class === "Wizard") adv.attr.wisdom += 3;
 
+                // logs
                 console.log(`increase mainStat by 3`);
                 console.log(`new attributes after weapon equip: ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
-
             }   
         }
-
-
     }
 
-    // other leveling logic @ battleScene initBattle()
+    // other levelUp logic @ battleScene.js initBattle()
 
 })

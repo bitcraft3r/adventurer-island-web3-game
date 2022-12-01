@@ -12,10 +12,6 @@ class Sprite {
         this.sprites = sprites;
         this.opacity = 1;
         this.rotation = rotation;
-        // this.xp = 0;
-        // this.bag = [];
-        // this.gold = 0;
-        // this.gameClass = "";
     }
     draw(){
         c.save();
@@ -132,9 +128,6 @@ class Monster extends Sprite {
             }
         }
 
-
-
-
         // handle attack damage
         if (this.isEnemy) { // logic for enemy attacks player
             recipient.health -= attack.damage - adv.attr.defence;
@@ -145,7 +138,6 @@ class Monster extends Sprite {
             recipient.health -= attack.damage; 
             // TODO
             // add critical damage chance
-            
         } 
 
         // update HP of adv & monster after each attack
@@ -182,7 +174,7 @@ class Monster extends Sprite {
                     rotation // same as `rotation: rotation`
                 })
                 // renderedSprites.push(fireball);
-                renderedSprites.splice(1, 0, fireball); // add fireball after before player sprite but after enemy sprite
+                renderedSprites.splice(1, 0, fireball); // add fireball before player sprite but after enemy sprite
                 gsap.to(fireball.position, {
                     x: recipient.position.x,
                     y: recipient.position.y,

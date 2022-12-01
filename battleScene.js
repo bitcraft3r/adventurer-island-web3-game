@@ -198,7 +198,10 @@ function initBattle() {
                                 // populate title
                                 document.querySelector("#levelUpTitle").innerHTML = `YOU HAVE REACHED LEVEL ${levelAfter}!`;
                                 
+                                // levelUp logic
                                 // populate text based on level
+
+                                // level 2: select class
                                 if (levelAfter === 2){
                                     // select class
                                     document.querySelector("#levelUpText").innerHTML = `
@@ -210,12 +213,14 @@ function initBattle() {
                                         </select>
                                     </div>
                                     `;
-                                } else if (levelAfter >= 4){
+                                } 
+
+                                // level 4++: add stats
+                                else if (levelAfter >= 4){
                                     // clear old text
                                     document.querySelector("#levelUpText").replaceChildren();
                                     document.querySelector("#levelUpTextMore").replaceChildren();
                                     
-
                                     // +3 stats points to add to attributes
                                     document.querySelector("#levelUpText").innerHTML =`
                                     <div id="addStatsBox">Increase Attributes with Stats Points:
@@ -227,9 +232,28 @@ function initBattle() {
                                     </div>
                                     `;
                                 } 
+
+                                // level 3: get new attack
+                                if (levelAfter === 3){
+                                    // clear old text
+                                    document.querySelector("#levelUpText").replaceChildren();
+
+                                    // add a new attack
+                                    if (adv.class === "Warrior") monsters.Adventurer.attacks.push(attacks.Slash);
+                                    else if (adv.class === "Archer") monsters.Adventurer.attacks.push(attacks.Bullseye);
+                                    else if (adv.class === "Wizard") monsters.Adventurer.attacks.push(attacks.Fireball);
+
+                                    // update dom
+                                    document.querySelector("#levelUpTextMore").innerHTML =`
+                                    <div id="newSkill">
+                                        You have gained a new skill (${monsters.Adventurer.attacks[monsters.Adventurer.attacks.length-1].name})!
+                                    </div>
+                                    `;
+                                }
                                 
+                                // level 5: equip weapon
                                 if (levelAfter === 5){
-                                    // equip weapon if available
+                                    // show weapon if available, otherwise show none
                                     if (adv.class === "Warrior" && adv.bag.sword > 0){
                                         document.querySelector("#levelUpTextMore").innerHTML =`
                                             <div id="equipWeaponBox">
@@ -271,38 +295,15 @@ function initBattle() {
                                             `;
                                     }
                                 }
-
-                                if (levelAfter === 3){
-                                    // clear old text
-                                    document.querySelector("#levelUpText").replaceChildren();
-
-                                    // add a new attack
-                                    if (adv.class === "Warrior"){
-                                        monsters.Adventurer.attacks.push(attacks.Slash);
-                                    } 
-                                    else if (adv.class === "Archer"){
-                                        monsters.Adventurer.attacks.push(attacks.Bullseye);
-                                    } 
-                                    else if (adv.class === "Wizard"){
-                                        monsters.Adventurer.attacks.push(attacks.Fireball);
-                                    } 
-
-                                    document.querySelector("#levelUpTextMore").innerHTML =`
-                                    <div id="newSkill">
-                                        You have gained a new skill (${monsters.Adventurer.attacks[monsters.Adventurer.attacks.length-1].name})!
-                                    </div>
-                                    `;
-                                }
-
                             }
                         }
                     })
                 })
             }
 
+            // handle enemy attacks
 
-
-            // enemy attacks
+            // randomize selection of enemy attacks
             const randomAttack = enemy.attacks[Math.floor(Math.random() * enemy.attacks.length)];
 
             queue.push(()=>{
@@ -347,13 +348,14 @@ function animateBattle() {
     })
 }
 
-animate();
-// initBattle();
-// animateBattle();
-
+// logic for what happens after adventurer selects attack (and dialogue box appears)
 document.querySelector("#dialogueBox").addEventListener("click", (e)=>{
     if (queue.length > 0){
+        // execute (then remove) remaining queue items starting from front of array
         queue[0]();
         queue.shift();
-    } else e.currentTarget.style.display = 'none';
+    } else e.currentTarget.style.display = 'none'; // once queue is empty, next click will close dialogue box
 })
+
+// start animation with animate() from index.js
+animate();
