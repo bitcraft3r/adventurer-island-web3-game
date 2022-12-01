@@ -433,9 +433,6 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
         console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
     }
 
-    if (adv.attr.level === 5){
-        // add a skill
-        // monsters.Advsdenturer.attacks.push(attacks.NewAttackName)
-    }
+    // level 5 upgrade handled in battleScene initBattle()
 
 })

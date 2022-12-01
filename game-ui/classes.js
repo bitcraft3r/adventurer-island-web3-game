@@ -248,6 +248,72 @@ class Monster extends Sprite {
                     x: this.position.x,
                 })
             break;
+            case 'Slash':
+                const tl5 = gsap.timeline();
+                let movementDistance5 = 20;
+                if (this.isEnemy) movementDistance5 = -20;
+
+                tl5.to(this.position, {
+                    x: this.position.x - movementDistance5,
+                }).to(this.position, {
+                    x: this.position.x + movementDistance5*2,
+                    duration: 0.1,
+                    onComplete: () => {
+                        // Enemy actually gets hit
+                        audio.tackleHit.play();
+                        gsap.to(healthBar, {
+                            width: recipient.health + "%"
+                        })
+                        gsap.to(recipient.position, {
+                            x: recipient.position.x + 10,
+                            yoyo: true,
+                            repeat: 5,
+                            duration: 0.08,
+                        })
+                        gsap.to(recipient, {
+                            opacity: 0,
+                            repeat: 5,
+                            yoyo: true,
+                            duration: 0.08
+                        })
+                    }
+                }).to(this.position, {
+                    x: this.position.x,
+                })
+            break;
+            case 'Bullseye':
+                const tl6 = gsap.timeline();
+                let movementDistance6 = 20;
+                if (this.isEnemy) movementDistance6 = -20;
+
+                tl6.to(this.position, {
+                    x: this.position.x - movementDistance6,
+                }).to(this.position, {
+                    x: this.position.x + movementDistance6*2,
+                    duration: 0.1,
+                    onComplete: () => {
+                        // Enemy actually gets hit
+                        audio.tackleHit.play();
+                        gsap.to(healthBar, {
+                            width: recipient.health + "%"
+                        })
+                        gsap.to(recipient.position, {
+                            x: recipient.position.x + 10,
+                            yoyo: true,
+                            repeat: 5,
+                            duration: 0.08,
+                        })
+                        gsap.to(recipient, {
+                            opacity: 0,
+                            repeat: 5,
+                            yoyo: true,
+                            duration: 0.08
+                        })
+                    }
+                }).to(this.position, {
+                    x: this.position.x,
+                })
+            break;
             case 'Tackle':
                 const tl = gsap.timeline();
                 let movementDistance = 20;

@@ -182,14 +182,7 @@ function initBattle() {
                                 
                                 if (levelAfter === 4){
                                     if (adv.class === "Warrior" && adv.bag.sword > 0){
-                                        document.querySelector("#levelUpText").innerHTML =`
-                                            <div id="addStatsBox">Increase Attributes with Stats Points:
-                                                <div id="chooseStats">
-                                                    <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0>
-                                                    <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0>
-                                                    <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0>
-                                                </div>
-                                            </div>
+                                        document.querySelector("#levelUpTextMore").innerHTML =`
                                             <div id="equipWeaponBox">
                                                 <select id="equipWeapon">
                                                     <option value="sword">Sword: (${adv.bag.sword})</option>
@@ -199,14 +192,7 @@ function initBattle() {
                                             `;
                                     }
                                     else if (adv.class === "Archer" && adv.bag.bow > 0){
-                                        document.querySelector("#levelUpText").innerHTML =`
-                                        <div id="addStatsBox">Increase Attributes with Stats Points:
-                                            <div id="chooseStats">
-                                                <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0>
-                                                <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0>
-                                                <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0>
-                                            </div>
-                                        </div>
+                                        document.querySelector("#levelUpTextMore").innerHTML =`
                                         <div id="equipWeaponBox">
                                             <select id="equipWeapon">
                                                 <option value="bow">Bow: (${adv.bag.bow})</option>
@@ -216,14 +202,7 @@ function initBattle() {
                                         `;
                                     }
                                     else if (adv.class === "Wizard" && adv.bag.wand > 0){
-                                        document.querySelector("#levelUpText").innerHTML =`
-                                        <div id="addStatsBox">Increase Attributes with Stats Points:
-                                            <div id="chooseStats">
-                                                <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0>
-                                                <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0>
-                                                <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0>
-                                            </div>
-                                        </div>
+                                        document.querySelector("#levelUpTextMore").innerHTML =`
                                         <div id="equipWeaponBox">
                                             <select id="equipWeapon">
                                                 <option value="wand">Wand: (${adv.bag.wand})</option>
@@ -233,14 +212,7 @@ function initBattle() {
                                         `;
                                     } 
                                     else {
-                                        document.querySelector("#levelUpText").innerHTML =`
-                                            <div id="addStatsBox">Increase Attributes with Stats Points:
-                                                <div id="chooseStats">
-                                                    <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0>
-                                                    <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0>
-                                                    <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0>
-                                                </div>
-                                            </div>
+                                        document.querySelector("#levelUpTextMore").innerHTML =`
                                             <div id="equipWeaponBox">
                                                 <select id="equipWeapon">
                                                     <option value="none">None</option>
@@ -249,9 +221,27 @@ function initBattle() {
                                             </div>
                                             `;
                                     }
-
-
                                 }
+
+                                if (levelAfter === 5){
+                                    // add a skill
+                                    if (adv.class === "Warrior"){
+                                        monsters.Adventurer.attacks.push(attacks.Slash);
+                                    } 
+                                    else if (adv.class === "Archer"){
+                                        monsters.Adventurer.attacks.push(attacks.Bullseye);
+                                    } 
+                                    else if (adv.class === "Wizard"){
+                                        monsters.Adventurer.attacks.push(attacks.Fireball);
+                                    } 
+
+                                    document.querySelector("#levelUpTextMore").innerHTML =`
+                                    <div id="newSkill">
+                                        You have gained a new skill (${monsters.Adventurer.attacks[monsters.Adventurer.attacks.length-1].name})!
+                                    </div>
+                                    `;
+                                }
+
                             }
                         }
                     })
