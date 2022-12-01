@@ -141,7 +141,7 @@ function initBattle() {
                 }
 
                 // show on UI
-                document.querySelector("#itemOverlay").innerHTML = `ITEMS: [x]`;
+                // document.querySelector("#itemOverlay").innerHTML = `ITEMS: [x]`;
                 // TODO: show obj length? https://stackoverflow.com/a/6700
 
                 // handle gold
@@ -197,6 +197,7 @@ function initBattle() {
                                 
                                 // populate text based on level
                                 if (levelAfter === 2){
+                                    // select class
                                     document.querySelector("#levelUpText").innerHTML = `
                                     <div id="classBox">Select Class:
                                         <select id="chooseClass">
@@ -206,19 +207,24 @@ function initBattle() {
                                         </select>
                                     </div>
                                     `;
-                                } else if (levelAfter >= 3){
+                                } else if (levelAfter >= 4){
+                                    // clear old text
+                                    document.querySelector("#levelUpText").replaceChildren();
+
+                                    // +3 stats points to add to attributes
                                     document.querySelector("#levelUpText").innerHTML =`
                                     <div id="addStatsBox">Increase Attributes with Stats Points:
                                         <div id="chooseStats">
-                                            <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0>
-                                            <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0>
-                                            <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0>
+                                            <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0 type="number" min="0" max="3">
+                                            <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0 type="number" min="0" max="3">
+                                            <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0 type="number" min="0" max="3">
                                         </div>
                                     </div>
                                     `;
                                 } 
                                 
-                                if (levelAfter === 4){
+                                if (levelAfter === 5){
+                                    // equip weapon if available
                                     if (adv.class === "Warrior" && adv.bag.sword > 0){
                                         document.querySelector("#levelUpTextMore").innerHTML =`
                                             <div id="equipWeaponBox">
@@ -261,8 +267,11 @@ function initBattle() {
                                     }
                                 }
 
-                                if (levelAfter === 5){
-                                    // add a skill
+                                if (levelAfter === 3){
+                                    // clear old text
+                                    document.querySelector("#levelUpText").replaceChildren();
+
+                                    // add a new attack
                                     if (adv.class === "Warrior"){
                                         monsters.Adventurer.attacks.push(attacks.Slash);
                                     } 

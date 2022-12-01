@@ -392,47 +392,61 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
     }
     
     // for level 3++: add stats
-    if (adv.attr.level >= 3){
+    if (adv.attr.level >= 4){
 
         let strToAdd = Number(document.querySelector("#addStr").value);
         let agiToAdd = Number(document.querySelector("#addAgi").value);
         let wisToAdd = Number(document.querySelector("#addWis").value);
         console.log(strToAdd, agiToAdd, wisToAdd);
-        // increase adventurer attributes
-        adv.attr.strength += strToAdd;
-        adv.attr.agility += agiToAdd;
-        adv.attr.wisdom += wisToAdd;
-        // increase adv damage
-        if (adv.class === "Warrior"){
-            adv.attr.damage += strToAdd/2;
+
+        if (strToAdd+agiToAdd+wisToAdd === 3) {
+            // increase adventurer attributes
+            adv.attr.strength += strToAdd;
+            adv.attr.agility += agiToAdd;
+            adv.attr.wisdom += wisToAdd;
+            // increase adv damage
+            if (adv.class === "Warrior"){
+                adv.attr.damage += strToAdd/2;
+            } 
+            else if (adv.class === "Archer"){
+                adv.attr.damage += agiToAdd/2;
+            } 
+            else if (adv.class === "Wizard"){
+                adv.attr.damage += wisToAdd/2;
+            } 
+            
+            console.log(`ADDED ${strToAdd}STR, ${agiToAdd}AGI, ${wisToAdd}WIS`);
+            console.log(`new attributes are ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
+            console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
+        } else {
+            document.querySelector("#levelUpOverlay").style.display = 'block';
+            alert(`STR + AGI + WIS must be EQUAL TO 3`)
         } 
-        else if (adv.class === "Archer"){
-            adv.attr.damage += agiToAdd/2;
-        } 
-        else if (adv.class === "Wizard"){
-            adv.attr.damage += wisToAdd/2;
-        } 
-        
-        console.log(`ADDED ${strToAdd}STR, ${agiToAdd}AGI, ${wisToAdd}WIS`);
-        console.log(`new attributes are ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
-        console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
+
+
     }
 
-    if (adv.attr.level === 4){
+    if (adv.attr.level === 5){
         let inputWeapon = document.getElementById("equipWeapon").value;
-        if (inputWeapon !== `none`){
-            adv.gear[`${inputWeapon}`] = 1; // add weapon to gear
-            adv.bag[`${inputWeapon}`] -= 1; // deduct 1 from bag
-            console.log(`attached gear ${adv.gear}`)
-            adv.attr.damage += 3;
-            console.log(`increase dmg by 3, total dmg now ${adv.attr.damage}`)
+        if (inputWeapon !== `none`){            
+
+            // check if object is empty
+            // https://bobbyhadz.com/blog/javascript-check-if-object-is-empty
+            const obj = adv.gear;
+            if (Object.keys(obj).length === 0) {
+
+                adv.gear[`${inputWeapon}`] = 1; // add weapon to gear
+                adv.bag[`${inputWeapon}`] -= 1; // deduct 1 from bag
+                console.log(`attached gear ${adv.gear}`)
+                adv.attr.damage += 3;
+                console.log(`increase dmg by 3, total dmg now ${adv.attr.damage}`)
+
+            }   
         }
 
-        console.log(`after LV 4 EQUIP WEAPON:`)
-        console.log(`new attributes are ${adv.attr.strength}, ${adv.attr.agility}, ${adv.attr.wisdom}`);
-        console.log(`Added priSTAT/2 damage; new damage is ${adv.attr.damage}`);
+
     }
 
-    // level 5 upgrade handled in battleScene initBattle()
+    // other leveling logic @ battleScene initBattle()
 
 })
