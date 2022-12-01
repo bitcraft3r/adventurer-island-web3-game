@@ -1,88 +1,171 @@
+* {
+    font-family: 'Press Start 2P', cursive;
+}
 body {
-    background-color: burlywood;
-    margin: 20px;
+    background-color: #232323;
 }
-
-#nav, #controls {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-    padding: 10px;
+h1 {
+    margin: 0;
 }
-
-#learn-more {
-    padding: 10px;
-    margin: 10px;
-
+button {
+    border: 0;
+    font-size: 16px;
+}
+button:hover, #viewNft:hover {
+    background-color: #ddd;
+    cursor: pointer;
 }
 
 #root {
+    display: inline-block; 
+    position: relative;
+}
+#overlappingDiv {
+    background-color: black; 
+    position:absolute; 
+    top:0; left: 0; bottom: 0; right: 0; 
+    opacity: 0; 
+    pointer-events: none; 
+    z-index: 10;
+}
+#mapOverlay {
+    position: absolute; 
+    bottom:20px; 
+    left: 20px;
+}
+#startScreen, #startScreen2 {
+    position: absolute; 
+    top:0; left: 0; bottom: 0; right: 0; 
+    background-color: grey;
+}
+#nameBox, #classBox, #nftBox {
+    position: absolute; 
+    top: 25%; left: 30%; right: 30%; 
+    font-size: 24px; 
+    height: 50px;
+}
+#classBox {
+    top: 40%; 
+}
+#nftBox {
+    top: 55%;
+}
+#chooseName {
+    font-size: 24px;
+}
+#chooseClass, #chooseNft {
+    font-size: 18px;
+}
+span {
+    font-size: 12px;
+}
+#startButton, #heroButton {
+    position: absolute; 
+    top: 65%; left: 35%; right: 35%; 
+    font-size: 24px; 
+    height: 50px; 
+    border: black solid 4px;
+}
+#heroButton {
+    top: 75%; 
+}
+#viewNft, a {
+    color: blue;
+}
+#nftScreen {
+    display: none;
+    position: absolute;
+    top: 10%; left: 10%; right: 10%; bottom: 10%;
+    background-color: white;
+    border: #232323 double 4px;
+}
+#showNfts {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    border: 1px solid brown;
-    padding: 10px;
 }
-
-.user-nft {
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-    border: 1px solid bisque;
-    width: 310px;
-    padding: 10px;
-    margin: 10px;
+#userNft { /* TODO: FIX NFT GALLERY CSS */
+    border: #232323 solid 2px;
+    background: #ddd;
 }
-
-.nft-name {
-    text-align: center;
+#nftScreenButton {
+    position: absolute;
+    bottom: 10%; left: 40%; right: 40%;
+    border: #232323 solid 2px;
 }
-
-.attributes {
-    font-weight: bold;
-    text-align: center;
+#userInterface {
+    display: none;
 }
-
-#hero {
+#enemyHealthBox, #playerHealthBox {
+    background-color: white; 
+    width: 250px; 
+    position: absolute; 
+    border: 4px black solid; 
+    padding: 12px;
+}
+#enemyHealthBox {
+    top: 50px; left: 50px; 
+}
+#playerHealthBox {
+    top: 300px; right: 50px;
+}
+#enemyName, #playerName {
+    font-size: 16px
+}
+#enemyHealthBar, #playerHealthBar {
+    height: 5px; 
+    background-color: green; 
+    position: absolute; 
+    top: 0; left: 0; right: 0;
+}
+#greyBox {
+    height: 5px; 
+    background-color: #ccc; 
+    margin-top: 10px;
+}
+#healthWrapper {
+    position: relative;
+}
+#dialogueWrapper {
+    background-color: white; 
+    height: 140px; 
+    position: absolute; 
+    bottom: 0; right: 0; left: 0; 
+    border-top: 4px solid black; 
     display: flex;
-    padding: 10px;
+}
+#dialogueBox {
+    position:absolute; 
+    top: 0; right: 0; bottom: 0; left: 0; 
+    background: white; 
+    padding: 12px; 
+    display: none; 
+    cursor: pointer;
+}
+#attacksBox {
+    width: 66.66%; 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+}
+#logWrapper {
+    /* display: flex; 
+    align-items: center; 
+    justify-content: center;  */
+    width: 50%; 
+    border-left: 4px solid black;
+}
+#battleLog {
+    text-decoration: underline;
     margin: 10px;
-    border: 1px solid green;
+    font-size: 12px;
 }
-
-#selected-adv, #create-hero, #generate-hero {
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid darkolivegreen;
+h6 {
+    margin: 5px;
+    margin-left: 10px;
+    font-size: 10px;
 }
-
-#battle {
-    display: flex;
-}
-
-#battle, #your-hero, #battle-screen, #your-spawn {
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid red;
-}
-
-#game {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid blue;
-}
-
-#start-game, #player-controls, #spawn-controls, #game-result {
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid blue;
-}
-
-#game-result {
-    height: 300px;
-    width: 400px;
+#levelUpOverlay {
+    display: none;
+    position: absolute;
+    top: 10%; left: 10%; right: 10%; bottom: 10%;
+    background-color: white;
+    border: #232323 double 4px;
 }

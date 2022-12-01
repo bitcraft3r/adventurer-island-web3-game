@@ -44,14 +44,14 @@ const main = async () => {
         token.metadata = metadata;
     }
     
-    document.getElementById("root").innerHTML = tokens.map(createElement).join("");
+    document.getElementById("showNfts").innerHTML = tokens.map(createElement).join("");
 }
 
 function createElement(token){
-    return `        <div class="user-nft">
-    <h3 class="nft-name">${token.metadata.name}</h3>
-    <img src="${token.metadata.image}" alt="" width="300">
-    <div class="attributes">
+    return `<div id="userNft" style="border: #232323 solid 2px; padding: 5px; margin: 5px">
+    <h4 id="userNftName">${token.metadata.name}</h4>
+    <img src="${token.metadata.image}" alt="" width="200">
+    <div id="userNftAttr" style="font-size: 12px;">
         <div>Strength: ${token.metadata.attributes[0].value}</div>
         <div>Agility: ${token.metadata.attributes[1].value}</div>
         <div>Wisdom: ${token.metadata.attributes[2].value}</div>
