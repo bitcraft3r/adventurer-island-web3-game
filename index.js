@@ -321,9 +321,12 @@ document.querySelector("#heroButton").addEventListener("click", ()=>{
         advWis = Math.ceil(Math.random() * 10);
     } else {
         // if nft selected, use those values
-        advStr = selectedStr;
-        advAgi = selectedAgi;
-        advWis = selectedWis;
+        // advStr = selectedStr;
+        // advAgi = selectedAgi;
+        // advWis = selectedWis;
+        advStr = selectedStatsArr[0];
+        advAgi = selectedStatsArr[1];
+        advWis = selectedStatsArr[2];
     }
     
     // create new Adventurer player

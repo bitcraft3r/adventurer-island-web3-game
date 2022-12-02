@@ -25,6 +25,8 @@ const connect = async () => {
     }
 }
 
+let selectedStatsArr = [];
+
 const main = async () => {
     await connect();
     // once connected, variables become available: web3 (obj) and account
@@ -56,7 +58,8 @@ const main = async () => {
 
     // get attribute stats of the selected nft
     let nftsObject = document.getElementsByClassName("userNft");
-    let selectedStatsArr = [];
+    console.log(nftsObject)
+    // let selectedStatsArr = [];
     let selectedNftName = "";
     // loop through the selected nft div's elements (object)
     // https://masteringjs.io/tutorials/fundamentals/foreach-object
@@ -72,20 +75,20 @@ const main = async () => {
             selectedStatsArr = []; // empty the array
             // loop through the selected div containing 3 divs of STR/AGI/WIS (object)
             let attrObject = e.currentTarget.lastElementChild.children;
-            Object.keys(nftsObject).forEach(key => {
-                // push STR, AGI, WIS into the selectedStatsArr
-                selectedStatsArr.push(Number(attrObject[key].innerHTML));
-                console.log(selectedStatsArr);
-            });
+            console.log(attrObject);
+
+            for (let i=0; i<3; i++){
+                selectedStatsArr.push(Number(attrObject[i].innerHTML));
+                
+            }
+            console.log(selectedStatsArr);
 
             // print details of selected nft to screen
             document.querySelector("#selectedNft").innerHTML = `
                 <h4>Selected Adventurer:</h4>
                 <div>
                     <p>ID: ${selectedNftName}</p>
-                    <p>STR: <span id="selectStr">${selectedStatsArr[0]}</span></p>
-                    <p>AGI: <span id="selectAgi">${selectedStatsArr[1]}</span></p>
-                    <p>WIS: <span id="selectWis">${selectedStatsArr[2]}</span></p>
+                    <p>STR: <span id="selectStr">${selectedStatsArr[0]}</span>, AGI: <span id="selectAgi">${selectedStatsArr[1]}</span>, WIS: <span id="selectWis">${selectedStatsArr[2]}</span></p>
                 </div>
             `;
         });
@@ -93,10 +96,10 @@ const main = async () => {
 }
 
 function createElement(token){
-    return `<div class="userNft" style="border: #232323 solid 2px; padding: 5px; margin: 5px">
+    return `<div class="userNft">
     <h4 id="userNftName">${token.metadata.name}</h4>
-    <img src="${token.metadata.image}" alt="" width="200">
-    <div id="userNftAttr" style="font-size: 12px;">
+    <img id="userNftImage" src="${token.metadata.image}" alt="">
+    <div id="userNftAttr">
         <div id="selectedNftStr">${token.metadata.attributes[0].value}</div>
         <div id="selectedNftAgi">${token.metadata.attributes[1].value}</div>
         <div id="selectedNftWis">${token.metadata.attributes[2].value}</div>

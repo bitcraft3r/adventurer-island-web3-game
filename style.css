@@ -59,9 +59,6 @@ button:hover, #viewNft:hover {
 #chooseClass, #chooseNft {
     font-size: 18px;
 }
-span {
-    font-size: 12px;
-}
 #startButton, #heroButton {
     position: absolute; 
     top: 65%; left: 35%; right: 35%; 
@@ -74,6 +71,7 @@ span {
 }
 #viewNft, a {
     color: blue;
+    font-size: 14px;
 }
 #nftScreen {
     display: none;
@@ -83,16 +81,37 @@ span {
     border: #232323 double 4px;
     z-index: 35;
 }
+#nftScreenContainer {
+    bottom: 30%; left: 10%; right: 10%;
+    overflow: auto;
+}
 #showNfts {
     display: flex;
+    overflow: auto;
 }
-#userNft { /* TODO: FIX NFT GALLERY CSS */
+.userNft { /* TODO: FIX NFT GALLERY CSS */
     border: #232323 solid 2px;
     background: #ddd;
+    padding: 5px; 
+    margin: 5px;
+}
+#userNftName {
+    font-size: 12px;
+}
+#userNftImage {
+    width: 200px;
+    border: #232323 solid 1px;
+}
+#userNftAttr {
+    display: none;
+}
+#selectedNft {
+    margin: 10px;
+    padding: 10px;
 }
 #nftScreenButton {
     position: absolute;
-    bottom: 10%; left: 40%; right: 40%;
+    bottom: 20%; left: 65%; right: 15%;
     border: #232323 solid 2px;
 }
 #userInterface {
@@ -138,7 +157,7 @@ span {
 }
 #dialogueBox {
     position:absolute; 
-    top: 0; right: 0; bottom: 0; left: 0; 
+    top: 0; right: 43%; bottom: 0; left: 0; 
     background: white; 
     padding: 12px; 
     display: none; 
@@ -155,6 +174,11 @@ span {
     justify-content: center;  */
     width: 50%; 
     border-left: 4px solid black;
+    /* https://www.w3schools.com/cssref/pr_pos_overflow.php */
+    overflow: auto;
+    /* https://stackoverflow.com/questions/18614301/keep-overflow-div-scrolled-to-bottom-unless-user-scrolls-up */
+    display: flex; 
+    flex-direction: column-reverse;
 }
 #battleLog {
     text-decoration: underline;

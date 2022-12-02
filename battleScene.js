@@ -215,24 +215,6 @@ function initBattle() {
                                     `;
                                 } 
 
-                                // level 4++: add stats
-                                else if (levelAfter >= 4){
-                                    // clear old text
-                                    document.querySelector("#levelUpText").replaceChildren();
-                                    document.querySelector("#levelUpTextMore").replaceChildren();
-                                    
-                                    // +3 stats points to add to attributes
-                                    document.querySelector("#levelUpText").innerHTML =`
-                                    <div id="addStatsBox">Increase Attributes with Stats Points:
-                                        <div id="chooseStats">
-                                            <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0 type="number" min="0" max="3">
-                                            <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0 type="number" min="0" max="3">
-                                            <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0 type="number" min="0" max="3">
-                                        </div>
-                                    </div>
-                                    `;
-                                } 
-
                                 // level 3: get new attack
                                 if (levelAfter === 3){
                                     // clear old text
@@ -249,7 +231,25 @@ function initBattle() {
                                         You have gained a new skill (${monsters.Adventurer.attacks[monsters.Adventurer.attacks.length-1].name})!
                                     </div>
                                     `;
-                                }
+                                }+``
+
+                                // level 4++: add stats
+                                if (levelAfter >= 4){
+                                    // clear old text
+                                    document.querySelector("#levelUpText").replaceChildren();
+                                    document.querySelector("#levelUpTextMore").replaceChildren();
+                                    
+                                    // +3 stats points to add to attributes
+                                    document.querySelector("#levelUpText").innerHTML =`
+                                    <div id="addStatsBox">Increase Attributes with Stats Points:
+                                        <div id="chooseStats">
+                                            <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0 type="number" min="0" max="3">
+                                            <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0 type="number" min="0" max="3">
+                                            <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0 type="number" min="0" max="3">
+                                        </div>
+                                    </div>
+                                    `;
+                                } 
                                 
                                 // level 5: equip weapon
                                 if (levelAfter === 5){

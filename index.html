@@ -42,17 +42,19 @@
 
         <!-- Show a popup when player click "(View)" -->
         <div id="nftScreen">
-            <div id="showNfts"></div>
-            <div id="selectedNft">
-                <h4></h4>
-                <div>
-                    <p></p>
-                    <p><span id="selectStr"></span></p>
-                    <p><span id="selectAgi"></span></p>
-                    <p><span id="selectWis"></span></p>
+            <div id="nftScreenContainer">
+                <div id="showNfts"></div>
+                <div id="selectedNft">
+                    <h4>Selected Adventurer:</h4>
+                    <div>
+                        <p>None</p>
+                        <p><span id="selectStr"></span></p>
+                        <p><span id="selectAgi"></span></p>
+                        <p><span id="selectWis"></span></p>
+                    </div>
                 </div>
             </div>
-            <button id="nftScreenButton">Select</button>
+            <button id="nftScreenButton">CONFIRM</button>
         </div>
 
         <!-- Show player stats on top of map -->
@@ -101,13 +103,13 @@
                 <div id="attacksBox">
                 </div>
                 <div id="logWrapper">
-                    <h3 id="battleLog">Battle Log</h3>
                     <div id="battleLogItems">
                         <!-- 
                             TODO: if too many lines of text, it should not go out of logWrapper container.
                             Scrollable.
                         -->
                     </div>
+                    <h3 id="battleLog">Battle Log</h3>
                 </div>
             </div>
 
