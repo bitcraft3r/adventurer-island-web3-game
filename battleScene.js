@@ -8,6 +8,7 @@ let renderedSprites;
 let battleAnimationId;
 let queue;
 
+// set monster's appearance probability
 let randomMonster = () => {
     if (adv.attr.level === 1){
         document.querySelector("#enemyName").innerHTML = "Momo"
@@ -24,10 +25,10 @@ let randomMonster = () => {
     }
     else if (adv.attr.level === 3){
         let randomNumber = Math.random();
-        if (randomNumber < 0.4) {
+        if (randomNumber < 0.35) {
             document.querySelector("#enemyName").innerHTML = "Momo"
             return monsters.Momo;
-        } else if (randomNumber < 0.85) {
+        } else if (randomNumber < 0.75) {
             document.querySelector("#enemyName").innerHTML = "Draggle"
             return monsters.Draggle;
         } else {
@@ -37,13 +38,13 @@ let randomMonster = () => {
     }
     else if (adv.attr.level === 4){
         let randomNumber = Math.random();
-        if (randomNumber < 0.1) {
+        if (randomNumber < 0.15) {
             document.querySelector("#enemyName").innerHTML = "Momo"
             return monsters.Momo;
         } else if (randomNumber < 0.4) {
             document.querySelector("#enemyName").innerHTML = "Draggle"
             return monsters.Draggle;
-        } else if (randomNumber < 0.8) {
+        } else if (randomNumber < 0.9) {
             document.querySelector("#enemyName").innerHTML = "Emby"
             return monsters.Emby;
         } else {
@@ -51,7 +52,26 @@ let randomMonster = () => {
             return monsters.Woodle;
         }
     }
-    else if (adv.attr.level >= 5){
+    else if (adv.attr.level === 5){
+        let randomNumber = Math.random();
+        if (randomNumber < 0.05) {
+            document.querySelector("#enemyName").innerHTML = "Momo"
+            return monsters.Momo;
+        } else if (randomNumber < 0.1) {
+            document.querySelector("#enemyName").innerHTML = "Draggle"
+            return monsters.Draggle;
+        } else if (randomNumber < 0.4) {
+            document.querySelector("#enemyName").innerHTML = "Emby"
+            return monsters.Emby;
+        } else if (randomNumber < 0.8) {
+            document.querySelector("#enemyName").innerHTML = "Woodle"
+            return monsters.Woodle;
+        } else {
+            document.querySelector("#enemyName").innerHTML = "Rocky"
+            return monsters.Rocky;
+        }
+    }
+    else if (adv.attr.level >= 6){
         let randomNumber = Math.random();
         if (randomNumber < 0.025) {
             document.querySelector("#enemyName").innerHTML = "Momo"
@@ -73,6 +93,8 @@ let randomMonster = () => {
             return monsters.Beradin;
         }
     }
+    // TODO: unable beat Rocky at level 4 & 5. 
+    // TODO: too much Beradin on level 6
 }
 
 function initBattle() {
@@ -97,7 +119,10 @@ function initBattle() {
     monsters.Rocky.position = {x:740, y:60}, 
     monsters.Beradin.position = {x:780, y:55}, 
 
-    
+    // set fighter's hp using adv's hp
+    monsters.Adventurer.health = adv.attr.hp
+
+    // initialize fighter and enemy
     enemy = new Monster(randomMonster());
     fighter = new Monster(monsters.Adventurer);
     renderedSprites = [fighter, enemy];

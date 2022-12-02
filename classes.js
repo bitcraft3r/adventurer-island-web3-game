@@ -67,10 +67,12 @@ class Adventurer {
 }
 
 class Monster extends Sprite {
-    constructor({ position, image, frames = {max:1, hold:10}, sprites, animate=false, rotation=0, isEnemy=false, name, attacks, xp, drops, rareDrops, gold }) {
+    constructor({ position, image, frames = {max:1, hold:10}, sprites, animate=false, rotation=0, health, damage, armour, isEnemy=false, name, attacks, xp, drops, rareDrops, gold }) {
         super({ position, image, frames, sprites, animate, rotation });
-        this.health = 100;
-        this.healthMax = 100;
+        this.health = health;
+        this.healthMax = health;
+        this.damage = damage;
+        this.armour = armour
         this.isEnemy = isEnemy;
         this.name = name;
         this.attacks = attacks;
@@ -92,17 +94,17 @@ class Monster extends Sprite {
             
             // UPDATE DAMAGE FOR "Tackle"
             if (attack.name === "Tackle"){
-                attack.damage = 10;
+                attack.damage = this.damage;
             }
 
             // UPDATE DAMAGE FOR "Dive"
             if (attack.name === "Dive"){
-                attack.damage = 15;
+                attack.damage = this.damage * 1.5;
             }
 
             // UPDATE DAMAGE FOR "Fireball (enemy)"
             if (attack.name === "Fireball"){
-                attack.damage = 20;
+                attack.damage = Math.ceil(this.damage*1.5) + Math.ceil(Math.random() * (this.damage/2));
             }
 
         } else { 
@@ -116,43 +118,51 @@ class Monster extends Sprite {
     
             // UPDATE DAMAGE FOR "Lucky"
             if (attack.name === "Lucky"){
-                if (adv.attr.strength >= 10) attack.damage = adv.attr.strength/2 + Math.ceil(Math.random()*adv.attr.strength*1.5);
+                if (adv.attr.strength >= 10) attack.damage = Math.ceil(adv.attr.strength/2) + Math.ceil(Math.random()*adv.attr.strength*1.5);
                 else attack.damage = 5 + Math.ceil(Math.random()*15);
             }
 
             // UPDATE DAMAGE FOR "Slash" "Bullseye" and "Fireball (player)"
-            if (attack.name === "Slash" || attack.name === "Bullseye" || attack.name === "Fireball"){
-                if (adv.class === "Warrior") attack.damage = Math.floor(adv.attr.strength*1.5) + Math.ceil(Math.random() * (adv.attr.strength/2));
-                else if (adv.class === "Archer") attack.damage = Math.floor(adv.attr.agility*1.5) + Math.ceil(Math.random() * (adv.attr.agility/2));
-                else if (adv.class === "Wizard") attack.damage = Math.floor(adv.attr.wisdom*1.5) + Math.ceil(Math.random() * (adv.attr.wisdom/2));
-            }
+            if (attack.name === "Slash") attack.damage = Math.floor(adv.attr.strength*1.5) + Math.ceil(Math.random() * (adv.attr.strength/2));
+            else if (attack.name === "Bullseye") attack.damage = Math.floor(adv.attr.agility*1.5) + Math.ceil(Math.random() * (adv.attr.agility/2));
+            else if (attack.name === "Fireball") attack.damage = Math.floor(adv.attr.wisdom*1.5) + Math.ceil(Math.random() * (adv.attr.wisdom/2));
         }
+
+        let damageDealt;
 
         // handle attack damage
         if (this.isEnemy) { // logic for enemy attacks player
-            recipient.health -= attack.damage - adv.attr.defence;
+            damageDealt = attack.damage - adv.attr.defence
+            recipient.health -= damageDealt;
             // TODO
             // add chance to evade attack
         } 
         else { // logic for player attacks enemy
-            recipient.health -= attack.damage; 
+            damageDealt = attack.damage - recipient.armour
+            recipient.health -= damageDealt; 
             // TODO
             // add critical damage chance
         } 
+
+        let enemyHpMax;
+        if (this.isEnemy) enemyHpMax = this.healthMax;
+        else enemyHpMax = recipient.healthMax;
 
         // update HP of adv & monster after each attack
         let showFighterHealth;
         if (fighter.health < 0) showFighterHealth = 0;
         else showFighterHealth = fighter.health;
-        document.querySelector("#playerHP").innerHTML = `HP: ${showFighterHealth}/${this.healthMax}`;
+        document.querySelector("#playerHP").innerHTML = `HP: ${showFighterHealth}/${adv.attr.hp}`;
         let showEnemyHealth;
         if (enemy.health < 0) showEnemyHealth = 0;
         else showEnemyHealth = enemy.health;
-        document.querySelector("#enemyHP").innerHTML = `HP: ${showEnemyHealth}/${enemy.healthMax}`;
+        document.querySelector("#enemyHP").innerHTML = `HP: ${showEnemyHealth}/${enemyHpMax}`;
+
+
 
         // push text to BATTLE LOG after attack is done
         let node = document.createElement("h6");
-        let textnode = document.createTextNode(`${this.name} used ${attack.name} and did ${attack.damage}DMG! ${recipient.name} has ${recipient.health}HP left.`);
+        let textnode = document.createTextNode(`${this.name} used ${attack.name} and did ${damageDealt}DMG! ${recipient.name} has ${recipient.health}HP left.`);
         node.appendChild(textnode);
         document.getElementById("battleLogItems").appendChild(node); // https://www.w3schools.com/jsref/met_node_appendchild.asp
 
@@ -182,7 +192,7 @@ class Monster extends Sprite {
                         // Enemy actually gets hit
                         audio.fireballHit.play();
                         gsap.to(healthBar, {
-                            width: recipient.health + "%"
+                            width: recipient.health*100/recipient.healthMax + "%"
                         })
                         gsap.to(recipient.position, {
                             x: recipient.position.x + 10,
@@ -214,7 +224,7 @@ class Monster extends Sprite {
                         // Enemy actually gets hit
                         audio.tackleHit.play();
                         gsap.to(healthBar, {
-                            width: recipient.health + "%"
+                            width: recipient.health*100/recipient.healthMax + "%"
                         })
                         gsap.to(recipient.position, {
                             x: recipient.position.x + 10,
@@ -247,7 +257,7 @@ class Monster extends Sprite {
                         // Enemy actually gets hit
                         audio.tackleHit.play();
                         gsap.to(healthBar, {
-                            width: recipient.health + "%"
+                            width: recipient.health*100/recipient.healthMax + "%"
                         })
                         gsap.to(recipient.position, {
                             x: recipient.position.x + 10,
@@ -280,7 +290,7 @@ class Monster extends Sprite {
                         // Enemy actually gets hit
                         audio.tackleHit.play();
                         gsap.to(healthBar, {
-                            width: recipient.health + "%"
+                            width: recipient.health*100/recipient.healthMax + "%"
                         })
                         gsap.to(recipient.position, {
                             x: recipient.position.x + 10,
@@ -313,7 +323,7 @@ class Monster extends Sprite {
                         // Enemy actually gets hit
                         audio.tackleHit.play();
                         gsap.to(healthBar, {
-                            width: recipient.health + "%"
+                            width: recipient.health*100/recipient.healthMax + "%"
                         })
                         gsap.to(recipient.position, {
                             x: recipient.position.x + 10,
@@ -346,7 +356,7 @@ class Monster extends Sprite {
                         // Enemy actually gets hit
                         audio.tackleHit.play();
                         gsap.to(healthBar, {
-                            width: recipient.health + "%"
+                            width: recipient.health*100/recipient.healthMax + "%"
                         })
                         gsap.to(recipient.position, {
                             x: recipient.position.x + 10,
@@ -378,7 +388,7 @@ class Monster extends Sprite {
                         // Enemy actually gets hit
                         audio.tackleHit.play();
                         gsap.to(healthBar, {
-                            width: recipient.health + "%"
+                            width: recipient.health*100/recipient.healthMax + "%"
                         })
                         gsap.to(recipient.position, {
                             x: recipient.position.x + 10,
