@@ -311,7 +311,7 @@ function initBattle() {
                                     } 
                                     else {
                                         document.querySelector("#levelUpTextMore").innerHTML =`
-                                            <div id="equipWeaponBox">
+                                            <div id="equipWeaponBox">Equip ${adv.class}'s Weapon:
                                                 <select id="equipWeapon">
                                                     <option value="none">None</option>
                                                 </select>
