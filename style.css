@@ -56,7 +56,7 @@ button:hover, #viewNft:hover {
 #chooseName {
     font-size: 24px;
 }
-#chooseClass, #chooseNft {
+#chooseNft {
     font-size: 18px;
 }
 #startButton, #heroButton {
@@ -198,6 +198,36 @@ h6 {
     border: #232323 double 4px;
     z-index: 20;
 }
+#levelUpTitle {
+    position: absolute;
+    top: 10%; left: 10%; right: 10%; bottom: 80%;
+    text-align: center;
+}
+#levelUpText {
+    position: absolute;
+    top: 20%; left: 10%; right: 10%; bottom: 45%;
+}
+#levelUpTextMore {
+    position: absolute;
+    top: 55%; left: 10%; right: 10%; bottom: 25%;
+}
 #classBox {
     top: 40%; 
+}
+#chooseClass {
+    font-size: 18px;
+    display: block;
+    margin: 0 auto;
+}
+#chooseStats {
+    display: flex;
+}
+#chooseStatStrs, #chooseStatsAgi, #chooseStatsWis, #addStr, #addAgi, #addWis {
+    padding: 10px;
+    margin: 10px;
+}
+#levelUpButton {
+    position: absolute;
+    top: 80%; left: 40%; right: 40%; bottom: 10%;
+    border: #232323 solid 2px;
 }

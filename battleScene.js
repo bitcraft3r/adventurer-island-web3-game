@@ -281,9 +281,9 @@ function initBattle() {
                                     // show weapon if available, otherwise show none
                                     if (adv.class === "Warrior" && adv.bag.sword > 0){
                                         document.querySelector("#levelUpTextMore").innerHTML =`
-                                            <div id="equipWeaponBox">
+                                            <div id="equipWeaponBox">Equip ${adv.class}'s Weapon:
                                                 <select id="equipWeapon">
-                                                    <option value="sword">Sword: (${adv.bag.sword})</option>
+                                                    <option value="sword">Sword (${adv.bag.sword})</option>
                                                 </select>
                                                 </div>
                                             </div>
@@ -291,9 +291,9 @@ function initBattle() {
                                     }
                                     else if (adv.class === "Archer" && adv.bag.bow > 0){
                                         document.querySelector("#levelUpTextMore").innerHTML =`
-                                        <div id="equipWeaponBox">
+                                        <div id="equipWeaponBox">Equip ${adv.class}'s Weapon:
                                             <select id="equipWeapon">
-                                                <option value="bow">Bow: (${adv.bag.bow})</option>
+                                                <option value="bow">Bow (${adv.bag.bow})</option>
                                             </select>
                                             </div>
                                         </div>
@@ -301,9 +301,9 @@ function initBattle() {
                                     }
                                     else if (adv.class === "Wizard" && adv.bag.wand > 0){
                                         document.querySelector("#levelUpTextMore").innerHTML =`
-                                        <div id="equipWeaponBox">
+                                        <div id="equipWeaponBox">Equip ${adv.class}'s Weapon:
                                             <select id="equipWeapon">
-                                                <option value="wand">Wand: (${adv.bag.wand})</option>
+                                                <option value="wand">Wand (${adv.bag.wand})</option>
                                             </select>
                                             </div>
                                         </div>
