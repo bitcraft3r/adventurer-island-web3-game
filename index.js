@@ -302,6 +302,28 @@ let selectedStr;
 let selectedAgi;
 let selectedWis;
 
+// random number generator from 1 to input value
+function generateStat(num) {
+    return Math.ceil(Math.random() * num);
+}
+
+// Randomize character's stats + show it on character screen
+document.querySelector("#rollStats").addEventListener("click", (e)=>{
+    
+    // randomize character stats
+    selectedStr = generateStat(10);
+    selectedAgi = generateStat(10);
+    selectedWis = generateStat(10);
+
+    // show the stats on UI
+    document.querySelector("#showStatsStr").innerHTML = `STR: ${selectedStr}`;
+    document.querySelector("#showStatsAgi").innerHTML = `AGI: ${selectedAgi}`;
+    document.querySelector("#showStatsWis").innerHTML = `WIS: ${selectedWis}`;
+
+    // display 
+    document.querySelector("#showStats").style.display = "block";
+})
+
 // SET CHARACTER SCREEN click to continue
 document.querySelector("#heroButton").addEventListener("click", ()=>{
     document.querySelector("#startScreen2").style.display = 'none'; // hide this screen
@@ -316,17 +338,14 @@ document.querySelector("#heroButton").addEventListener("click", ()=>{
     let advWis;
     if (selectedStr === "" || selectedStr === undefined ){
         // if no nft selected, generate random values from 1 to 10
-        advStr = Math.ceil(Math.random() * 10);
-        advAgi = Math.ceil(Math.random() * 10);
-        advWis = Math.ceil(Math.random() * 10);
+        advStr = generateStat(10);
+        advAgi = generateStat(10);
+        advWis = generateStat(10);
     } else {
-        // if nft selected, use those values
-        // advStr = selectedStr;
-        // advAgi = selectedAgi;
-        // advWis = selectedWis;
-        advStr = selectedStatsArr[0];
-        advAgi = selectedStatsArr[1];
-        advWis = selectedStatsArr[2];
+        // if nft selected, use those values. random roll (if clicked) stats will then replace prior values.
+        advStr = selectedStr;
+        advAgi = selectedAgi;
+        advWis = selectedWis;
     }
     
     // create new Adventurer player
@@ -374,6 +393,12 @@ document.querySelector("#nftScreenButton").addEventListener("click", ()=>{
     document.querySelector("#showNfts").replaceChildren(); 
     // TODO: how to prevent Loading NFTs more than once?
     // it does delete the targeted DIVs, but when click #viewNft again, it loads the old "deleted" divs too
+
+    // display stats on UI
+    document.querySelector("#showStatsStr").innerHTML = `STR: ${selectedStr}`;
+    document.querySelector("#showStatsAgi").innerHTML = `AGI: ${selectedAgi}`;
+    document.querySelector("#showStatsWis").innerHTML = `WIS: ${selectedWis}`;
+    document.querySelector("#showStats").style.display = "block";
 })
 
 // LEVEL UP SCREEN click to confirm/continue

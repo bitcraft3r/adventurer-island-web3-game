@@ -293,3 +293,23 @@ h6 {
   visibility: visible;
   opacity: 1;
 }
+
+#showStats {
+    /* display: none; */
+    margin-left: 150px;
+    margin-right: 150px;
+    font-size: 14px;
+    border:#232323 solid 1px;
+    text-align: center;
+}
+#showStatsTitle {
+    font-size: 14px;
+    text-decoration: underline;
+    padding: 3px;
+    margin: 3px;
+
+}
+#showStatsStr, #showStatsAgi, #showStatsWis {
+    padding: 2px;
+    margin: 2px;
+}
