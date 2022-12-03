@@ -15,6 +15,7 @@
     <div id="root">
         <div id="overlappingDiv"></div>
 
+        <!-- Game canvas -->
         <canvas></canvas>
 
         <!-- START SCREEN -->
@@ -76,6 +77,19 @@
             <div id="goldOverlay">GOLD: 0</div>
             <div id="itemOverlay"></div>
             <div id="xpOverlay">LEVEL: 1 (0 XP)</div>
+        </div>
+
+        <!-- Show control buttons on top of map -->
+        <div id="mapControlsOverlay">
+            <div id="controlsRow1">
+                <button id="moveButtonUp">UP</button>
+            </div>
+            <br>
+            <div id="controlsRow2">
+                <button id="moveButtonLeft">LEFT</button>
+                <button id="moveButtonDown">DOWN</button>
+                <button id="moveButtonRight">RIGHT</button>
+            </div>
         </div>
 
         <!-- Show a popup when user levels up -->

@@ -116,7 +116,7 @@ function animate() {
     // console.log(animationId)
     if (battle.initiated) return;
     // activate a battle
-    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed){
+    if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed || touchedButtonUp === true || touchedButtonLeft === true || touchedButtonDown === true || touchedButtonRight === true){
         for (let i=0; i<battleZones.length; i++){
             const battleZone = battleZones[i];
             const overlappingArea = (Math.min(player.position.x + player.width, battleZone.position.x + battleZone.width) - Math.max(player.position.x, battleZone.position.x)) * (Math.min(player.position.y + player.height, battleZone.position.y + battleZone.height) - Math.max(player.position.y, battleZone.position.y));
@@ -162,7 +162,7 @@ function animate() {
         }
     }
 
-    if (keys.w.pressed && lastKey === 'w'){
+    if (keys.w.pressed && lastKey === 'w' || touchedButtonUp === true){
         player.animate = true;
         player.image = player.sprites.up;
         for (let i=0; i<boundaries.length; i++){
@@ -181,7 +181,7 @@ function animate() {
             };
         }
         if (moving) movables.forEach(movable => movable.position.y += 5);
-    } else if (keys.a.pressed && lastKey === 'a'){
+    } else if (keys.a.pressed && lastKey === 'a' || touchedButtonLeft === true){
         player.animate = true;
         player.image = player.sprites.left;
         for (let i=0; i<boundaries.length; i++){
@@ -200,7 +200,7 @@ function animate() {
             };
         }
         if (moving) movables.forEach(movable => movable.position.x += 5);
-    } else if (keys.s.pressed && lastKey === 's'){
+    } else if (keys.s.pressed && lastKey === 's' || touchedButtonDown === true){
         player.animate = true;
         player.image = player.sprites.down;
         for (let i=0; i<boundaries.length; i++){
@@ -219,7 +219,7 @@ function animate() {
             };
         }
         if (moving) movables.forEach(movable => movable.position.y -= 5)
-    } else if (keys.d.pressed && lastKey === 'd'){
+    } else if (keys.d.pressed && lastKey === 'd' || touchedButtonRight === true){
         player.animate = true;
         player.image = player.sprites.right;
         for (let i=0; i<boundaries.length; i++){
@@ -488,3 +488,39 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
 document.querySelector("#penaltyButton").addEventListener("click", ()=>{
     document.querySelector("#penaltyOverlay").style.display = 'none';
 })
+
+// record when control buttons are being touched/clicked
+let touchedButtonUp = false;
+let touchedButtonLeft = false;
+let touchedButtonDown = false;
+let touchedButtonRight = false;
+
+// get button element
+let buttonUp = document.getElementById("moveButtonUp");
+let buttonLeft = document.getElementById("moveButtonLeft");
+let buttonDown = document.getElementById("moveButtonDown");
+let buttonRight = document.getElementById("moveButtonRight");
+
+// when touching buttons (and haven't let go), touchedButtonX will be true
+buttonUp.addEventListener("touchstart", () => { touchedButtonUp = true; })
+buttonLeft.addEventListener("touchstart", () => { touchedButtonLeft = true; })
+buttonDown.addEventListener("touchstart", () => { touchedButtonDown = true; })
+buttonRight.addEventListener("touchstart", () => { touchedButtonRight = true; })
+
+// once lifted touch, change touchedButtonX to false
+buttonUp.addEventListener("touchend", () => { touchedButtonUp = false; })
+buttonLeft.addEventListener("touchend", () => { touchedButtonLeft = false; })
+buttonDown.addEventListener("touchend", () => { touchedButtonDown = false; })
+buttonRight.addEventListener("touchend", () => { touchedButtonRight = false; })
+
+// when click (and didn't let go of click), touchedButtonX will be true
+buttonUp.addEventListener("mousedown", () => { touchedButtonUp = true; })
+buttonLeft.addEventListener("mousedown", () => { touchedButtonLeft = true; })
+buttonDown.addEventListener("mousedown", () => { touchedButtonDown = true; })
+buttonRight.addEventListener("mousedown", () => { touchedButtonRight = true; })
+
+// once let go of click, change touchedButtonX to false
+buttonUp.addEventListener("mouseup", () => { touchedButtonUp = false; })
+buttonLeft.addEventListener("mouseup", () => { touchedButtonLeft = false; })
+buttonDown.addEventListener("mouseup", () => { touchedButtonDown = false; })
+buttonRight.addEventListener("mouseup", () => { touchedButtonRight = false; })
