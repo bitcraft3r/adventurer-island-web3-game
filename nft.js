@@ -29,6 +29,19 @@ let selectedStatsArr = [];
 
 const main = async () => {
     await connect();
+
+    // show loading spinner
+
+    // create the spinner element
+    let spinner = document.createElement("div");
+    spinner.className = "spinner";
+
+    // add the spinner to the page
+    document.querySelector("#selectedNft").appendChild(spinner);
+
+    // show the spinner
+    spinner.style.display = "block";
+
     // once connected, variables become available: web3 (obj) and account
     contract = new web3.eth.Contract(ABI, ADDRESS);
 
@@ -55,6 +68,9 @@ const main = async () => {
     });
     let result = await promise; // wait until the promise resolves (*)
     alert(result); // "done!"
+
+    // hide the spinner
+    spinner.style.display = "none";
 
     // get attribute stats of the selected nft
     let nftsObject = document.getElementsByClassName("userNft");
