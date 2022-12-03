@@ -33,6 +33,15 @@ button:hover, #viewNft:hover {
     bottom:20px; 
     left: 20px;
 }
+#mapControlsOverlay {
+    position: absolute; 
+    bottom:20px; 
+    right: 20px;
+}
+#moveButtonUp {
+    position: relative;
+    left: 40%; right: 40%;
+}
 #startScreen, #startScreen2 {
     position: absolute; 
     top:0; left: 0; bottom: 0; right: 0; 
