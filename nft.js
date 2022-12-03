@@ -64,7 +64,7 @@ const main = async () => {
 
     // AWAIT (#userNft) DIVs to be created
     let promise = new Promise((resolve, reject) => {
-        setTimeout(() => resolve("NFTs Loaded! Select one to create your game character."), 5000)
+        setTimeout(() => resolve("NFTs loaded! Select one to create your game character."), 5000)
     });
     let result = await promise; // wait until the promise resolves (*)
     alert(result); // "done!"
