@@ -483,3 +483,8 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
     // other levelUp logic @ battleScene.js initBattle()
 
 })
+
+// click button to close penalty screen
+document.querySelector("#penaltyButton").addEventListener("click", ()=>{
+    document.querySelector("#penaltyOverlay").style.display = 'none';
+})

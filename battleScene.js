@@ -385,6 +385,15 @@ function initBattle() {
                                 // end battle - player lost
                                 battle.initiated = false;
                                 audio.Map.play();
+                                // penalty for fainting - lose [10% + (0 to 10%)] of gold (then round up)
+                                let goldToDeduct = Math.ceil( adv.gold/10 + adv.gold*Math.random()/10 ); 
+                                // deduct the gold from adv object
+                                adv.gold -= goldToDeduct;
+                                // show the new gold value on map overlay
+                                document.querySelector("#goldOverlay").innerHTML = `GOLD: ${adv.gold}`;
+                                // show the penalty description screen
+                                document.querySelector("#penaltyOverlay").style.display = 'block';
+                                document.querySelector("#penaltyText").innerHTML = `You dropped ${goldToDeduct} Gold.`;
                             }
                         })
                     })

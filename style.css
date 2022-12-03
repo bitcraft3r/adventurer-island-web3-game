@@ -204,7 +204,7 @@ h6 {
     margin-left: 10px;
     font-size: 10px;
 }
-#levelUpOverlay {
+#levelUpOverlay, #penaltyOverlay {
     display: none;
     position: absolute;
     top: 10%; left: 10%; right: 10%; bottom: 10%;
@@ -212,12 +212,12 @@ h6 {
     border: #232323 double 4px;
     z-index: 20;
 }
-#levelUpTitle {
+#levelUpTitle, #penaltyTitle {
     position: absolute;
     top: 10%; left: 10%; right: 10%; bottom: 80%;
     text-align: center;
 }
-#levelUpText {
+#levelUpText, #penaltyText {
     position: absolute;
     top: 20%; left: 10%; right: 10%; bottom: 45%;
 }
@@ -240,11 +240,12 @@ h6 {
     padding: 10px;
     margin: 10px;
 }
-#levelUpButton {
+#levelUpButton, #penaltyButton {
     position: absolute;
     top: 80%; left: 40%; right: 40%; bottom: 10%;
     border: #232323 solid 2px;
 }
+
 /* Tooltip container */
 .tooltip {
   position: relative;
