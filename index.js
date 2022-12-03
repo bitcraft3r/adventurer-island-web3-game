@@ -415,7 +415,7 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
         document.querySelector("#nameOverlay").innerHTML = `${adv.name} (${inputClass})`;
 
         // increase adventurer's mainStat attribute
-        if (adv.class === "Warrior") adv.attr.strength += 1;
+        if (adv.class === "Swordsman") adv.attr.strength += 1;
         else if (adv.class === "Archer") adv.attr.agility += 1;
         else if (adv.class === "Wizard") adv.attr.wisdom += 1;
 
@@ -469,7 +469,7 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
                 console.log(`attached ${inputWeapon} to gear`)
 
                 // manage stats increase
-                if (adv.class === "Warrior") adv.attr.strength += 3;
+                if (adv.class === "Swordsman") adv.attr.strength += 3;
                 else if (adv.class === "Archer") adv.attr.agility += 3;
                 else if (adv.class === "Wizard") adv.attr.wisdom += 3;
 

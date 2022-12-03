@@ -161,6 +161,7 @@ class Monster extends Sprite {
 
 
         // push text to BATTLE LOG after attack is done
+        if (recipient.health < 0) recipient.health = 0;
         let node = document.createElement("h6");
         let textnode = document.createTextNode(`${this.name} used ${attack.name} and did ${damageDealt}DMG! ${recipient.name} has ${recipient.health}HP left.`);
         node.appendChild(textnode);

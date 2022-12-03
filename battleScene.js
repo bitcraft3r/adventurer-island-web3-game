@@ -232,7 +232,7 @@ function initBattle() {
                                     document.querySelector("#levelUpText").innerHTML = `
                                     <div id="classBox">Select Class:
                                         <select id="chooseClass">
-                                            <option value="Warrior">Warrior</option>
+                                            <option value="Swordsman">Swordsman</option>
                                             <option value="Archer">Archer</option>
                                             <option value="Wizard">Wizard</option>
                                         </select>
@@ -246,7 +246,7 @@ function initBattle() {
                                     document.querySelector("#levelUpText").replaceChildren();
 
                                     // add a new attack
-                                    if (adv.class === "Warrior") monsters.Adventurer.attacks.push(attacks.Slash);
+                                    if (adv.class === "Swordsman") monsters.Adventurer.attacks.push(attacks.Slash);
                                     else if (adv.class === "Archer") monsters.Adventurer.attacks.push(attacks.Bullseye);
                                     else if (adv.class === "Wizard") monsters.Adventurer.attacks.push(attacks.Fireball);
 
@@ -265,6 +265,7 @@ function initBattle() {
                                     document.querySelector("#levelUpTextMore").replaceChildren();
                                     
                                     // +3 stats points to add to attributes
+                                    document.querySelector("#levelUpText").style.display = "block";
                                     document.querySelector("#levelUpText").innerHTML =`
                                     <div id="addStatsBox">You have gained +3 Attribute Points. Select which Stat you want to increase:
                                         <div id="chooseStats">
@@ -309,7 +310,7 @@ function initBattle() {
                                 // level 5: equip weapon
                                 if (levelAfter === 5){
                                     // show weapon if available, otherwise show none
-                                    if (adv.class === "Warrior" && adv.bag.sword > 0){
+                                    if (adv.class === "Swordsman" && adv.bag.sword > 0){
                                         document.querySelector("#levelUpTextMore").innerHTML =`
                                             <div id="equipWeaponBox">Equip ${adv.class}'s Weapon:
                                                 <select id="equipWeapon">

@@ -313,3 +313,7 @@ h6 {
     padding: 2px;
     margin: 2px;
 }
+
+#addStatsBox {
+    display: none;
+}
