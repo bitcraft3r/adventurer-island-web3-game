@@ -332,6 +332,14 @@ document.querySelector("#heroButton").addEventListener("click", ()=>{
     // create new Adventurer player
     adv = new Adventurer(advName, advStr, advAgi, advWis);
     console.log(adv);
+    
+    // // GOD MODE FOR SPEEDING UP GAME FOR TESTING
+    // adv.attr.level = 3;
+    // adv.attr.xp = 145;
+    // adv.attr.strength = 15;
+    // adv.attr.agility = 15;
+    // adv.attr.wisdom = 15;
+    // console.log(`god mode enabled!`)
 } )
 
 // in SET CHARACTER SCREEN, click "(View)" to LOAD and SHOW nfts
