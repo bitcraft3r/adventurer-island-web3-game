@@ -266,14 +266,44 @@ function initBattle() {
                                     
                                     // +3 stats points to add to attributes
                                     document.querySelector("#levelUpText").innerHTML =`
-                                    <div id="addStatsBox">Increase Attributes with Stats Points:
+                                    <div id="addStatsBox">You have gained +3 Attribute Points. Select which Stat you want to increase:
                                         <div id="chooseStats">
-                                            <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" value=0 type="number" min="0" max="3">
-                                            <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" value=0 type="number" min="0" max="3">
-                                            <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" value=0 type="number" min="0" max="3">
+                                            <p id="chooseStatsStr">STR: ${adv.attr.strength}</p><input id="addStr" type="number" min="0" max="3">
+                                            <p id="chooseStatsAgi">AGI: ${adv.attr.agility}</p><input id="addAgi" type="number" min="0" max="3">
+                                            <p id="chooseStatsWis">WIS: ${adv.attr.wisdom}</p><input id="addWis" type="number" min="0" max="3">
                                         </div>
                                     </div>
                                     `;
+
+                                    // update adv's stat dynamically on ui to include the input values chosen
+
+                                    // in level up screen 4++, able to select attributes to add points to.
+                                    // when user changes the input value -> update the currentStat being shown.
+                                    // e.g. if STR: 11, when i change input of increaseStr from 0 to 1, ui changes to STR: 12.
+                                    let inputStr = document.querySelector('#addStr');
+                                    let inputAgi = document.querySelector('#addAgi');
+                                    let inputWis = document.querySelector('#addWis');
+                                    let outputStr = document.querySelector('#chooseStatsStr');
+                                    let outputAgi = document.querySelector('#chooseStatsAgi');
+                                    let outputWis = document.querySelector('#chooseStatsWis');
+
+                                    // when value of stats input box change, update total stats on ui
+
+                                    inputStr.addEventListener('change', (event) => {
+                                        // Get the current value of the input field
+                                        let valueStr = Number(event.target.value);
+                                        // Update the output element with the current input value
+                                        outputStr.innerHTML = `STR: ${adv.attr.strength + valueStr}`;
+                                    });
+                                    inputAgi.addEventListener('change', (event) => {
+                                        let valueAgi = Number(event.target.value);
+                                        outputAgi.innerHTML = `AGI: ${adv.attr.agility + valueAgi}`;
+                                    });
+                                    inputWis.addEventListener('change', (event) => {
+                                        let valueWis = Number(event.target.value);
+                                        outputWis.innerHTML = `WIS: ${adv.attr.wisdom + valueWis}`;
+                                    });
+                                    // In the above example, we are using the querySelector method to get references to the input and output elements in the DOM. Then we are using addEventListener to listen for input events on the input element. When the input event is triggered, the callback function gets the current value of the input field and updates the output element with that value.
                                 } 
                                 
                                 // level 5: equip weapon
