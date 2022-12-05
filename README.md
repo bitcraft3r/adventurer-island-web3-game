@@ -10,7 +10,10 @@ Mint your free Adventurer today and start your adventure now!
 
 ## Adventurer (ADV) NFT
 
-The *ADVENTURER NFT* is an ERC-721 token on the MATIC (Polygon) network.
+The *ADVENTURER NFT* (**$ADV**) is an ERC-721 token on the Ethereum Mainnet.
+
+- [Contract Address:](https://etherscan.io/address/0x4b8f5913f1dd81ae68ac8d332635cbb4c7436f2a) `0x4b8f5913f1dd81ae68ac8d332635cbb4c7436f2a`
+- [OpenSea Collection](https://opensea.io/collection/adventurer-smngz7p0ms)
 
 ## Adventurer Island
 
