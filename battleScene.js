@@ -276,6 +276,9 @@ function initBattle() {
                                     </div>
                                     `;
 
+                                    // show addStatsBox
+                                    document.querySelector("#addStatsBox").style.display = "block";
+
                                     // update adv's stat dynamically on ui to include the input values chosen
 
                                     // in level up screen 4++, able to select attributes to add points to.
