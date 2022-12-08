@@ -8,7 +8,7 @@ pragma solidity ^0.8.0;
  *  Battle and slay them and we'll pay you a hefty sum of gold and silver!
  */
 
-contract Game {
+contract Battle {
 
     struct Hero {
         string name;
@@ -32,6 +32,8 @@ contract Game {
         uint lastAttackIndex;
         bool result;
         uint coinsWon;
+        string playerName;
+        address playerAddress;
     }
 
     struct Attack {
@@ -61,8 +63,8 @@ contract Game {
         spawns.push(newSpawn);
     }
 
-    function addRound(uint _roundNo, uint _totalAttacks, uint _firstAttackIndex, uint _lastAttackIndex, bool _result, uint _score) private {
-        Round memory newRound = Round(_roundNo, _totalAttacks, _firstAttackIndex, _lastAttackIndex, _result, _score);
+    function addRound(uint _roundNo, uint _totalAttacks, uint _firstAttackIndex, uint _lastAttackIndex, bool _result, uint _score, string memory _name, address _address) private {
+        Round memory newRound = Round(_roundNo, _totalAttacks, _firstAttackIndex, _lastAttackIndex, _result, _score, _name, _address);
         rounds.push(newRound);
     }
 
@@ -125,9 +127,9 @@ contract Game {
         return (spawnToReturn.health, spawnToReturn.strength, spawnToReturn.agility, spawnToReturn.wisdom);
     }
 
-    function roundDetails(uint _index) public view returns (uint, uint, uint, uint, bool, uint) {
+    function roundDetails(uint _index) public view returns (uint, uint, uint, uint, bool, uint, string memory, address) {
         Round memory roundToReturn = rounds[_index];
-        return (roundToReturn.roundNo, roundToReturn.totalAttacks, roundToReturn.firstAttackIndex, roundToReturn.lastAttackIndex, roundToReturn.result, roundToReturn.coinsWon);
+        return (roundToReturn.roundNo, roundToReturn.totalAttacks, roundToReturn.firstAttackIndex, roundToReturn.lastAttackIndex, roundToReturn.result, roundToReturn.coinsWon, roundToReturn.playerName, roundToReturn.playerAddress);
     }
 
     function attackDetails(uint _index) public view returns (uint, uint, int, int, int, int) {
@@ -140,7 +142,7 @@ contract Game {
     }
 
     function mapPlayer(string memory _name, uint _counter) internal returns (uint) {
-        addHero(_name, 100, getStrength(_counter*100+1, _name), getAgility(_counter*101+2, _name), getWisdom(_counter*102+3, _name));
+        addHero(_name, 100, getStrength(_counter*100, _name), getAgility(_counter*101, _name), getWisdom(_counter*102, _name));
         return players.length-1; // return index of newly mapped player // return value unused
     }
     
@@ -160,7 +162,7 @@ contract Game {
         mapPlayer(_name, gameCounter);
         uint256 currentIndex = players.length-1;
         // initialize spawn
-        addSpawn(100, getStrength(currentIndex, _name), getAgility(currentIndex, _name), getWisdom(currentIndex, _name));
+        addSpawn(100, getStrength(currentIndex*201, _name), getAgility(currentIndex*202, _name), getWisdom(currentIndex*203, _name));
         // initialize variables used for entire battle (round)
         uint attackCounter = 0;
         uint startAttackIndex = 0 + attacks.length;
@@ -206,11 +208,11 @@ contract Game {
         }
         // check winner
         if (players[currentIndex].health <= 0 && spawns[currentIndex].health <= 0){
-            addRound(currentIndex, attackCounter, startAttackIndex, attacks.length-1, false, 5);
+            addRound(currentIndex, attackCounter, startAttackIndex, attacks.length-1, false, 5, players[players.length-1].name, msg.sender);
         } else if (players[currentIndex].health > 0 && spawns[currentIndex].health <= 0){
-            addRound(currentIndex, attackCounter, startAttackIndex, attacks.length-1, true, 20);
+            addRound(currentIndex, attackCounter, startAttackIndex, attacks.length-1, true, 20, players[players.length-1].name, msg.sender);
         } else if (players[currentIndex].health <= 0 && spawns[currentIndex].health > 0){
-            addRound(currentIndex, attackCounter, startAttackIndex, attacks.length-1, false, 0);
+            addRound(currentIndex, attackCounter, startAttackIndex, attacks.length-1, false, 0, players[players.length-1].name, msg.sender);
         }
         // end game
         return rounds.length-1; // return index of this battle
