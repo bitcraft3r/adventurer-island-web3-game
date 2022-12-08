@@ -1,4 +1,5 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: UNLICENSED
+
 pragma solidity ^0.8.0;
 
 /** 
@@ -46,6 +47,7 @@ contract Game {
     Spawn[] spawns;
     Round[] rounds;
     Attack[] attacks;
+    uint gameCounter;
 
     int[] attributesArray = [1,2,3,4,5,6,7,8,9,10];
 
@@ -137,8 +139,8 @@ contract Game {
         return rounds.length-1;
     }
 
-    function mapPlayer(string memory _name, int _strength, int _agility, int _wisdom) internal returns (uint) {
-        addHero(_name, 100, _strength, _agility, _wisdom);
+    function mapPlayer(string memory _name, uint _counter) internal returns (uint) {
+        addHero(_name, 100, getStrength(_counter*100+1, _name), getAgility(_counter*101+2, _name), getWisdom(_counter*102+3, _name));
         return players.length-1; // return index of newly mapped player // return value unused
     }
     
@@ -151,9 +153,11 @@ contract Game {
  *  - Spawn passive skill: Harden()
  */
 
-    function battle(string memory _name, int _strength, int _agility, int _wisdom) public returns (uint) {
+    function battle(string memory _name) public returns (uint) {
+        // increment counter
+        gameCounter++;
         // initialize player
-        mapPlayer(_name, _strength, _agility, _wisdom);
+        mapPlayer(_name, gameCounter);
         uint256 currentIndex = players.length-1;
         // initialize spawn
         addSpawn(100, getStrength(currentIndex, _name), getAgility(currentIndex, _name), getWisdom(currentIndex, _name));
