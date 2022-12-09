@@ -1411,39 +1411,39 @@ contract Adv3nturers is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
     
     function getStrength(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "STRENGTH", strength);
+        return pluck(tokenId*11, "STRENGTH", strength);
     }
     
     function getAgility(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "AGILITY", agility);
+        return pluck(tokenId*22, "AGILITY", agility);
     }
     
     function getWisdom(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "WISDOM", wisdom);
+        return pluck(tokenId*33, "WISDOM", wisdom);
     }
     
     function getConstitution(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "CONSTITUTION", constitution);
+        return pluck(tokenId*44, "CONSTITUTION", constitution);
     }
 
     function getLuck(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "LUCK", luck);
+        return pluck(tokenId*55, "LUCK", luck);
     }
 
     function getIntuition(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "INTUITION", intuition);
+        return pluck(tokenId*66, "INTUITION", intuition);
     }
     
     function getPerception(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "PERCEPTION", perception);
+        return pluck(tokenId*77, "PERCEPTION", perception);
     }
     
     function getElement(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "ELEMENT", elements);
+        return pluck(tokenId*88, "ELEMENT", elements);
     }
 
     function getZodiac(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "ZODIAC", zodiacs);
+        return pluck(tokenId*99, "ZODIAC", zodiacs);
     }
     
     
@@ -1485,11 +1485,11 @@ contract Adv3nturers is ERC721Enumerable, ReentrancyGuard, Ownable {
 
         parts[14] = '</text><text x="10" y="160" class="base">';
 
-        parts[17] = getElement(tokenId);
+        parts[15] = getElement(tokenId);
 
         parts[16] = '</text><text x="10" y="180" class="base">';
 
-        parts[15] = getZodiac(tokenId);
+        parts[17] = getZodiac(tokenId);
 
         parts[18] = '</text></svg>';
 
