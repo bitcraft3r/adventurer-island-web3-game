@@ -68,5 +68,4 @@ Deployed with [Vercel](https://vercel.com/).
 
 - Integrating the UI from the tutorial with my own game mechanics was the biggest challenge. 
 - Took a lot of effort to understand the existing code base and how to add new features without creating a lot of repetitive code. 
-- My lack of game design pattern knowledge made it difficult to implement scalable solutions to the problems I faced. 
-- Overall, I wasn't sure how to effectively deal with these challenges.
+- Lack of game design pattern knowledge made it difficult to implement scalable solutions to some of these problems. 
