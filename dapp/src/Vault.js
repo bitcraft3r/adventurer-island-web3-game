@@ -66,8 +66,8 @@ const Vault = () => {
         let userPercentShareOfTotal = await contract.userPercentShareOfTotal();
 
         // setCurrentContractDetails(`${name} (${symbol})`);
-        setUserGoldBalance(`${userGoldBalance / (10**18)} GOLD / ${totalGoldBalance / (10**18)} TOTAL`);
-        setUserIBGoldBalance(`${userIBGoldBalance  / (10**18)} ibGOLD / ${totalIBGoldBalance / (10**18)} TOTAL`);
+        setUserGoldBalance(`${(userGoldBalance / (10**18)).toFixed(4)} GOLD / ${(totalGoldBalance / (10**18)).toFixed(4)} TOTAL`);
+        setUserIBGoldBalance(`${(userIBGoldBalance  / (10**18)).toFixed(4)} ibGOLD / ${(totalIBGoldBalance / (10**18)).toFixed(4)} TOTAL`);
         setUserPercentShareOfTotal(`Share of Total: ${userPercentShareOfTotal}%`);
     }
 
