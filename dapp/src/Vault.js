@@ -172,7 +172,7 @@ const Vault = () => {
 
     return (
         <div>
-            <h1>{"Adv3nturer.xyz"}</h1>
+            <h1>{"Adv3nture.xyz"}</h1>
             <button onClick={connectWalletHandler}>{connectButtonText}</button>
             <h3 id="userAddress">Address: {defaultAccount}</h3>
             {errorMessage}
