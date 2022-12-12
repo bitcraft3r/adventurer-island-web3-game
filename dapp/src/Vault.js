@@ -63,36 +63,37 @@ const Vault = () => {
     const getContractDetails = async () => {
         // let name = await contract.name();
         // let symbol = await contract.symbol();
-        let userGoldBalance = await contract.userGoldBalance();
-        let userIBGoldBalance = await contract.userIBGoldBalance();
+        let thisUserGoldBalance = await contract.userGoldBalance();
+        let thisUserIBGoldBalance = await contract.userIBGoldBalance();
         let totalGoldBalance = await contract.totalGoldBalance();
         let totalIBGoldBalance = await contract.totalIBGoldSupply();
-        let userPercentShareOfTotal = await contract.userPercentShareOfTotal();
+        let thisUserPercentShareOfTotal = await contract.userPercentShareOfTotal();
 
-        setUserGoldBalance(userGoldBalance);
-        setUserIBGoldBalance(userIBGoldBalance);
-        setUserPercentShareOfTotal(userPercentShareOfTotal);
+        setUserGoldBalance(thisUserGoldBalance);
+        setUserIBGoldBalance(thisUserIBGoldBalance);
+        setUserPercentShareOfTotal(thisUserPercentShareOfTotal);
 
         // setCurrentContractDetails(`${name} (${symbol})`);
-        setUserGoldBalanceString(`${(userGoldBalance / (10**18)).toFixed(4)} GOLD / ${(totalGoldBalance / (10**18)).toFixed(4)} TOTAL`);
-        setUserIBGoldBalanceString(`${(userIBGoldBalance  / (10**18)).toFixed(4)} ibGOLD / ${(totalIBGoldBalance / (10**18)).toFixed(4)} TOTAL`);
-        setUserPercentShareOfTotalString(`Share of Total: ${userPercentShareOfTotal}%`);
+        setUserGoldBalanceString(`${(thisUserGoldBalance / (10**18)).toFixed(4)} GOLD / ${(totalGoldBalance / (10**18)).toFixed(4)} TOTAL`);
+        setUserIBGoldBalanceString(`${(thisUserIBGoldBalance  / (10**18)).toFixed(4)} ibGOLD / ${(totalIBGoldBalance / (10**18)).toFixed(4)} TOTAL`);
+        setUserPercentShareOfTotalString(`Share of Total: ${thisUserPercentShareOfTotal}%`);
     }
 
     const approveSpend = async () => {
         contractGoldToken.approve(contractAddressGoldVault, ethers.utils.parseEther("10000000"));
     }
+    
+    // TODO: BUG as this userGoldBalance is showing user's balance IN THE VAULT. should be using contractGoldToken.balanceOf(signer);
+    // const inputMaxGold = async () => {
+    //     let userGoldBalance = await contract.userGoldBalance();
+    //     setUserGoldBalance(userGoldBalance);
 
-    const inputMaxGold = async () => {
-        let userGoldBalance = await contract.userGoldBalance();
-        setUserGoldBalance(userGoldBalance);
-
-        document.querySelector("#depositGold").value = userGoldBalance / (10**18);
-    }
+    //     document.querySelector("#depositGold").value = userGoldBalance / (10**18);
+    // }
     
     const depositGold = (event) => {
         event.preventDefault();
-        contract.enter(ethers.utils.parseEther(event.target.setText.value));
+        contract.enter(ethers.utils.parseEther(event.target.depositGold.value));
     }
 
     const inputMaxIBGold = async () => {
@@ -104,7 +105,7 @@ const Vault = () => {
 
     const withdrawIBGold = (event) => {
         event.preventDefault();
-        contract.leave(ethers.utils.parseEther(event.target.setText.value));
+        contract.leave(ethers.utils.parseEther(event.target.withdrawGold.value));
     }
 
     return (
@@ -135,7 +136,7 @@ const Vault = () => {
                 <h3>Deposit GOLD</h3>
                 <form onSubmit={depositGold}>
                     <input id="depositGold" type="number" step="0.0001" placeholder="1000" />
-                    <button type={"button"} onClick={inputMaxGold}>Max</button>
+                    {/* <button type={"button"} onClick={inputMaxGold}>Max</button> */}
                     <button type={"submit"}>Deposit</button>
                 </form>
 
