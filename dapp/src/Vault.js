@@ -10,7 +10,10 @@ const Vault = () => {
     const [defaultAccount, setDefaultAccount] = useState(null);
     const [connectButtonText, setConnectButtonText] = useState('Connect Wallet');
     
-    const [currentContractVal, setCurrentContractVal] = useState(null);
+    const [currentContractDetails, setCurrentContractDetails] = useState(null);
+    const [userGoldBalance, setUserGoldBalance] = useState(null);
+    const [userIBGoldBalance, setUserIBGoldBalance] = useState(null);
+    const [userPercentShareOfTotal, setUserPercentShareOfTotal] = useState(null);
 
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
@@ -23,6 +26,8 @@ const Vault = () => {
             .then(result => {
                 accountChangedHandler(result[0]);
                 setConnectButtonText('Wallet Connected');
+                document.querySelector("#userAddress").style.display = "block";
+                document.querySelector("#ibGold").style.display = "block";
             })
         } else {
             setErrorMessage('Need to install MetaMask!');
@@ -30,7 +35,7 @@ const Vault = () => {
     }
 
     const accountChangedHandler = (newAccount) => {
-        setDefaultAccount(newAccount);
+        setDefaultAccount(newAccount.slice(0, 5) + "..." + newAccount.slice(newAccount.length-4));
         updateEthers();
     }
 
@@ -45,6 +50,21 @@ const Vault = () => {
         setContract(tempContract);
     }
     
+    const getContractDetails = async () => {
+        let name = await contract.name();
+        let symbol = await contract.symbol();
+        let userGoldBalance = await contract.userGoldBalance();
+        let userIBGoldBalance = await contract.userIBGoldBalance();
+        let totalGoldBalance = await contract.totalGoldBalance();
+        let totalIBGoldBalance = await contract.totalIBGoldSupply();
+        let userPercentShareOfTotal = await contract.userPercentShareOfTotal();
+
+        setCurrentContractDetails(`${name} (${symbol})`);
+        setUserGoldBalance(`${userGoldBalance / (10**18)} GOLD / ${totalGoldBalance / (10**18)} TOTAL`);
+        setUserIBGoldBalance(`${userIBGoldBalance  / (10**18)} ibGOLD / ${totalIBGoldBalance / (10**18)} TOTAL`);
+        setUserPercentShareOfTotal(`Share of Total: ${userPercentShareOfTotal}%`);
+    }
+
     const depositGold = (event) => {
         event.preventDefault();
         contract.enter(ethers.utils.parseEther(event.target.setText.value));
@@ -55,29 +75,43 @@ const Vault = () => {
         contract.leave(ethers.utils.parseEther(event.target.setText.value));
     }
 
-    const getCurrentVal = async () => {
-        let val = await contract.govToken();
-        setCurrentContractVal(val); 
-    }
-
     return (
         <div>
-            <h3>{"Adv3nturer Vaults"}</h3>
+            <h2>{"Adv3nturer Vaults"}</h2>
             <button onClick={connectWalletHandler}>{connectButtonText}</button>
-            <h3>Address: {defaultAccount}</h3>
+            <h3 id="userAddress">Address: {defaultAccount}</h3>
 
-            <form onSubmit={depositGold}>
-                <input id="setText" type="number" step="0.0001" />
-                <button type={"submit"}>Deposit GOLD</button>
-            </form>
+            <hr />
 
-            <form onSubmit={withdrawIBGold}>
-                <input id="setText" type="number" step="0.0001" />
-                <button type={"submit"}>Withdraw ibGOLD</button>
-            </form>
+            <div id="ibGold">
+                <h2>ibGOLD Vault</h2>
+                <button onClick={getContractDetails}>Show My Vault Balance</button>
+                <br/>
+                {userGoldBalance} 
+                <br/>
+                {userIBGoldBalance} 
+                <br/>
+                {userPercentShareOfTotal} 
 
-            <button onClick={getCurrentVal}>Get Contract Address</button><br/>
-            {currentContractVal}
+                <br />
+
+                <h3>Deposit GOLD</h3>
+                <form onSubmit={depositGold}>
+                    <input id="setText" type="number" step="0.0001" placeholder="1000" />
+                    <button type={"submit"}>Deposit</button>
+                </form>
+
+                <br />
+
+                <h3>Withdraw ibGOLD</h3>
+                <form onSubmit={withdrawIBGold}>
+                    <input id="setText" type="number" step="0.0001" placeholder="998.7654" />
+                    <button type={"submit"}>Withdraw</button>
+                </form>
+
+            </div>
+            
+
             {errorMessage}
 
         </div>
