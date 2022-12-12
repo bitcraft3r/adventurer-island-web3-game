@@ -17,6 +17,10 @@ const Vault = () => {
     const [userIBGoldBalance, setUserIBGoldBalance] = useState(null);
     const [userPercentShareOfTotal, setUserPercentShareOfTotal] = useState(null);
 
+    const [userGoldBalanceString, setUserGoldBalanceString] = useState(null);
+    const [userIBGoldBalanceString, setUserIBGoldBalanceString] = useState(null);
+    const [userPercentShareOfTotalString, setUserPercentShareOfTotalString] = useState(null);
+
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
     const [contractGoldToken, setContractGoldToken] = useState(null);
@@ -65,19 +69,37 @@ const Vault = () => {
         let totalIBGoldBalance = await contract.totalIBGoldSupply();
         let userPercentShareOfTotal = await contract.userPercentShareOfTotal();
 
+        setUserGoldBalance(userGoldBalance);
+        setUserIBGoldBalance(userIBGoldBalance);
+        setUserPercentShareOfTotal(userPercentShareOfTotal);
+
         // setCurrentContractDetails(`${name} (${symbol})`);
-        setUserGoldBalance(`${(userGoldBalance / (10**18)).toFixed(4)} GOLD / ${(totalGoldBalance / (10**18)).toFixed(4)} TOTAL`);
-        setUserIBGoldBalance(`${(userIBGoldBalance  / (10**18)).toFixed(4)} ibGOLD / ${(totalIBGoldBalance / (10**18)).toFixed(4)} TOTAL`);
-        setUserPercentShareOfTotal(`Share of Total: ${userPercentShareOfTotal}%`);
+        setUserGoldBalanceString(`${(userGoldBalance / (10**18)).toFixed(4)} GOLD / ${(totalGoldBalance / (10**18)).toFixed(4)} TOTAL`);
+        setUserIBGoldBalanceString(`${(userIBGoldBalance  / (10**18)).toFixed(4)} ibGOLD / ${(totalIBGoldBalance / (10**18)).toFixed(4)} TOTAL`);
+        setUserPercentShareOfTotalString(`Share of Total: ${userPercentShareOfTotal}%`);
     }
 
     const approveSpend = async () => {
         contractGoldToken.approve(contractAddressGoldVault, ethers.utils.parseEther("10000000"));
     }
 
+    const inputMaxGold = async () => {
+        let userGoldBalance = await contract.userGoldBalance();
+        setUserGoldBalance(userGoldBalance);
+
+        document.querySelector("#depositGold").value = userGoldBalance / (10**18);
+    }
+    
     const depositGold = (event) => {
         event.preventDefault();
         contract.enter(ethers.utils.parseEther(event.target.setText.value));
+    }
+
+    const inputMaxIBGold = async () => {
+        let userIBGoldBalance = await contract.userIBGoldBalance();
+        setUserIBGoldBalance(userIBGoldBalance);
+
+        document.querySelector("#withdrawGold").value = userIBGoldBalance / (10**18);
     }
 
     const withdrawIBGold = (event) => {
@@ -98,11 +120,11 @@ const Vault = () => {
                 <button onClick={getContractDetails}>Show My Vault Balance</button>
                 <br/>
                 <br/>
-                {userGoldBalance} 
+                {userGoldBalanceString} 
                 <br/>
-                {userIBGoldBalance} 
+                {userIBGoldBalanceString} 
                 <br/>
-                {userPercentShareOfTotal} 
+                {userPercentShareOfTotalString} 
 
                 <br />
 
@@ -112,7 +134,8 @@ const Vault = () => {
 
                 <h3>Deposit GOLD</h3>
                 <form onSubmit={depositGold}>
-                    <input id="setText" type="number" step="0.0001" placeholder="1000" />
+                    <input id="depositGold" type="number" step="0.0001" placeholder="1000" />
+                    <button type={"button"} onClick={inputMaxGold}>Max</button>
                     <button type={"submit"}>Deposit</button>
                 </form>
 
@@ -120,7 +143,8 @@ const Vault = () => {
 
                 <h3>Withdraw ibGOLD</h3>
                 <form onSubmit={withdrawIBGold}>
-                    <input id="setText" type="number" step="0.0001" placeholder="998.7654" />
+                    <input id="withdrawGold" type="number" step="0.0001" placeholder="998.7654" />
+                    <button type={"button"} onClick={inputMaxIBGold}>Max</button>
                     <button type={"submit"}>Withdraw</button>
                 </form>
 
