@@ -44,6 +44,21 @@ const Vault = () => {
         let tempContract = new ethers.Contract(contractAddress, Vault_abi, tempSigner);
         setContract(tempContract);
     }
+    
+    const depositGold = (event) => {
+        event.preventDefault();
+        contract.enter(ethers.utils.parseEther(event.target.setText.value));
+    }
+
+    const withdrawIBGold = (event) => {
+        event.preventDefault();
+        contract.leave(ethers.utils.parseEther(event.target.setText.value));
+    }
+
+    const getCurrentVal = async () => {
+        let val = await contract.govToken();
+        setCurrentContractVal(val); 
+    }
 
     return (
         <div>
@@ -51,6 +66,18 @@ const Vault = () => {
             <button onClick={connectWalletHandler}>{connectButtonText}</button>
             <h3>Address: {defaultAccount}</h3>
 
+            <form onSubmit={depositGold}>
+                <input id="setText" type="number" step="0.0001" />
+                <button type={"submit"}>Deposit GOLD</button>
+            </form>
+
+            <form onSubmit={withdrawIBGold}>
+                <input id="setText" type="number" step="0.0001" />
+                <button type={"submit"}>Withdraw ibGOLD</button>
+            </form>
+
+            <button onClick={getCurrentVal}>Get Contract Address</button><br/>
+            {currentContractVal}
             {errorMessage}
 
         </div>
