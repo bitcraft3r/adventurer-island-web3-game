@@ -16,6 +16,19 @@ code {
   display: none;
 }
 
-#ibGold {
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex-direction: row; */
+  /* align-items: center; */
+}
+
+#ibGold, #ibSilver {
   display: none;
+  border: 2px solid black;
+  /* flex-direction: row; */
+  /* align-items: center; */
+  padding: 20px 50px 50px;
+  margin: 20px 50px;
 }
