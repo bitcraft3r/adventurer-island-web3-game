@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { ethers } from 'ethers';
+import Vault_abi from './Vault_ABI.json';
 
 const Vault = () => {
+
+    const contractAddress = '0xd47A584727c8C84559073859567F5d6300fd24B6';
 
     const [errorMessage, setErrorMessage] = useState(null);
     const [defaultAccount, setDefaultAccount] = useState(null);
@@ -27,6 +31,18 @@ const Vault = () => {
 
     const accountChangedHandler = (newAccount) => {
         setDefaultAccount(newAccount);
+        updateEthers();
+    }
+
+    const updateEthers = () => {
+        let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(tempProvider);
+
+        let tempSigner = tempProvider.getSigner();
+        setSigner(tempSigner);
+
+        let tempContract = new ethers.Contract(contractAddress, Vault_abi, tempSigner);
+        setContract(tempContract);
     }
 
     return (
