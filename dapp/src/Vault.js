@@ -48,6 +48,8 @@ const Vault = () => {
                 accountChangedHandler(result[0]);
                 setConnectButtonText('Wallet Connected');
                 document.querySelector("#userAddress").style.display = "block";
+                document.querySelector("#vaultHeading").style.display = "block";
+                document.querySelector("#container").style.display = "flex";
                 document.querySelector("#ibGold").style.display = "block";
                 document.querySelector("#ibSilver").style.display = "block";
             })
@@ -170,13 +172,17 @@ const Vault = () => {
 
     return (
         <div>
-            <h2>{"Adv3nturer Vaults"}</h2>
+            <h1>{"Adv3nturer.xyz"}</h1>
             <button onClick={connectWalletHandler}>{connectButtonText}</button>
             <h3 id="userAddress">Address: {defaultAccount}</h3>
+            {errorMessage}
 
             <hr />
 
+            <h2 id="vaultHeading">{"Vaults"}</h2>
+
             <div id="container">
+
 
                 <div id="ibGold">
                     <h2>ibGOLD Vault</h2>
@@ -250,9 +256,8 @@ const Vault = () => {
 
             </div>
 
-            
 
-            {errorMessage}
+            
 
         </div>
 

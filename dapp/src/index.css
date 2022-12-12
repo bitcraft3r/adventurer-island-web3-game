@@ -16,8 +16,12 @@ code {
   display: none;
 }
 
+#vaultHeading {
+  display: none;
+}
+
 #container {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   /* flex-direction: row; */
@@ -30,5 +34,16 @@ code {
   /* flex-direction: row; */
   /* align-items: center; */
   padding: 20px 50px 50px;
-  margin: 20px 50px;
+  margin: 20px 30px;
+}
+
+#footerLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footerLinksEach {
+  padding: 10px;
+  margin: 10px
 }
