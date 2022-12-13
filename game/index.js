@@ -469,9 +469,15 @@ document.querySelector("#levelUpButton").addEventListener("click", ()=>{
                 console.log(`attached ${inputWeapon} to gear`)
 
                 // manage stats increase
-                if (adv.class === "Swordsman") adv.attr.strength += 3;
-                else if (adv.class === "Archer") adv.attr.agility += 3;
-                else if (adv.class === "Wizard") adv.attr.wisdom += 3;
+                const classAttrMap = {
+                    Swordsman: "strength",
+                    Archer: "agility",
+                    Wizard: "wisdom"
+                }
+                adv.attr[classAttrMap[adv.class]] += 3;
+                // if (adv.class === "Swordsman") adv.attr.strength += 3;
+                // else if (adv.class === "Archer") adv.attr.agility += 3;
+                // else if (adv.class === "Wizard") adv.attr.wisdom += 3;
 
                 // logs
                 console.log(`increase mainStat by 3`);
