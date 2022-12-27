@@ -8,6 +8,8 @@ const Footer = () => {
             </div>
 
             <div id="footerLinks">
+                <p className="footerLinksEach"><a href="https://adventurer-game.vercel.app/" target="_blank" rel="noopener noreferrer">Adventure Island</a></p>        
+                <p className="footerLinksEach"><a href="https://github.com/sov3333/adventurer-game" target="_blank" rel="noopener noreferrer">GitHub</a></p>        
                 <p className="footerLinksEach"><a href="https://twitter.com/adv3nturers" target="_blank" rel="noopener noreferrer">Twitter</a></p>
                 <p className="footerLinksEach"><a href="https://t.me/adv3nturers" target="_blank" rel="noopener noreferrer">Telegram</a></p>
                 <p className="footerLinksEach"><a href="https://discord.gg/FMRkY8hH4h" target="_blank" rel="noopener noreferrer">Discord</a></p>
