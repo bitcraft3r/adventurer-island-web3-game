@@ -1,4 +1,4 @@
-.gpt3__whatgpt3 {
+.adv3__vision {
     display: flex;
     flex-direction: column;
 
@@ -23,21 +23,21 @@
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.gpt3__whatgpt3-feature {
+.adv3__vision-feature {
     display: flex;
 }
 
 /* Customizing feature component as per needs */
-.gpt3__whatgpt3-feature .gpt3__features-container__feature {
+.adv3__vision-feature .adv3__features-container__feature {
     margin: 0;
 }
 
 /* Customizing feature component as per needs */
-.gpt3__whatgpt3-feature .gpt3__features-container_feature-text {
+.adv3__vision-feature .adv3__features-container_feature-text {
     max-width: 700px;
 }
 
-.gpt3__whatgpt3-heading {
+.adv3__vision-heading {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -46,7 +46,7 @@
     margin: 4rem 0 2rem;
 }
 
-.gpt3__whatgpt3-heading h1 {
+.adv3__vision-heading h1 {
     font-size: 34px;
     line-height: 45px;
     font-weight: 800;
@@ -54,7 +54,7 @@
     max-width: 510px;
 }
 
-.gpt3__whatgpt3-heading p {
+.adv3__vision-heading p {
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 16px;
@@ -64,7 +64,7 @@
     margin-top: 1rem;
 }
 
-.gpt3__whatgpt3-container {
+.adv3__vision-container {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -73,7 +73,7 @@
 }
 
 /* Customizing feature component as per needs */
-.gpt3__whatgpt3-container .gpt3__features-container__feature {
+.adv3__vision-container .adv3__features-container__feature {
     flex: 1;
     margin: 1rem;
     min-width: 210px;
@@ -82,34 +82,34 @@
 }
 
 /* Customizing feature component as per needs */
-.gpt3__whatgpt3-container .gpt3__features-container_feature-text {
+.adv3__vision-container .adv3__features-container_feature-text {
     margin-top: 0.5rem;
 }
 
 @media screen and (max-width: 850px) {
-    .gpt3__whatgpt3-heading {
+    .adv3__vision-heading {
         flex-direction: column;
         align-items: flex-start;
         margin-bottom: 0rem;
     }
 
-    .gpt3__whatgpt3-heading p {
+    .adv3__vision-heading p {
         margin-top: 1rem;
     }
 }
 
 @media screen and (max-width: 650px) {
     /* Customizing feature component as per needs */
-    .gpt3__whatgpt3-feature .gpt3__features-container__feature {
+    .adv3__vision-feature .adv3__features-container__feature {
         flex-direction: column;
     }
 
     /* Customizing feature component as per needs */
-    .gpt3__whatgpt3-feature .gpt3__features-container_feature-text {
+    .adv3__vision-feature .adv3__features-container_feature-text {
         margin-top: 0.5rem;
     }
 
-    .gpt3__whatgpt3-heading h1 {
+    .adv3__vision-heading h1 {
         font-size: 28px;
         line-height: 40px;
     }
@@ -117,7 +117,7 @@
 
 @media screen and (max-width: 350px) {
     /* Customizing feature component as per needs */
-    .gpt3__whatgpt3-container .gpt3__features-container__feature {
+    .adv3__vision-container .adv3__features-container__feature {
         margin: 1rem 0;
         min-width: 100%;
     }

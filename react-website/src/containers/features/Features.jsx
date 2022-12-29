@@ -19,12 +19,12 @@ const featuresData = [
 
 const Features = () => {
   return (
-    <div className="gpt3__features section__padding" id="features">
-        <div className="gpt3__features-heading">
+    <div className="adv3__features section__padding" id="features">
+        <div className="adv3__features-heading">
           <h1 className="gradient__text">Join a Team and Explore the World Together</h1>
           <p><a href="#home">Request Early Access to Get Started</a></p>
         </div>
-        <div className="gpt3__features-container">
+        <div className="adv3__features-container">
           {featuresData.map((item, index) => (
             <Feature title={item.title} text={item.text} key={item.title + index} />
           ))}

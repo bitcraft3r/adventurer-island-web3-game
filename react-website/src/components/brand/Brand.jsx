@@ -4,7 +4,7 @@ import './brand.css';
 
 const Brand = () => {
   return (
-    <div className="gpt3__brand section__padding">
+    <div className="adv3__brand section__padding">
       <div>
         <a href="https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0xc4be0798e5b5b1c15eda36d9b2d8c1a60717fa92" target="_blank" rel="noopener noreferrer">
           <img src={uniswap} alt="uniswap" />
