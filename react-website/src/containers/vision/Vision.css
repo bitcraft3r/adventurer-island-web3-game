@@ -39,9 +39,9 @@
 
 .gpt3__whatgpt3-heading {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     
     margin: 4rem 0 2rem;
 }
@@ -61,6 +61,7 @@
     line-height: 30px;
     color: var(--color-subtext);
     cursor: pointer;
+    margin-top: 1rem;
 }
 
 .gpt3__whatgpt3-container {

@@ -9,35 +9,41 @@ const Footer = () => {
           <h1 className="gradient__text">Be the first to hear about all the exciting adventures that await!</h1>
         </div>
         <div className="gpt3__footer-btn">
-          <p>Request Early Access</p>
+          <p><a href="#home">Request Early Access</a></p>
         </div>
         <div className="gpt3__footer-links">
           <div className="gpt3__footer-links_logo">
             <img src={gpt3Logo} alt="logo" />
-            <p>Crechterwoord K12 182 DK Alknjkcb, All Rights Reserved</p>
+            <p>© Adv3nture.xyz 🗺️</p>
           </div>
           <div className="gpt3__footer-links_div">
             <h4>Links</h4>
-            <p>Overons</p>
-            <p>Social Media</p>
-            <p>Counters</p>
-            <p>Contact</p>
+            <p><a href="https://opensea.io/collection/adventurer-eth" target="_blank" rel="noopener noreferrer">ADV (OpenSea)</a></p>
+            <p><a href="https://opensea.io/collection/adv3nturers" target="_blank" rel="noopener noreferrer">aADV (OpenSea)</a></p>
+            <p><a href="https://coinmarketcap.com/currencies/adventurer-gold/" target="_blank" rel="noopener noreferrer">$GOLD (CoinMarketCap)</a></p>
+            <p><a href="https://coinmarketcap.com/currencies/adv3nturer-silver/" target="_blank" rel="noopener noreferrer">$SILVER (CoinMarketCap)</a></p>
+            {/* <p><a href="#home">Home</a></p>
+            <p><a href="#vision">Vision</a></p>
+            <p><a href="#features">Features</a></p>
+            <p><a href="#games">Community Games</a></p>
+            <p><a href="#blog">Blog</a></p> */}
           </div>
           <div className="gpt3__footer-links_div">
-            <h4>Company</h4>
-            <p>Social Terms & Conditions</p>
-            <p>Privacy Policy</p>
-            <p>Contact</p>
+            <h4>dApps & Games</h4>
+            <p><a href="https://adv3nture.xyz/" target="_blank" rel="noopener noreferrer">ibVaults</a></p>
+            <p><a href="https://adventurer-game.vercel.app/" target="_blank" rel="noopener noreferrer">Adv3nture Island</a></p>
+            <p><a href="https://twitter.com/sov3333/status/1601011596272095232" target="_blank" rel="noopener noreferrer">Battle.sol</a></p>
+            <p><a href="https://vanilla-raiders-nine.vercel.app/" target="_blank" rel="noopener noreferrer">VanillaRaiders.sol</a></p>
           </div>
           <div className="gpt3__footer-links_div">
             <h4>Get in Touch</h4>
-            <p>@adv3nturers</p>
-            {/* <p>Telegram: @adv3nturers</p> */}
+            <p><a href="https://twitter.com/adv3nturers" target="_blank" rel="noopener noreferrer">Twitter: @adv3nturers</a></p>
+            <p><a href="https://t.me/adv3nturers" target="_blank" rel="noopener noreferrer">Telegram: @adv3nturers</a></p>
             {/* <p>Email: imagine@adv3nture.xyz</p> */}
           </div>
         </div>
         <div className="gpt3__footer-copyright">
-          <p>© 2023 Adv3nture.xyz. All rights reserved.</p>
+          <p>© 2023 Adv3nture.xyz 🗺️ All rights reserved.</p>
         </div>
     </div>
   )

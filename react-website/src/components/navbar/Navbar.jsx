@@ -6,10 +6,10 @@ import logo from '../../assets/logo.svg';
 const Menu = () => (
   <>
     <p><a href="#home">Home</a></p>
-    <p><a href="#wgpt3">What is ADV3?</a></p>
-    <p><a href="#features">Composable Gaming</a></p>
-    <p><a href="#possibility">Community Games</a></p>
-    <p><a href="#blog">Blog</a></p>
+    <p><a href="#vision">Vision</a></p>
+    <p><a href="#features">Features</a></p>
+    <p><a href="#games">Community Games</a></p>
+    <p><a href="#tokenomics">Tokenomics</a></p>
   </>
 )
 
@@ -31,7 +31,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="gpt3__navbar-sign">
-        <button type="button"><a href="https://adventurer-game.vercel.app/" target="_blank" rel="noopener noreferrer">Play Adventure Island</a></button>
+        <button type="button"><a href="https://adv3nture.xyz/" target="_blank" rel="noopener noreferrer">Vaults</a></button>
       </div>
       <div className="gpt3__navbar-menu">
         {toggleMenu 
@@ -44,7 +44,7 @@ const Navbar = () => {
             <div    className="gpt3__navbar-menu_container-links">
               <Menu /> 
               <div className="gpt3__navbar-menu_container-links-sign">
-                <button type="button"><a href="https://adv3nture.xyz/" target="_blank" rel="noopener noreferrer">Enter Vault</a></button>
+                <button type="button"><a href="https://adv3nture.xyz/" target="_blank" rel="noopener noreferrer">Vaults</a></button>
               </div>
             </div>
           </div>

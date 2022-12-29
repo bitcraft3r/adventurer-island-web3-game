@@ -30,10 +30,12 @@
     font-size: 16px;
     line-height: 30px;
     color: #71E5FF;
+    cursor: pointer;
 }
 
 .gpt3__possibility-content h4:last-child {
     color: #FF8A71;
+    cursor: pointer;
 }
 
 .gpt3__possibility-content h1 {
