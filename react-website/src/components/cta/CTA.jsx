@@ -9,7 +9,7 @@ const CTA = () => {
           <h3>Unlock Early Access to Epic Adventures</h3>
         </div>
         <div className="gpt3__cta-btn">
-          <button type="button">Get Started</button>
+          <button type="button"><a href="#home">Get Started</a></button>
         </div>
     </div>
   )

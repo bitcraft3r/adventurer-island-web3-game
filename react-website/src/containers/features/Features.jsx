@@ -1,25 +1,19 @@
 import React from 'react';
 import { Feature } from '../../components';
 import './features.css';
-import adventure from '../../assets/adventure.png'
-import adventure2 from '../../assets/adventure2.png'
 
 const featuresData = [
   {
-    title: 'Game-Fi Building Blocks',
-    text: 'Our APIs and SDKs allow developers to easily build games with DeFi integration, enabling players to earn and use blockchain-based assets.'
+    title: 'Collaboration',
+    text: 'Work with your team to complete quests and challenges, and share your own adventures and puzzles with the community.'
   },
   {
-    title: 'Composable Games',
-    text: "By building more composable games, we aim to create a vibrant and dynamic gaming community that empowers players and developers."
+    title: 'Customization',
+    text: "Collect and trade NFTs to unlock new abilities and equipment, and create your own unique character."
   },
   {
-    title: 'Open and Interoperable',
-    text: 'Our goal is to create a new generation of games that are more open, interoperable, and engaging for players, and that provide developers with greater creative freedom and control.'
-  },
-  {
-    title: 'On-chain ARG',
-    text: "Experience a fully immersive and interactive gaming experience with Adv3nture's on-chain Alternate Reality Game (ARG)."
+    title: 'Rewards',
+    text: 'Earn rewards, including in-game currency, for your achievements as you explore the game world and complete quests.'
   },
 ];
 
@@ -27,8 +21,8 @@ const Features = () => {
   return (
     <div className="gpt3__features section__padding" id="features">
         <div className="gpt3__features-heading">
-          <h1 className="gradient__text">Composable tools for building a new world of gaming possibilities.</h1>
-          <p>Request Early Access to Get Started</p>
+          <h1 className="gradient__text">Join a Team and Explore the World Together</h1>
+          <p><a href="#home">Request Early Access to Get Started</a></p>
         </div>
         <div className="gpt3__features-container">
           {featuresData.map((item, index) => (
