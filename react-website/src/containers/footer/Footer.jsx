@@ -30,7 +30,7 @@ const Footer = () => {
           </div>
           <div className="gpt3__footer-links_div">
             <h4>dApps & Games</h4>
-            <p><a href="https://adv3nture.xyz/" target="_blank" rel="noopener noreferrer">ibVaults</a></p>
+            <p><a href="https://adv3nture-vaults.vercel.app/" target="_blank" rel="noopener noreferrer">ibVaults</a></p>
             <p><a href="https://adventurer-game.vercel.app/" target="_blank" rel="noopener noreferrer">Adv3nture Island</a></p>
             <p><a href="https://twitter.com/sov3333/status/1601011596272095232" target="_blank" rel="noopener noreferrer">Battle.sol</a></p>
             <p><a href="https://vanilla-raiders-nine.vercel.app/" target="_blank" rel="noopener noreferrer">VanillaRaiders.sol</a></p>
