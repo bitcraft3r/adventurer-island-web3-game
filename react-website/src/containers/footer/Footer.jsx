@@ -1,6 +1,6 @@
 import React from 'react';
 import './footer.css';
-import adv3Logo from '../../assets/logo.svg';
+import adv3Logo from '../../assets/adv3nture-logo.png';
 
 const Footer = () => {
   return (
