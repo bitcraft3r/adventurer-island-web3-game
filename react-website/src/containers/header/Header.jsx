@@ -31,10 +31,10 @@ const Header = () => {
               <button type="submit">Get Started</button>
             </form>
           {/* </div> */}
-          <div className="adv3__header-content__people">
+          {/* <div className="adv3__header-content__people">
             <img src={people} alt="people" />
             <p>1,600 people requested early access in the last 24 hours</p>
-          </div>
+          </div> */}
         </div>
         <div className="adv3__header-image">
           <img src={symbol} alt="symbol" />
