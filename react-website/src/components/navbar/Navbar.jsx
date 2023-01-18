@@ -31,7 +31,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="adv3__navbar-sign">
-        <button type="button"><a href="https://adv3nture-vaults.vercel.app/" target="_blank" rel="noopener noreferrer">Vaults</a></button>
+        <button type="button"><a href="https://docs.adv3nture.xyz/" target="_blank" rel="noopener noreferrer">Documentation</a></button>
       </div>
       <div className="adv3__navbar-menu">
         {toggleMenu 
@@ -44,7 +44,7 @@ const Navbar = () => {
             <div    className="adv3__navbar-menu_container-links">
               <Menu /> 
               <div className="adv3__navbar-menu_container-links-sign">
-                <button type="button"><a href="https://adv3nture-vaults.vercel.app/" target="_blank" rel="noopener noreferrer">Vaults</a></button>
+                <button type="button"><a href="https://docs.adv3nture.xyz/" target="_blank" rel="noopener noreferrer">Docs</a></button>
               </div>
             </div>
           </div>

@@ -21,10 +21,10 @@ const Header = () => {
     <div className="adv3__header section__padding" id="home">
         <div className="adv3__header-content">
           <h1 className="gradient__text">
-            Explore a fantasy world on the blockchain
+            Explore an endless world of possibilities
 
           </h1>
-          <p>Unleash your inner adventurer and explore a vast, fantastical world on the blockchain. Join a team and work together to conquer quests, defeat monsters, and collect valuable treasure through this immersive and interactive game.</p>
+          <p>Be whoever you want to be in an open-world action adventure MMORPG. Collaborate with other Gem Hunters to conquer quests and gather precious gems to save our land.</p>
           {/* <div className="adv3__header-content__input"> */}
             <form className="adv3__header-content__input" onSubmit={handleFormSubmit} action={webHook} method="POST">
               <input type="email" id="email" name="email" placeholder="Your Email Address" />
