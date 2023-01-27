@@ -21,7 +21,7 @@ const Brand = () => {
         </a>
       </div>
       <div>
-        <a href="https://coinmarketcap.com/currencies/adventurer-gold/" target="_blank" rel="noopener noreferrer">
+        <a href="https://coinmarketcap.com/currencies/gemstone/" target="_blank" rel="noopener noreferrer">
           <img src={coinmarketcap} alt="coinmarketcap" />
         </a>
       </div>
