@@ -10,6 +10,7 @@ const Menu = () => (
     <p><a href="#features">Features</a></p>
     <p><a href="#games">Community Games</a></p>
     <p><a href="#tokenomics">Tokenomics</a></p>
+    <p><a href="https://forms.gle/neuQThnrNAnkfpNw8" target="_blank" rel="noopener noreferrer">BUILDSPACE 💎</a></p>
   </>
 )
 
