@@ -16,18 +16,18 @@ const Brand = () => {
         </a>
       </div>
       <div>
-        <a href="https://opensea.io/collection/adv3nturers" target="_blank" rel="noopener noreferrer">
-          <img src={opensea} alt="opensea" />
-        </a>
-      </div>
-      <div>
         <a href="https://coinmarketcap.com/currencies/gemstone/" target="_blank" rel="noopener noreferrer">
           <img src={coinmarketcap} alt="coinmarketcap" />
         </a>
       </div>
       <div>
-        <a href="https://www.coingecko.com/en/coins/adventurer-gold" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.coingecko.com/en/coins/adv3nture-xyz-gemstone" target="_blank" rel="noopener noreferrer">
           <img src={coingecko} alt="coingecko" />
+        </a>
+      </div>
+      <div>
+        <a href="https://opensea.io/collection/adv3nturers" target="_blank" rel="noopener noreferrer">
+          <img src={opensea} alt="opensea" />
         </a>
       </div>
       <div>
