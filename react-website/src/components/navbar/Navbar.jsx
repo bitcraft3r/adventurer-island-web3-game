@@ -10,7 +10,7 @@ const Menu = () => (
     <p><a href="#features">Features</a></p>
     <p><a href="#games">Community Games</a></p>
     <p><a href="#tokenomics">Tokenomics</a></p>
-    <p><a href="https://forms.gle/neuQThnrNAnkfpNw8" target="_blank" rel="noopener noreferrer">BUILDSPACE 💎</a></p>
+    <p><a href="https://docs.adv3nture.xyz/" target="_blank" rel="noopener noreferrer">Documentation</a></p>
   </>
 )
 
@@ -32,7 +32,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="adv3__navbar-sign">
-        <button type="button"><a href="https://docs.adv3nture.xyz/" target="_blank" rel="noopener noreferrer">Documentation</a></button>
+        <button type="button"><a href="https://forms.gle/neuQThnrNAnkfpNw8" target="_blank" rel="noopener noreferrer">Buildspace 💎</a></button>
       </div>
       <div className="adv3__navbar-menu">
         {toggleMenu 
