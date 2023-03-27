@@ -20,8 +20,8 @@ const Footer = () => {
             <h4>Links</h4>
             <p><a href="https://opensea.io/collection/adventurer-eth" target="_blank" rel="noopener noreferrer">ADV (OpenSea)</a></p>
             <p><a href="https://opensea.io/collection/adv3nturers" target="_blank" rel="noopener noreferrer">aADV (OpenSea)</a></p>
-            <p><a href="https://coinmarketcap.com/currencies/adventurer-gold/" target="_blank" rel="noopener noreferrer">$GOLD (CoinMarketCap)</a></p>
-            <p><a href="https://coinmarketcap.com/currencies/adv3nturer-silver/" target="_blank" rel="noopener noreferrer">$SILVER (CoinMarketCap)</a></p>
+            {/* <p><a href="https://coinmarketcap.com/currencies/adventurer-gold/" target="_blank" rel="noopener noreferrer">$GOLD (CoinMarketCap)</a></p>
+            <p><a href="https://coinmarketcap.com/currencies/adv3nturer-silver/" target="_blank" rel="noopener noreferrer">$SILVER (CoinMarketCap)</a></p> */}
             {/* <p><a href="#home">Home</a></p>
             <p><a href="#vision">Vision</a></p>
             <p><a href="#features">Features</a></p>
@@ -30,8 +30,9 @@ const Footer = () => {
           </div>
           <div className="adv3__footer-links_div">
             <h4>dApps & Games</h4>
-            <p><a href="https://adv3nture-vaults.vercel.app/" target="_blank" rel="noopener noreferrer">ibVaults</a></p>
-            <p><a href="https://adventurer-game.vercel.app/" target="_blank" rel="noopener noreferrer">Adv3nture Island</a></p>
+            {/* <p><a href="https://adv3nture-vaults.vercel.app/" target="_blank" rel="noopener noreferrer">ibVaults</a></p> */}
+            {/* <p><a href="https://adventurer-game.vercel.app/" target="_blank" rel="noopener noreferrer">Adv3nture Island</a></p> */}
+            <p><a href="https://docs.adv3nture.xyz/introduction/gemscape" target="_blank" rel="noopener noreferrer">GemScape MMORPG (Coming soon)</a></p>
             <p><a href="https://twitter.com/sov3333/status/1601011596272095232" target="_blank" rel="noopener noreferrer">Battle.sol</a></p>
             <p><a href="https://vanilla-raiders-nine.vercel.app/" target="_blank" rel="noopener noreferrer">VanillaRaiders.sol</a></p>
           </div>
